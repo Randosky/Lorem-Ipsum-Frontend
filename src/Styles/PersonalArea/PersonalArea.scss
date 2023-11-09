@@ -134,4 +134,9 @@
 .userAbilities__list-btn{
   width: 100%;
   @extend %fontSize5;
+
+  span{
+    word-break: break-word;
+    text-align: center;
+  }
 }
