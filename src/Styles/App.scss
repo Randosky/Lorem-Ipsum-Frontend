@@ -1,0 +1,129 @@
+@font-face {
+  font-family: 'Grtsk Exa';
+  src: local('Grtsk Exa'),
+  url('../Fonts/GrtskExa-Light.woff2') format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Grtsk Exa';
+  src: local('Grtsk Exa'),
+  url('../Fonts/GrtskExa-Regular.woff2') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Grtsk Exa';
+  src: local('Grtsk Exa'),
+  url('../Fonts/GrtskExa-Medium.woff2') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Grtsk Exa';
+  src: local('Grtsk Exa'),
+  url('../Fonts/GrtskExa-Semibold.woff2') format('truetype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Grtsk Exa';
+  src: local('Grtsk Exa'),
+  url('../Fonts/GrtskExa-Bold.woff2') format('truetype');
+  font-weight: 700;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Grtsk Exa", sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+}
+
+/**::-webkit-scrollbar {*/
+/*    width: 7px;*/
+/*    height: 5px;*/
+/*}*/
+
+/**::-webkit-scrollbar-track {*/
+/*    background: #e0e0e0;*/
+/*    border-radius: 20px;*/
+/*}*/
+
+/**::-webkit-scrollbar-thumb {*/
+/*    cursor: pointer;*/
+/*    background: #361107;*/
+/*    border-radius: 20px;*/
+/*}*/
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+
+  &:hover, &:focus, &:active {
+    text-decoration: none;
+  }
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  background-color: transparent;
+  color: black;
+  transition: all 0.15s ease-in-out;
+
+  &:hover {
+    transform: scale(0.98);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+input, textarea, select {
+  outline: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  background-color: transparent;
+  border-radius: 5px;
+  color: black;
+  transition: all 0.15s ease-in-out;
+  padding: 0;
+}
+
+input::placeholder, textarea::placeholder, select::placeholder {
+  color: black;
+  opacity: 0.5;
+}
+
+input::-ms-input-placeholder, textarea::-ms-input-placeholder, select::-ms-input-placeholder {
+  color: black;
+  opacity: 0.5;
+}
