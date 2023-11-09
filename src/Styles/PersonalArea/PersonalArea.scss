@@ -1,2 +1,137 @@
 @import "../Variables";
 
+.personalArea {
+  width: 100vw;
+  height: $heightWithHeader100vh;
+  max-height: $heightWithHeader100vh;
+  background-color: $brandColorBlack20;
+  color: $brandColorBlack100;
+}
+
+.personalArea__container {
+  @extend %container;
+}
+
+.personalArea__userInfo{
+  width: 100%;
+  height: 350px;
+  padding: 50px 50px;
+  border-bottom: 1px solid $brandColorBlack100;
+  @extend %flexStart;
+  align-items: start;
+}
+
+.userInfo__img{
+  width: 250px;
+  height: 250px;
+  background-color: #D9D9D9;
+  margin-right: 100px;
+
+
+  label{
+    div{
+      cursor: pointer;
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      &::before{
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 50%;
+        top: 50%;
+        right: 50%;
+        transform: translate(-50%, -50%) rotate(180deg);
+        background-color: $brandColorBlack100;
+      }
+
+      &::after{
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 50%;
+        top: 50%;
+        right: 50%;
+        transform: translate(-50%, -50%) rotate(90deg);
+        background-color: $brandColorBlack100;
+      }
+    }
+  }
+
+  input{
+    display: none;
+  }
+}
+
+.userInfo__lists{
+  flex-grow: 1;
+  height: 100%;
+  @extend %flexStartColumn;
+
+  h1{
+    margin-bottom: 15px;
+    @extend %fontH1;
+  }
+}
+
+.userInfo__lists-block{
+  width: 100%;
+  flex-grow: 1;
+  @extend %flexStart;
+  align-items: start;
+}
+
+.userInfo__lists-list{
+  height: 100%;
+
+  &:first-child{
+    margin-right: 75px;
+  }
+
+  &:last-child{
+    flex-grow: 1;
+  }
+}
+
+.userInfo__lists-item{
+  @extend %fontSize5;
+  height: calc(100% / 4);
+  @extend %flexStart;
+  align-items: end;
+}
+
+.userInfo__edit{
+  height: 100%;
+  @extend %flexStart;
+  align-items: end;
+}
+
+.userInfo__edit-btn{
+  @extend %fontSize5;
+}
+
+.personalArea__userAbilities{
+  width: 100%;
+  height: calc(100% - 350px);
+  @extend %flexSpaceBetween;
+}
+
+.userAbilities__list{
+  @extend %flexCenterColumn;
+  width: 50%;
+}
+
+.userAbilities__list-item{
+  max-width: 80%;
+  width: 400px;
+
+  &:not(:last-child){
+    margin-bottom: 30px;
+  }
+}
+
+.userAbilities__list-btn{
+  width: 100%;
+  @extend %fontSize5;
+}

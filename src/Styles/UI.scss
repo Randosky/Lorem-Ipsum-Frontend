@@ -1,0 +1,49 @@
+@import "./Variables";
+
+// BUTTON CONTRAST
+
+.ui__button-contrast{
+  background-color: $brandColorGreen100;
+  border-radius: $borderRadius20;
+}
+
+// BUTTON MAIN
+
+.ui__button-main{
+  padding: 5px 25px;
+  border-radius: $borderRadius20;
+  border: 1px solid $brandColorBlack100;
+  background: $brandColorBlack20;
+}
+
+// HEADER
+
+.ui__header{
+  width: 100vw;
+  height: 74px;
+  background-color: $brandColorBlack100;
+  @extend %flexSpaceBetween;
+  padding: 0 15px;
+}
+
+.header__button-contrast{
+  padding: 10px calc(10px + 24px + 15px) 10px 15px;
+  position: relative;
+
+  &::before{
+    content: "";
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    top: 50%;
+    right: 15px;
+    transform: translate(0, -50%);
+    background: url("../Assets/Img/LogoutIcon24.svg") center no-repeat;
+    background-size: contain;
+    z-index: 1000;
+  }
+}
+
+.header__button-contrast-text{
+  @extend %fontSize5;
+}
