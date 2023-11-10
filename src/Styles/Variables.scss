@@ -1,0 +1,171 @@
+// BrandColorGreen
+
+$brandColorGreen100: #9ACA3C;
+$brandColorGreen80: #ADD363;
+$brandColorGreen60: #C1DC8B;
+$brandColorGreen40: #D3E7B7;
+$brandColorGreen20: #E8F2D6;
+
+// BrandColorBlack
+
+$brandColorBlack100: #14191A;
+$brandColorBlack80: #5B5E5E;
+$brandColorBlack60: #8A8C8C;
+$brandColorBlack40: #B9BABA;
+$brandColorBlack20: #E7E8E8;
+
+// BorderRadius
+
+$borderRadius20: 20px;
+
+// Fonts
+
+%fontH0 {
+  font-size: 56px;
+  line-height: 64px;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+%fontH1 {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+%fontH2 {
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
+
+%fontH3 {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
+%fontH4 {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
+%fontH5 {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
+%fontSize1 {
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+%fontSize2 {
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+%fontSize3 {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+%fontSize4 {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+%fontSize5 {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+%fontSize6 {
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+%fontSize7 {
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+%fontSize8 {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+
+// Display
+
+%flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%flexStart {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+%flexSpaceBetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+%flexCenterColumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+%flexStartColumn  {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+%flexSpaceBetweenColumn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+// OTHER
+
+$heightWithHeader100vh: calc(100vh - 74px);
+%container {
+  max-width: 1540px;
+  margin: 0 auto;
+  height: 100%;
+}
