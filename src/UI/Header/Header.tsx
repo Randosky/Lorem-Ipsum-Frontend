@@ -6,11 +6,13 @@ import "../../Styles/UI.scss"
 const Header: React.FC = () => {
     return (
         <header className="ui__header">
-            <Logo/>
-            <ButtonContrast btnText="LOG OUT"
-                            btnStyle="header__button-contrast"
-                            textStyle="header__button-contrast-text"
-                            handleOnClick={() => {}}/>
+            <div className="header__container">
+                <Logo/>
+                <ButtonContrast btnText=""
+                                btnStyle="header__button-contrast"
+                                textStyle="header__button-contrast-text"
+                                handleOnClick={() => {}}/>
+            </div>
         </header>
     );
 };

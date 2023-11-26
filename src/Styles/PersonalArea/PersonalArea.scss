@@ -2,141 +2,144 @@
 
 .personalArea {
   width: 100vw;
-  height: $heightWithHeader100vh;
-  max-height: $heightWithHeader100vh;
+  max-width: 100vw;
+  min-height: 100vh;
+  max-height: 100%;
   background-color: $brandColorBlack20;
   color: $brandColorBlack100;
+  overflow-x: hidden;
 }
 
 .personalArea__container {
   @extend %container;
 }
 
-.personalArea__userInfo{
+// USERINFO
+
+.personalArea__userInfo {
   width: 100%;
-  height: 350px;
-  padding: 50px 50px;
+  padding: $mainBigPadding 0;
   border-bottom: 1px solid $brandColorBlack100;
-  @extend %flexStart;
-  align-items: start;
-}
-
-.userInfo__img{
-  width: 250px;
-  height: 250px;
-  background-color: #D9D9D9;
-  margin-right: 100px;
-
-
-  label{
-    div{
-      cursor: pointer;
-      position: relative;
-      width: 100%;
-      height: 100%;
-
-      &::before{
-        content: "";
-        position: absolute;
-        width: 1px;
-        height: 50%;
-        top: 50%;
-        right: 50%;
-        transform: translate(-50%, -50%) rotate(180deg);
-        background-color: $brandColorBlack100;
-      }
-
-      &::after{
-        content: "";
-        position: absolute;
-        width: 1px;
-        height: 50%;
-        top: 50%;
-        right: 50%;
-        transform: translate(-50%, -50%) rotate(90deg);
-        background-color: $brandColorBlack100;
-      }
-    }
-  }
-
-  input{
-    display: none;
-  }
-}
-
-.userInfo__lists{
-  flex-grow: 1;
-  height: 100%;
   @extend %flexStartColumn;
-
-  h1{
-    margin-bottom: 15px;
-    @extend %fontH1;
-  }
+  align-items: start;
+  margin-bottom: $mainBigPadding;
 }
 
-.userInfo__lists-block{
+.userInfo__title {
+  margin-bottom: $mainBigPadding;
+  @extend %bigFontH1;
+}
+
+.userInfo__image {
+  align-self: start;
+  background-color: #D9D9D9;
+  margin-right: 150px;
+}
+
+.userInfo__block {
   width: 100%;
+  height: 100%;
+  @extend %flexStart;
+}
+
+.userInfo__block-lists {
   flex-grow: 1;
+  height: 100%;
   @extend %flexStart;
   align-items: start;
 }
 
-.userInfo__lists-list{
+.userInfo__block-list {
   height: 100%;
 
-  &:first-child{
-    margin-right: 75px;
+  &:first-child {
+    margin-right: $mainBigPadding;
   }
 
-  &:last-child{
+  &:last-child {
     flex-grow: 1;
   }
 }
 
-.userInfo__lists-item{
-  @extend %fontSize5;
-  height: calc(100% / 4);
-  @extend %flexStart;
-  align-items: end;
-}
+.userInfo__list-item {
+  @extend %fontSize8;
 
-.userInfo__edit{
-  height: 100%;
-  @extend %flexStart;
-  align-items: end;
-}
+  a{
+    color: inherit;
+  }
 
-.userInfo__edit-btn{
-  @extend %fontSize5;
-}
-
-.personalArea__userAbilities{
-  width: 100%;
-  height: calc(100% - 350px);
-  @extend %flexSpaceBetween;
-}
-
-.userAbilities__list{
-  @extend %flexCenterColumn;
-  width: 50%;
-}
-
-.userAbilities__list-item{
-  max-width: 80%;
-  width: 400px;
-
-  &:not(:last-child){
-    margin-bottom: 30px;
+  &:not(:last-child) {
+    margin-bottom: $mainBigPadding;
   }
 }
 
-.userAbilities__list-btn{
-  width: 100%;
-  @extend %fontSize5;
+.userInfo__edit {
+  align-self: end;
+}
 
-  span{
-    word-break: break-word;
-    text-align: center;
+.userInfo__edit-btn {
+  @extend %fontSize8;
+}
+
+// KANBAN
+
+.personalArea__kanban {
+  width: 100%;
+  padding-bottom: $mainBigPadding;
+  @extend %flexCenterColumn;
+  align-items: start;
+}
+
+.kanban__title{
+  @extend %bigFontH2;
+  margin-bottom: $mainBigPadding;
+}
+
+.kanban__boards{
+  width: 100%;
+  height: 600px;
+  max-height: 600px;
+  @extend %flexStart;
+  align-items: start;
+  justify-content: space-around;
+}
+
+.kanban__board{
+  flex: 0 1 30%;
+  height: 100%;
+  @extend %flexCenterColumn
+}
+
+.board__board{
+  width: 330px;
+  flex-grow: 1;
+  @extend %flexCenterColumn;
+  justify-content: start;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.board__title{
+  width: 280px;
+  padding: 10px 0;
+  @extend %bigFontH3;
+  text-align: center;
+  margin-bottom: $mainMediumPadding;
+}
+
+.board__task{
+}
+
+.task__task{
+  cursor: grab;
+  width: 300px;
+  height: 100px;
+  background-color: white;
+  border: 1px solid $brandColorBlack100;
+  padding: 25px;
+  margin-bottom: $mainMediumPadding;
+
+  p{
+    @extend %fontSize8;
   }
 }

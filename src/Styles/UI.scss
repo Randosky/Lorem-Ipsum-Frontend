@@ -4,14 +4,12 @@
 
 .ui__button-contrast{
   background-color: $brandColorGreen100;
-  border-radius: $borderRadius20;
 }
 
 // BUTTON MAIN
 
 .ui__button-main{
-  padding: 5px 25px;
-  border-radius: $borderRadius20;
+  padding: 10px 50px;
   border: 1px solid $brandColorBlack100;
   background: $brandColorBlack20;
 }
@@ -19,16 +17,22 @@
 // HEADER
 
 .ui__header{
-  width: 100vw;
-  height: 74px;
+}
+
+.header__container{
+  height: 95px;
   background-color: $brandColorBlack100;
   @extend %flexSpaceBetween;
-  padding: 0 15px;
+  @extend %container;
 }
 
 .header__button-contrast{
-  padding: 10px calc(10px + 24px + 15px) 10px 15px;
+  border-radius: 50%;
+  padding: 15px;
+  width: 39px;
+  height: 39px;
   position: relative;
+  box-sizing: border-box;
 
   &::before{
     content: "";
@@ -36,8 +40,8 @@
     height: 24px;
     width: 24px;
     top: 50%;
-    right: 15px;
-    transform: translate(0, -50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
     background: url("../Assets/Img/LogoutIcon24.svg") center no-repeat;
     background-size: contain;
     z-index: 1000;
@@ -46,4 +50,54 @@
 
 .header__button-contrast-text{
   @extend %fontSize5;
+}
+
+// UserImage
+
+.ui__userImage{
+  width: 280px;
+  height: 280px;
+
+  label{
+    div{
+      cursor: pointer;
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      &::before{
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 50%;
+        top: 50%;
+        right: 50%;
+        transform: translate(-50%, -50%) rotate(180deg);
+        background-color: $brandColorBlack100;
+      }
+
+      &::after{
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 50%;
+        top: 50%;
+        right: 50%;
+        transform: translate(-50%, -50%) rotate(90deg);
+        background-color: $brandColorBlack100;
+      }
+    }
+  }
+
+  input{
+    display: none;
+  }
+}
+
+.userImage__image{
+
+}
+
+.userImage__icon{
+
 }

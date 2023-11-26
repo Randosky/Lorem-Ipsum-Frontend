@@ -1,3 +1,5 @@
+@import "./Variables";
+
 @font-face {
   font-family: 'Grtsk Exa';
   src: local('Grtsk Exa'),
@@ -44,21 +46,21 @@ body {
   margin: 0;
 }
 
-/**::-webkit-scrollbar {*/
-/*    width: 7px;*/
-/*    height: 5px;*/
-/*}*/
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 5px;
+}
 
-/**::-webkit-scrollbar-track {*/
-/*    background: #e0e0e0;*/
-/*    border-radius: 20px;*/
-/*}*/
+*::-webkit-scrollbar-track {
+    background: $brandColorBlack40;
+    border-radius: 20px;
+}
 
-/**::-webkit-scrollbar-thumb {*/
-/*    cursor: pointer;*/
-/*    background: #361107;*/
-/*    border-radius: 20px;*/
-/*}*/
+*::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background: rgba(20,25,26,0.72);
+    border-radius: 20px;
+}
 
 p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
