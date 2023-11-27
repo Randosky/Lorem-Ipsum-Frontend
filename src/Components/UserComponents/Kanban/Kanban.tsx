@@ -18,8 +18,8 @@ const Kanban: React.FC = observer(() => {
     }
 
     return (
-        <DragDropContext onDragEnd={(result) => onDragEndHandle(result)}>
-            <div className="personalArea__kanban">
+        <div className="personalArea__kanban">
+            <DragDropContext onDragEnd={(result) => onDragEndHandle(result)}>
                 <h2 className="kanban__title">
                     Мои задачи
                 </h2>
@@ -37,8 +37,8 @@ const Kanban: React.FC = observer(() => {
                         )
                     }
                 </div>
-            </div>
-        </DragDropContext>
+            </DragDropContext>
+        </div>
     );
 });
 

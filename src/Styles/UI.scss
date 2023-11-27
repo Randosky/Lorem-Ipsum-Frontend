@@ -20,10 +20,10 @@
 }
 
 .header__container{
+  @include flexSpaceBetween;
+  @include container;
   height: 95px;
   background-color: $brandColorBlack100;
-  @extend %flexSpaceBetween;
-  @extend %container;
 }
 
 .header__button-contrast{
@@ -49,7 +49,7 @@
 }
 
 .header__button-contrast-text{
-  @extend %fontSize5;
+  @include fontSize5;
 }
 
 // UserImage

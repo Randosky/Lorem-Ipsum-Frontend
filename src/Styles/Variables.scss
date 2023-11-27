@@ -20,21 +20,21 @@ $borderRadius20: 20px;
 
 // Fonts
 
-%fontH0 {
+@mixin fontH0 {
   font-size: 56px;
   line-height: 64px;
   letter-spacing: 0;
   font-weight: 600;
 }
 
-%fontH1 {
+@mixin fontH1 {
   font-size: 24px;
   line-height: 32px;
   letter-spacing: 0;
   font-weight: 600;
 }
 
-%fontH2 {
+@mixin fontH2 {
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 0;
@@ -42,91 +42,91 @@ $borderRadius20: 20px;
 }
 
 
-%fontH3 {
+@mixin fontH3 {
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
   font-weight: 500;
 }
 
-%fontH4 {
+@mixin fontH4 {
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0;
   font-weight: 500;
 }
 
-%fontH5 {
+@mixin fontH5 {
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0;
   font-weight: 500;
 }
 
-%fontSize1 {
+@mixin fontSize1 {
   font-size: 10px;
   line-height: 12px;
   letter-spacing: 0;
   font-weight: 400;
 }
 
-%fontSize2 {
+@mixin fontSize2 {
   font-size: 11px;
   line-height: 16px;
   letter-spacing: 0;
   font-weight: 400;
 }
 
-%fontSize3 {
+@mixin fontSize3 {
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0;
   font-weight: 400;
 }
 
-%fontSize4 {
+@mixin fontSize4 {
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0;
   font-weight: 400;
 }
 
-%fontSize5 {
+@mixin fontSize5 {
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
   font-weight: 400;
 }
 
-%fontSize6 {
+@mixin fontSize6 {
   font-size: 18px;
   line-height: 26px;
   letter-spacing: 0;
   font-weight: 400;
 }
 
-%fontSize7 {
+@mixin fontSize7 {
   font-size: 20px;
   line-height: 28px;
   letter-spacing: 0;
   font-weight: 400;
 }
 
-%fontSize8 {
+@mixin fontSize8 {
   font-size: 24px;
   line-height: 32px;
   letter-spacing: 0;
   font-weight: 400;
 }
 
-%bigFontH1 {
+@mixin bigFontH1 {
   font-size: 32px;
   line-height: 40px;
   letter-spacing: 0;
   font-weight: 600;
 }
 
-%bigFontH2 {
+@mixin bigFontH2 {
   font-size: 28px;
   line-height: 32px;
   letter-spacing: 0;
@@ -134,7 +134,7 @@ $borderRadius20: 20px;
 }
 
 
-%bigFontH3 {
+@mixin bigFontH3 {
   font-size: 24px;
   line-height: 32px;
   letter-spacing: 0;
@@ -144,39 +144,39 @@ $borderRadius20: 20px;
 
 // Display
 
-%flexCenter {
+@mixin flexCenter {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-%flexStart {
+@mixin flexStart {
   display: flex;
   align-items: center;
   justify-content: start;
 }
 
-%flexSpaceBetween {
+@mixin flexSpaceBetween {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-%flexCenterColumn {
+@mixin flexCenterColumn {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
-%flexStartColumn {
+@mixin flexStartColumn {
   display: flex;
   align-items: start;
   justify-content: center;
   flex-direction: column;
 }
 
-%flexSpaceBetweenColumn {
+@mixin flexSpaceBetweenColumn {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -191,9 +191,12 @@ $containerSmallPadding: 30px;
 
 $mainBigPadding: 50px;
 $mainMediumPadding: 25px;
-%container {
+
+$mainBigMargin: 50px;
+$mainMediumMargin: 25px;
+
+@mixin container {
   max-width: calc(1920px + $containerBigPadding*2);
   margin: 0 auto;
-  height: 100%;
   padding: 0 $containerBigPadding;
 }
