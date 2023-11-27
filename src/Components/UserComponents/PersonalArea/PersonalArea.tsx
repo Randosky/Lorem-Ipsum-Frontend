@@ -1,29 +1,34 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import "../../../Styles/PersonalArea/PersonalArea.scss"
-import PersonalAreaUserInfo from "./PersonalAreaUserInfo";
+import UserInfo from "./UserInfo/UserInfo";
 import Header from "../../../UI/Header/Header";
-import {IEmployeeType} from "../../../Types/EmployeeType";
-import Kanban from "../Kanban/Kanban";
+import Kanban from "./Kanban/Kanban";
+import Loading from "../../AdditionalComponets/LoadingPage/Loading";
+import employeeActionsStore from "../../../Store/EmployeeActionsStore";
+import {observer} from "mobx-react-lite";
 
-const PersonalArea: React.FC = () => {
-    const employee: IEmployeeType = {
-        fio: "Тестовый Тест Тестович",
-        email: "ttestovii@brusnika.ru",
-        phone: "8-963-094-68-34",
-        job: "Специалист1",
-        department: "Аналитический отдел",
-        supervisor: "Пробковый Пробка Пробкович",
-    }
+const PersonalArea: React.FC = observer(() => {
+    const EditingPage = lazy(() => import("../EditingPage/EditingPage"))
 
     return (
         <main className="personalArea">
             <Header/>
             <div className="personalArea__container">
-                <PersonalAreaUserInfo employee={employee}/>
-                <Kanban/>
+                {
+                    employeeActionsStore.isEditClicked
+                        ?
+                        <Suspense fallback={<Loading/>}>
+                            <EditingPage/>
+                        </Suspense>
+                        :
+                        <div>
+                            <UserInfo employee={employeeActionsStore.employee}/>
+                            <Kanban/>
+                        </div>
+                }
             </div>
         </main>
     );
-};
+})
 
 export default PersonalArea;

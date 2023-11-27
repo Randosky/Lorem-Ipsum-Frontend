@@ -1,13 +1,14 @@
 import React from 'react';
-import ButtonMain from "../../../UI/MyButton/ButtonMain";
-import UserImage from "../../../UI/UserImage";
-import {IEmployeeType} from "../../../Types/EmployeeType";
+import ButtonMain from "../../../../UI/MyButton/ButtonMain";
+import UserImage from "../../../../UI/UserImage/UserImage";
+import {IEmployeeType} from "../../../../Types/EmployeeType";
+import employeeActionsStore from "../../../../Store/EmployeeActionsStore";
 
 interface PersonalAreaUserInfoProps {
     employee: IEmployeeType,
 }
 
-const PersonalAreaUserInfo: React.FC<PersonalAreaUserInfoProps> = ({employee}: PersonalAreaUserInfoProps) => {
+const UserInfo: React.FC<PersonalAreaUserInfoProps> = ({employee}: PersonalAreaUserInfoProps) => {
     return (
         <div className="personalArea__userInfo">
             <h1 className="userInfo__title">
@@ -53,12 +54,11 @@ const PersonalAreaUserInfo: React.FC<PersonalAreaUserInfoProps> = ({employee}: P
                     <ButtonMain
                         btnStyle="userInfo__edit-btn"
                         btnText="Редактировать"
-                        handleOnClick={() => {
-                        }}/>
+                        handleOnClick={() => employeeActionsStore.updateIsEditingClicked()}/>
                 </div>
             </div>
         </div>
     );
 };
 
-export default PersonalAreaUserInfo;
+export default UserInfo;

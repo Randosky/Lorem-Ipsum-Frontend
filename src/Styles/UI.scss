@@ -2,13 +2,13 @@
 
 // BUTTON CONTRAST
 
-.ui__button-contrast{
+.ui__button-contrast {
   background-color: $brandColorGreen100;
 }
 
 // BUTTON MAIN
 
-.ui__button-main{
+.ui__button-main {
   padding: 10px 50px;
   border: 1px solid $brandColorBlack100;
   background: $brandColorBlack20;
@@ -16,17 +16,17 @@
 
 // HEADER
 
-.ui__header{
+.ui__header {
 }
 
-.header__container{
+.header__container {
   @include flexSpaceBetween;
   @include container;
   height: 95px;
   background-color: $brandColorBlack100;
 }
 
-.header__button-contrast{
+.header__button-contrast {
   border-radius: 50%;
   padding: 15px;
   width: 39px;
@@ -34,7 +34,7 @@
   position: relative;
   box-sizing: border-box;
 
-  &::before{
+  &::before {
     content: "";
     position: absolute;
     height: 24px;
@@ -48,24 +48,24 @@
   }
 }
 
-.header__button-contrast-text{
+.header__button-contrast-text {
   @include fontSize5;
 }
 
 // UserImage
 
-.ui__userImage{
+.ui__userImage {
   width: 280px;
   height: 280px;
 
-  label{
-    div{
+  label {
+    div {
       cursor: pointer;
       position: relative;
       width: 100%;
       height: 100%;
 
-      &::before{
+      &::before {
         content: "";
         position: absolute;
         width: 1px;
@@ -76,7 +76,7 @@
         background-color: $brandColorBlack100;
       }
 
-      &::after{
+      &::after {
         content: "";
         position: absolute;
         width: 1px;
@@ -89,15 +89,49 @@
     }
   }
 
-  input{
+  input {
     display: none;
   }
 }
 
-.userImage__image{
+.userImage__image {
 
 }
 
-.userImage__icon{
+.userImage__icon {
 
+}
+
+// MyInput
+
+.ui__label {
+  width: 100%;
+}
+
+.ui__label-prefix {
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.ui__label-input {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  border: 1px solid $brandColorBlack100;
+  background: #FFF;
+  padding: 10px 25px;
+}
+
+@media (max-width: 1530px) {
+  .ui__userImage {
+    width: 250px;
+    height: 250px;
+  }
+
+  .ui__button-main{
+    padding: 5px 25px;
+  }
 }
