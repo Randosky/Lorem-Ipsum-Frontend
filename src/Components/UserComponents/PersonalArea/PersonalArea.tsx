@@ -22,7 +22,7 @@ const PersonalArea: React.FC = observer(() => {
                         </Suspense>
                         :
                         <div>
-                            <UserInfo employee={employeeActionsStore.employee}/>
+                            <UserInfo/>
                             <Kanban/>
                         </div>
                 }

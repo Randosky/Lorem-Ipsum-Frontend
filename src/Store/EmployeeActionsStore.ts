@@ -1,23 +1,14 @@
 import {makeAutoObservable} from "mobx";
-import {IEmployeeType} from "../Types/EmployeeType";
 
 class EmployeeActionsStore {
 
     isEditClicked: boolean = false;
-    employee: IEmployeeType = {
-        fio: "Тестовый Тест Тестович",
-        email: "ttestovii@brusnika.ru",
-        phone: "8-963-094-68-34",
-        job: "Специалист1",
-        department: "Аналитический отдел",
-        supervisor: "Пробковый Пробка Пробкович",
-    }
-    currentEmployeeFIO: string = "";
-    currentEmployeeEmail: string = "";
-    currentEmployeePhone: string = "";
-    currentEmployeeJob: string = "";
-    currentEmployeeDepartment: string = "";
-    currentEmployeeSupervisor: string = "";
+    currentEmployeeFIO: string = "Тестовый Тест Тестович";
+    currentEmployeeEmail: string = "ttestovii@brusnika.ru";
+    currentEmployeePhone: string = "8-963-094-68-34";
+    currentEmployeeJob: string = "Специалист1";
+    currentEmployeeDepartment: string = "Аналитический отдел";
+    currentEmployeeSupervisor: string = "Пробковый Пробка Пробкович";
     currentEmployeeImage: File | null = null;
 
     constructor() {

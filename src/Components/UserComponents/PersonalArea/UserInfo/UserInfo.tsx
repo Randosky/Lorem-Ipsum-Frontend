@@ -1,14 +1,10 @@
 import React from 'react';
 import ButtonMain from "../../../../UI/MyButton/ButtonMain";
 import UserImage from "../../../../UI/UserImage/UserImage";
-import {IEmployeeType} from "../../../../Types/EmployeeType";
 import employeeActionsStore from "../../../../Store/EmployeeActionsStore";
+import {observer} from "mobx-react-lite";
 
-interface PersonalAreaUserInfoProps {
-    employee: IEmployeeType,
-}
-
-const UserInfo: React.FC<PersonalAreaUserInfoProps> = ({employee}: PersonalAreaUserInfoProps) => {
+const UserInfo: React.FC = observer(() => {
     return (
         <div className="personalArea__userInfo">
             <h1 className="userInfo__title">
@@ -27,26 +23,26 @@ const UserInfo: React.FC<PersonalAreaUserInfoProps> = ({employee}: PersonalAreaU
                     </ul>
                     <ul className="userInfo__block-list">
                         <li className="userInfo__list-item">
-                            {employee.fio}
+                            {employeeActionsStore.currentEmployeeFIO}
                         </li>
                         <li className="userInfo__list-item">
-                            <a href={`mailto:${employee.email}`}>
-                                {employee.email}
+                            <a href={`mailto:${employeeActionsStore.currentEmployeeEmail}`}>
+                                {employeeActionsStore.currentEmployeeEmail}
                             </a>
                         </li>
                         <li className="userInfo__list-item">
-                            <a href={`tel:${employee.phone}`}>
-                                {employee.phone}
+                            <a href={`tel:${employeeActionsStore.currentEmployeePhone}`}>
+                                {employeeActionsStore.currentEmployeePhone}
                             </a>
                         </li>
                         <li className="userInfo__list-item">
-                            {employee.job}
+                            {employeeActionsStore.currentEmployeeJob}
                         </li>
                         <li className="userInfo__list-item">
-                            {employee.department}
+                            {employeeActionsStore.currentEmployeeDepartment}
                         </li>
                         <li className="userInfo__list-item">
-                            {employee.supervisor}
+                            {employeeActionsStore.currentEmployeeSupervisor}
                         </li>
                     </ul>
                 </div>
@@ -59,6 +55,6 @@ const UserInfo: React.FC<PersonalAreaUserInfoProps> = ({employee}: PersonalAreaU
             </div>
         </div>
     );
-};
+});
 
 export default UserInfo;
