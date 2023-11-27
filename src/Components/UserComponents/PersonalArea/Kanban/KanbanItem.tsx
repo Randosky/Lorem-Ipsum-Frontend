@@ -1,7 +1,7 @@
 import React from 'react';
-import {IBoardTaskType} from "../../../Types/BoardTaskType";
+import {IBoardTaskType} from "../../../../Types/BoardTaskType";
 import {Draggable} from "@hello-pangea/dnd";
-import kanbanStore from "../../../Store/KanbanStore";
+import kanbanStore from "../../../../Store/KanbanStore";
 
 type KanbanItemProps = {
     task: IBoardTaskType,

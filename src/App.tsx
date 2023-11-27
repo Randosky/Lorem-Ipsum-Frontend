@@ -2,7 +2,6 @@ import React from 'react';
 import {BrowserRouter} from "react-router-dom"
 import AppRouter from "./Router/AppRouter";
 import "./Styles/App.scss"
-import "./Styles/Media.scss"
 
 const App: React.FC = () => {
     return (

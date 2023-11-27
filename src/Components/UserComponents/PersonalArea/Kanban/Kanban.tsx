@@ -1,7 +1,7 @@
 import React from 'react';
 import {DragDropContext, DropResult} from '@hello-pangea/dnd';
 import {observer} from "mobx-react-lite"
-import kanbanStore from "../../../Store/KanbanStore";
+import kanbanStore from "../../../../Store/KanbanStore";
 import KanbanBoard from "./KanbanBoard";
 
 const Kanban: React.FC = observer(() => {
