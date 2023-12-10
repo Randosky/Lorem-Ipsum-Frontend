@@ -1,0 +1,127 @@
+@import "../Variables";
+
+.auth{
+  background-color: $brandColorBlack100;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.auth__header{
+  @include flexCenter;
+  padding: $mainBigPadding 0 0 0;
+}
+
+.auth__modal{
+  @include flexCenterColumn;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $brandColorBlack20;
+  border-radius: 20px;
+  height: fit-content;
+  width: 700px;
+  padding: $mainMediumPadding $mainBigPadding;
+}
+
+.auth__title{
+  @include bigFontH1;
+  text-align: center;
+  margin-bottom: $mainBigMargin;
+}
+
+.auth__input{
+  @include fontSize8;
+}
+
+.auth__login{
+  margin-bottom: $mainMediumMargin;
+}
+
+.auth__prefix{
+  @include fontSize7;
+}
+
+.auth__password{
+  width: 100%;
+  position: relative;
+  margin-bottom: $mainBigMargin;
+}
+
+.auth__password-input{
+
+}
+
+.auth__password-visibility{
+  position: absolute;
+  bottom: 6px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.auth__buttons{
+  @include flexCenterColumn
+}
+
+.auth__buttons-signIn{
+  @include fontSize8;
+  border-radius: 25px;
+  padding: 10px $mainBigPadding;
+  margin-bottom: $mainSmallMargin;
+}
+
+.auth__buttons-register{
+  @include fontSize8;
+  border-radius: 25px;
+  padding: 10px $mainBigPadding;
+  margin-bottom: $mainMediumMargin;
+}
+
+.auth__buttons-text{
+  @include fontSize6;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (max-width: 1530px) {
+  .auth__modal{
+    width: 500px;
+  }
+
+  .auth__header{
+    padding: $mainMediumPadding 0 0 0;
+  }
+
+  .auth__title{
+    margin-bottom: $mainMediumMargin;
+  }
+
+  .auth__input{
+    @include fontSize7;
+  }
+
+  .auth__login{
+    margin-bottom: $mainSmallMargin;
+  }
+
+  .auth__password{
+    margin-bottom: $mainMediumMargin;
+  }
+
+  .auth__prefix{
+    @include fontSize6;
+  }
+
+  .auth__buttons-signIn{
+    @include fontSize7;
+    padding: 10px $mainMediumPadding;
+    margin-bottom: $mainSmallestMargin;
+  }
+
+  .auth__buttons-register{
+    @include fontSize7;
+    padding: 10px $mainMediumPadding;
+    margin-bottom: $mainSmallestMargin;
+  }
+}

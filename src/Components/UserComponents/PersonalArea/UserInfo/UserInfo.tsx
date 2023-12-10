@@ -4,7 +4,14 @@ import UserImage from "../../../../UI/UserImage/UserImage";
 import employeeActionsStore from "../../../../Store/EmployeeActionsStore";
 import {observer} from "mobx-react-lite";
 
-const UserInfo: React.FC = observer(() => {
+type UserInfoProps = {
+    handleOnEdit: () => void,
+}
+
+const UserInfo: React.FC<UserInfoProps> = observer((props: UserInfoProps) => {
+
+    const {handleOnEdit} = props
+
     return (
         <div className="personalArea__userInfo">
             <h1 className="userInfo__title">
@@ -50,7 +57,7 @@ const UserInfo: React.FC = observer(() => {
                     <ButtonMain
                         btnStyle="userInfo__edit-btn"
                         btnText="Редактировать"
-                        handleOnClick={() => employeeActionsStore.updateIsEditingClicked()}/>
+                        handleOnClick={handleOnEdit}/>
                 </div>
             </div>
         </div>

@@ -1,34 +1,38 @@
-import React, {lazy, Suspense} from 'react';
+import React, {lazy, Suspense, useCallback, useState} from 'react';
 import "../../../Styles/PersonalArea/PersonalArea.scss"
 import UserInfo from "./UserInfo/UserInfo";
 import Header from "../../../UI/Header/Header";
 import Kanban from "./Kanban/Kanban";
 import Loading from "../../AdditionalComponets/LoadingPage/Loading";
-import employeeActionsStore from "../../../Store/EmployeeActionsStore";
-import {observer} from "mobx-react-lite";
 
-const PersonalArea: React.FC = observer(() => {
+const PersonalArea: React.FC = () => {
     const EditingPage = lazy(() => import("../EditingPage/EditingPage"))
+    const [isEditClicked, setIsEditClicked] = useState(false);
+
+    const handleOnEdit = useCallback(
+        () => setIsEditClicked(!isEditClicked), [isEditClicked],
+    );
+
 
     return (
         <main className="personalArea">
             <Header/>
             <div className="personalArea__container">
                 {
-                    employeeActionsStore.isEditClicked
+                    isEditClicked
                         ?
                         <Suspense fallback={<Loading/>}>
-                            <EditingPage/>
+                            <EditingPage handleOnEdit={handleOnEdit}/>
                         </Suspense>
                         :
                         <div>
-                            <UserInfo/>
+                            <UserInfo handleOnEdit={handleOnEdit}/>
                             <Kanban/>
                         </div>
                 }
             </div>
         </main>
     );
-})
+}
 
 export default PersonalArea;

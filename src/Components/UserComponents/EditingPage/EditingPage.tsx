@@ -6,7 +6,12 @@ import ButtonMain from "../../../UI/MyButton/ButtonMain";
 import "../../../Styles/EditingPage/EditingPage.scss"
 import {observer} from "mobx-react-lite";
 
-const EditingPage: React.FC = observer(() => {
+type EditingPageProps = {
+    handleOnEdit: () => void,
+}
+
+const EditingPage: React.FC<EditingPageProps> = observer((props: EditingPageProps) => {
+    const {handleOnEdit} = props
 
     return (
         <div className="personalArea__editing">
@@ -66,10 +71,8 @@ const EditingPage: React.FC = observer(() => {
                 </ul>
             </div>
             <ButtonMain btnStyle="editing__save" btnText="Сохранить"
-                        handleOnClick={() => {
-                            employeeActionsStore.saveCurrentEmployeeData()
-                            employeeActionsStore.updateIsEditingClicked()
-                        }}/>
+                        handleOnClick={() => employeeActionsStore.saveCurrentEmployeeData()
+                                .then(handleOnEdit)}/>
         </div>
     );
 });

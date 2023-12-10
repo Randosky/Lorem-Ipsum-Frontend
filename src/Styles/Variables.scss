@@ -191,9 +191,13 @@ $containerSmallPadding: 30px;
 
 $mainBigPadding: 50px;
 $mainMediumPadding: 25px;
+$mainSmallPadding: 15px;
+$mainSmallestPadding: 10px;
 
 $mainBigMargin: 50px;
 $mainMediumMargin: 25px;
+$mainSmallMargin: 15px;
+$mainSmallestMargin: 10px;
 
 @mixin container {
   max-width: calc(1920px + $containerBigPadding*2);

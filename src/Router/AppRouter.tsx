@@ -1,7 +1,6 @@
 import React, {ReactNode} from 'react';
 import {Routes, Route, useLocation, Navigate} from "react-router-dom";
 import PersonalArea from "../Components/UserComponents/PersonalArea/PersonalArea";
-import Register from "../Components/AuthComponents/Register/Register";
 import Auth from "../Components/AuthComponents/Auth/Auth";
 
 type RouteType = {
@@ -12,19 +11,19 @@ type RouteType = {
 const AppRouter: React.FC = () => {
     const publicRoutes: RouteType[] = [
         {
-            path: "/login",
+            path: "/authentication",
             element: <Auth/>
         },
-        {
-            path: "/register",
-            element: <Register/>,
-        }
     ]
 
     const privateRoutes: RouteType[] = [
         {
-            path: "/",
+            path: "/personalArea",
             element: <PersonalArea/>,
+        },
+        {
+            path: "/authentication",
+            element: <Auth/>
         },
     ]
 
@@ -44,7 +43,7 @@ const AppRouter: React.FC = () => {
                         }
                     </Routes>
                     :
-                    <Navigate to="/"/>
+                    <Navigate to="/authentication"/>
 
             ) :
             (
@@ -58,7 +57,7 @@ const AppRouter: React.FC = () => {
                         }
                     </Routes>
                     :
-                    <Navigate to="/login"/>
+                    <Navigate to="/authentication"/>
             )
     );
 };

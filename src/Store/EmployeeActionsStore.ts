@@ -1,8 +1,6 @@
 import {makeAutoObservable} from "mobx";
 
 class EmployeeActionsStore {
-
-    isEditClicked: boolean = false;
     currentEmployeeFIO: string = "Тестовый Тест Тестович";
     currentEmployeeEmail: string = "ttestovii@brusnika.ru";
     currentEmployeePhone: string = "8-963-094-68-34";
@@ -13,10 +11,6 @@ class EmployeeActionsStore {
 
     constructor() {
         makeAutoObservable(this)
-    }
-
-    updateIsEditingClicked() {
-        this.isEditClicked = !this.isEditClicked
     }
 
     updateCurrentEmployeeFIO(fio: string) {
@@ -50,7 +44,7 @@ class EmployeeActionsStore {
         }
     }
 
-    saveCurrentEmployeeData() {
+    async saveCurrentEmployeeData() {
 
     }
 }
