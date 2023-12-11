@@ -1,16 +1,16 @@
 import React from 'react';
 import ButtonMain from "../../../../UI/MyButton/ButtonMain";
 import UserImage from "../../../../UI/UserImage/UserImage";
-import employeeActionsStore from "../../../../Store/EmployeeActionsStore";
 import {observer} from "mobx-react-lite";
+import {IEmployeeType} from "../../../../Types/Employee/EmployeeType";
 
-type UserInfoProps = {
+interface UserInfoProps extends IEmployeeType {
     handleOnEdit: () => void,
 }
 
 const UserInfo: React.FC<UserInfoProps> = observer((props: UserInfoProps) => {
 
-    const {handleOnEdit} = props
+    const {handleOnEdit, department, email, image, job, fio, phone, supervisor} = props
 
     return (
         <div className="personalArea__userInfo">
@@ -18,7 +18,7 @@ const UserInfo: React.FC<UserInfoProps> = observer((props: UserInfoProps) => {
                 Личный кабинет сотрудника
             </h1>
             <div className="userInfo__block">
-                <UserImage styles="userInfo__image"/>
+                <UserImage styles="userInfo__image" userImageUrl={image}/>
                 <div className="userInfo__block-lists">
                     <ul className="userInfo__block-list">
                         <li className="userInfo__list-item">ФИО</li>
@@ -30,26 +30,26 @@ const UserInfo: React.FC<UserInfoProps> = observer((props: UserInfoProps) => {
                     </ul>
                     <ul className="userInfo__block-list">
                         <li className="userInfo__list-item">
-                            {employeeActionsStore.currentEmployeeFIO}
+                            {fio}
                         </li>
                         <li className="userInfo__list-item">
-                            <a href={`mailto:${employeeActionsStore.currentEmployeeEmail}`}>
-                                {employeeActionsStore.currentEmployeeEmail}
+                            <a href={`mailto:${email}`}>
+                                {email}
                             </a>
                         </li>
                         <li className="userInfo__list-item">
-                            <a href={`tel:${employeeActionsStore.currentEmployeePhone}`}>
-                                {employeeActionsStore.currentEmployeePhone}
+                            <a href={`tel:${phone}`}>
+                                {phone}
                             </a>
                         </li>
                         <li className="userInfo__list-item">
-                            {employeeActionsStore.currentEmployeeJob}
+                            {job}
                         </li>
                         <li className="userInfo__list-item">
-                            {employeeActionsStore.currentEmployeeDepartment}
+                            {department}
                         </li>
                         <li className="userInfo__list-item">
-                            {employeeActionsStore.currentEmployeeSupervisor}
+                            {supervisor}
                         </li>
                     </ul>
                 </div>

@@ -5,4 +5,5 @@ export interface IEmployeeType {
     job: string,
     department: string,
     supervisor: string,
+    image: File | null,
 }

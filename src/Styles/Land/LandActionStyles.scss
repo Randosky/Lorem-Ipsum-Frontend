@@ -1,0 +1,102 @@
+@import "../Variables";
+
+// landActions
+
+.landActions{
+  @include pageStyles;
+}
+
+.landActions__container{
+  @include container;
+  padding-top: $mainBigPadding;
+  padding-bottom: $mainBigPadding;
+}
+
+.landActions__title{
+  @include bigFontH1;
+  margin-bottom: $mainBigMargin;
+}
+
+.landActions__lists{
+  @include flexStart;
+  align-items: start;
+  justify-content: space-between;
+  padding: 0 $mainBigPadding*2;
+  width: 100%;
+  position: relative;
+}
+
+.landActions__list{
+  flex: 0 1 40%;
+}
+
+.landActions__item{
+  &:not(:last-child){
+    margin-bottom: $mainMediumMargin;
+  }
+}
+
+.landActions__item-input{
+  @include fontSize8;
+}
+
+.landActions__item-select{
+  @include fontSize8;
+}
+
+.landActions__item-prefix{
+  @include fontSize8;
+}
+
+.landActions__button-button{
+  @include fontSize8;
+  position: absolute;
+  bottom: 0;
+  right: $mainBigPadding*2;
+}
+
+
+@media (max-width: 1530px) {
+
+  .landActions__container{
+    padding: $mainBigPadding $containerMediumPadding;
+  }
+
+  .landActions__title{
+    @include fontH1;
+  }
+
+  .landActions__lists{
+    padding: 0 $mainBigPadding;
+  }
+
+  .landActions__list{
+    flex: 0 1 45%
+  }
+
+  .landActions__item-input{
+    @include fontSize6;
+    padding: 7px 20px;
+  }
+
+  .landActions__item-select{
+    @include fontSize6;
+    padding: 7px 20px;
+  }
+
+  .landActions__item-prefix{
+    @include fontSize5;
+  }
+
+  .landActions__button-button{
+    @include fontSize6;
+    padding: 5px 25px;
+    right: $mainBigPadding;
+  }
+}
+
+@media (max-width: 1140px) {
+  .landActions__container{
+    padding: $mainMediumPadding $containerSmallPadding;
+  }
+}

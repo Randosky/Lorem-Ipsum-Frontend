@@ -1,14 +1,14 @@
 import {makeAutoObservable} from "mobx";
 
-class EmployeeActionsStore {
+class LandStore {
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    async saveCurrentEmployeeData() {
+    async saveLand() {
 
     }
 }
 
-export default new EmployeeActionsStore()
+export default new LandStore()

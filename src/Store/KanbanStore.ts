@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
-import {IBoardType} from "../Types/BoardType";
+import {IBoardType} from "../Types/Board/BoardType";
 import {DraggableLocation} from "@hello-pangea/dnd";
-import {IBoardTaskType} from "../Types/BoardTaskType";
+import {IBoardTaskType} from "../Types/Board/BoardTaskType";
 
 class KanbanStore {
     kanban: IBoardType[] = [

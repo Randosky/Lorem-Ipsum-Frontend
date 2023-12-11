@@ -19,10 +19,10 @@ const Kanban: React.FC = observer(() => {
 
     return (
         <div className="personalArea__kanban">
+            <h2 className="kanban__title">
+                Мои задачи
+            </h2>
             <DragDropContext onDragEnd={(result) => onDragEndHandle(result)}>
-                <h2 className="kanban__title">
-                    Мои задачи
-                </h2>
                 <div className="kanban__boards">
                     {
                         kanbanStore.kanban.map((board, index) =>
