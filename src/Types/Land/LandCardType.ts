@@ -1,4 +1,6 @@
 export interface LandCardType {
+    landId: string
+    landStatus: string,
     landTitle: string
     landCadastrial: string
     landSquare: string

@@ -12,6 +12,7 @@ type MyInputWithPrefixProps = {
     prefixStyle?: string,
     inputStyle?: string,
     pattern?: string,
+    labelStyle?: string,
 };
 
 const MyInputWithPrefix: React.FC<MyInputWithPrefixProps> = ({
@@ -25,9 +26,10 @@ const MyInputWithPrefix: React.FC<MyInputWithPrefixProps> = ({
                                                                  prefixStyle,
                                                                  inputStyle,
                                                                  pattern,
+                                                                 labelStyle,
                                                              }: MyInputWithPrefixProps) => {
     return (
-        <label className="ui__label">
+        <label className={"ui__label" + " " + labelStyle}>
             <p className={`ui__label-prefix ${prefixStyle}`}>
                 {prefixText}
             </p>

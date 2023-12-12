@@ -23,7 +23,8 @@ interface ActionsWithLandProps {
     landCategoryProps?: string,
     landObjectProps?: string,
     landSearchChannelProps?: string,
-    landAddingDateProps?: "",
+    landAddingDateProps?: string,
+    actionType?: string
 }
 
 const ActionsWithLand: React.FC<ActionsWithLandProps> = (props: ActionsWithLandProps) => {
@@ -37,10 +38,11 @@ const ActionsWithLand: React.FC<ActionsWithLandProps> = (props: ActionsWithLandP
         landObjectProps,
         landSearchChannelProps,
         landAddingDateProps,
+        actionType
     } = props
 
     const [params] = useSearchParams()
-    const actionType = params.get("actionType")
+    const currentActionType = params.get("actionType") || actionType
 
     const [landTitle, setLandTitle] = useState(landTitleProps || "");
     const [landCadastrial, setLandCadastrial] = useState(landCadastrialProps || "");
@@ -90,7 +92,7 @@ const ActionsWithLand: React.FC<ActionsWithLandProps> = (props: ActionsWithLandP
             <div className="landActions__container">
                 <h1 className="landActions__title">
                     {
-                        actionType === "ADD"
+                        currentActionType === "ADD"
                             ? "Добавление земельного участка"
                             : "Редактирование земельного участка"
                     }
@@ -157,7 +159,7 @@ const ActionsWithLand: React.FC<ActionsWithLandProps> = (props: ActionsWithLandP
                                                 optionsValues={searchChannelOptionsValues}/>
                         </li>
                         {
-                            actionType === "ADD"
+                            currentActionType === "ADD"
                                 ?
                                 <li className="landActions__item">
                                     <MyInputWithPrefix inputStyle="landActions__item-input"

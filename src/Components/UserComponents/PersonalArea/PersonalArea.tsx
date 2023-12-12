@@ -4,6 +4,9 @@ import UserInfo from "./UserInfo/UserInfo";
 import Header from "../../../UI/Header/Header";
 import Kanban from "./Kanban/Kanban";
 import Loading from "../../AdditionalComponets/LoadingPage/Loading";
+import {landActionTypes} from "../../../Helpers/LandHelper";
+import employeeActionsStore from "../../../Store/EmployeeActionsStore";
+import ActionsWithLand from "../../LandComponents/ActionsWithLand/ActionsWithLand";
 
 const PersonalArea: React.FC = () => {
     const EditingPage = lazy(() => import("../EditingPage/EditingPage"))
@@ -42,7 +45,6 @@ const PersonalArea: React.FC = () => {
     const handleOnEmployeeImage = useCallback(
         (e: File | null) => setCurrentEmployeeImage(e), [],
     );
-
 
     return (
         <main className="personalArea">

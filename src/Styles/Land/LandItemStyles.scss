@@ -1,1 +1,167 @@
 @import "../Variables";
+
+// LandList
+
+.landList{
+  @include pageStyles;
+}
+
+.landList__container{
+  @include container;
+  padding-top: $mainBigPadding;
+  padding-bottom: $mainBigPadding;
+}
+
+.landList__header{
+  @include flexStart;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $mainBigMargin;
+  width: 100%;
+}
+
+.header__title{
+  @include bigFontH1;
+  margin-right: $mainBigMargin;
+}
+
+.header__archive{
+  @include fontSize7;
+  align-self: end;
+  cursor: pointer;
+}
+
+.header__label{
+  width: 35%;
+  position: relative;
+
+  &::before{
+    content: "";
+    position: absolute;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    right: 25px;
+    transform: translate(0, -50%);
+    background: url("../../Assets/Img/searchIcon.svg") center no-repeat;
+    background-size: contain;
+    z-index: 10000000;
+  }
+}
+
+.header__search{
+  @include fontSize8;
+  width: 100%;
+}
+
+.header__search-text{
+  display: none;
+}
+
+.landList__lands{
+  width: 100%;
+  margin-bottom: $mainBigMargin;
+}
+
+.lands__table{
+  width: 100%;
+  border-collapse: collapse;
+
+  tr{
+    border-top: 1px solid black;
+
+    &:first-child{
+      border-top: none;
+    }
+
+    &:last-child{
+      border-bottom: 1px solid black;
+    }
+  }
+
+  th{
+    @include bigFontH3;
+    text-align: center;
+    position: relative;
+    max-width: calc(100% / 6);
+    padding: $mainMediumPadding $mainBigPadding;
+
+    &:not(:last-child){
+      &::before{
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 50%;
+        border-right: 1px solid black;
+        right: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+    }
+  }
+
+  td{
+    @include fontSize8;
+    text-align: center;
+    word-break: break-word;
+    padding: $mainBigPadding $mainBigPadding;
+  }
+}
+
+.lands__table-land{
+  cursor: pointer;
+
+  &:hover{
+    background-color: $brandColorBlack40;
+  }
+}
+
+// LandItem
+
+.landCard{
+  @include pageStyles;
+}
+
+.landCard__container{
+  @include container;
+
+}
+
+.landCard__item{
+  padding: $mainBigPadding 0;
+}
+
+@media (max-width: 1530px) {
+  .header__title{
+    @include fontH1;
+  }
+
+  .header__archive{
+    @include fontSize5;
+  }
+
+  .header__search{
+    @include fontSize6;
+  }
+
+  .header__label{
+    &::before{
+      right: 15px;
+    }
+  }
+
+  .lands__table{
+    tr{
+
+    }
+
+    th{
+      @include fontH2;
+    }
+
+    td{
+      @include fontSize6;
+    }
+  }
+}

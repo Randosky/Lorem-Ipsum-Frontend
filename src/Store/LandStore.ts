@@ -9,6 +9,10 @@ class LandStore {
     async saveLand() {
 
     }
+
+    async getCardInfo(id: string) {
+
+    }
 }
 
 export default new LandStore()

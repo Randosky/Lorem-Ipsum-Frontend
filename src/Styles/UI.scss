@@ -152,11 +152,11 @@
 // MyInput
 
 .ui__label {
-  width: 100%;
+  width: fit-content;
 }
 
 .ui__label-prefix {
-  width: 100%;
+  width: fit-content;
   word-wrap: break-word;
   word-break: break-word;
   margin-left: 10px;
@@ -217,5 +217,6 @@
   .ui__label-input,
   .ui__label-select{
     height: 40px;
+    padding: 0 15px;
   }
 }
