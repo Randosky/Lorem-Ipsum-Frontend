@@ -191,12 +191,26 @@ $containerSmallPadding: 30px;
 
 $mainBigPadding: 50px;
 $mainMediumPadding: 25px;
+$mainSmallPadding: 15px;
+$mainSmallestPadding: 10px;
 
 $mainBigMargin: 50px;
 $mainMediumMargin: 25px;
+$mainSmallMargin: 15px;
+$mainSmallestMargin: 10px;
 
 @mixin container {
   max-width: calc(1920px + $containerBigPadding*2);
   margin: 0 auto;
   padding: 0 $containerBigPadding;
+}
+
+@mixin pageStyles{
+  width: 100vw;
+  max-width: 100vw;
+  min-height: 100vh;
+  max-height: 100%;
+  background-color: $brandColorBlack20;
+  color: $brandColorBlack100;
+  overflow-x: hidden;
 }

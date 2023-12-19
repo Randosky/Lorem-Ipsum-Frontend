@@ -47,19 +47,19 @@ body {
 }
 
 *::-webkit-scrollbar {
-    width: 8px;
-    height: 5px;
+  width: 8px;
+  height: 5px;
 }
 
 *::-webkit-scrollbar-track {
-    background: $brandColorBlack40;
-    border-radius: 20px;
+  background: $brandColorBlack40;
+  border-radius: 20px;
 }
 
 *::-webkit-scrollbar-thumb {
-    cursor: pointer;
-    background: rgba(20,25,26,0.72);
-    border-radius: 20px;
+  cursor: pointer;
+  background: rgba(20, 25, 26, 0.72);
+  border-radius: 20px;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -127,4 +127,18 @@ input::placeholder, textarea::placeholder, select::placeholder {
 input::-ms-input-placeholder, textarea::-ms-input-placeholder, select::-ms-input-placeholder {
   color: black;
   opacity: 0.5;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }

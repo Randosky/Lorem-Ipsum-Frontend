@@ -17,28 +17,75 @@
 // HEADER
 
 .ui__header {
+  width: 100%;
+  height: 95px;
 }
 
 .header__container {
   @include flexSpaceBetween;
   @include container;
-  height: 95px;
+  height: 100%;
   background-color: $brandColorBlack100;
+}
+
+.header__left {
+  @include flexStart;
+
+  svg {
+    cursor: pointer;
+    margin-right: $mainBigMargin;
+  }
+}
+
+
+
+.header__left-button {
+  @include fontSize8;
+  padding: 10px 25px 10px 45px;
+  border-radius: 20px;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 15px;
+    transform: translate(0, -50%);
+    z-index: 1000000000;
+  }
+}
+
+.header__left-add {
+  margin-right: $mainBigMargin;
+
+  &::before {
+    background: url("../Assets/Img/AddIcon.svg") center no-repeat;
+    background-size: contain;
+  }
+}
+
+.header__left-landList {
+  &::before {
+    background: url("../Assets/Img/LinkToIcon.svg") center no-repeat;
+    background-size: contain;
+  }
 }
 
 .header__button-contrast {
   border-radius: 50%;
   padding: 15px;
-  width: 39px;
-  height: 39px;
+  width: 52px;
+  height: 52px;
   position: relative;
   box-sizing: border-box;
 
   &::before {
     content: "";
     position: absolute;
-    height: 24px;
-    width: 24px;
+    height: 32px;
+    width: 32px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -105,11 +152,12 @@
 // MyInput
 
 .ui__label {
-  width: 100%;
+  width: fit-content;
 }
 
 .ui__label-prefix {
-  width: 100%;
+  @include fontSize7;
+  width: fit-content;
   word-wrap: break-word;
   word-break: break-word;
   margin-left: 10px;
@@ -117,21 +165,130 @@
 }
 
 .ui__label-input {
+  @include fontSize8;
   width: 100%;
-  height: 100%;
   border-radius: 20px;
   border: 1px solid $brandColorBlack100;
   background: #FFF;
-  padding: 10px 25px;
+  padding: 0 25px;
+  height: 50px;
 }
 
+.ui__input-readonly{
+  background-color: $brandColorBlack40;
+}
+
+// MySelect
+
+.ui__multiply-main{
+  position: relative;
+
+  &::before{
+    content: "";
+    position: absolute;
+    background: url("../Assets/Img/ArrowDown.svg") center no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 50%;
+    z-index: 1000000;
+    transform: translate(0, -50%);
+  }
+}
+
+.ui__multiply-input{
+  cursor: pointer;
+}
+
+.ui__multiply-popup {
+  width: 50%;
+  min-height: fit-content;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid $brandColorBlack100;
+  padding: $mainSmallPadding;
+  border-radius: 20px;
+  background-color: white;
+  z-index: 100000000;
+  position: absolute;
+  top: calc(100% + $mainSmallPadding);
+  left: 0;
+}
+
+.popup__header {
+  @include flexSpaceBetween;
+  margin-bottom: $mainSmallMargin;
+}
+
+.popup__title {
+  @include fontH2;
+}
+
+.popup__close {
+  cursor: pointer;
+  padding: $mainSmallPadding;
+  margin: -$mainSmallMargin;
+}
+
+.popup__objects {
+  @include flexStartColumn;
+}
+
+.popup__object {
+  @include fontSize5;
+  width: 100%;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+
+  &:not(:last-child) {
+    margin-bottom: $mainSmallestMargin;
+  }
+
+  &:hover {
+    background-color: $brandColorGreen60;
+  }
+
+  &-selected {
+    background-color: $brandColorGreen100;
+  }
+}
+
+
 @media (max-width: 1530px) {
+  .header__button-contrast {
+    height: 38px;
+    width: 38px;
+
+    &::before{
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  .header__left-button {
+    @include fontSize6;
+    padding: 6px 25px 6px 45px;
+  }
+
   .ui__userImage {
     width: 250px;
     height: 250px;
   }
 
-  .ui__button-main{
+  .ui__button-main {
     padding: 5px 25px;
+  }
+
+  .ui__label-input{
+    @include fontSize6;
+    height: 50px;
+    padding: 0 15px;
+  }
+
+  .ui__label-prefix{
+    @include fontSize5;
   }
 }

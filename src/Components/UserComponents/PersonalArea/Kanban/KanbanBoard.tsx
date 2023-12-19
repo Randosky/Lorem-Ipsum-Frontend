@@ -1,5 +1,5 @@
 import React from 'react';
-import {IBoardType} from "../../../../Types/BoardType";
+import {IBoardType} from "../../../../Types/Board/BoardType";
 import {Droppable} from "@hello-pangea/dnd";
 import KanbanItem from "./KanbanItem";
 

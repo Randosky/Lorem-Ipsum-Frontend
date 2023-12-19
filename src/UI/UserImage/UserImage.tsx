@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 
 type UserImageProps = {
     isFileDraggable?: boolean;
-    userImageUrl?: string;
+    userImageUrl?: File | null;
     styles?: string;
     handleOnChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
