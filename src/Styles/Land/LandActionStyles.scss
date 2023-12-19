@@ -2,99 +2,75 @@
 
 // landActions
 
-.landActions{
+.landActions {
   @include pageStyles;
 }
 
-.landActions__container{
+.landActions__container {
   @include container;
+  @include flexStartColumn;
   padding-top: $mainBigPadding;
   padding-bottom: $mainBigPadding;
 }
 
-.landActions__title{
+.landActions__title {
   @include bigFontH1;
   margin-bottom: $mainBigMargin;
 }
 
-.landActions__lists{
+.landActions__lists {
   @include flexStart;
   align-items: start;
   justify-content: space-between;
   padding: 0 $mainBigPadding*2;
   width: 100%;
-  position: relative;
+  margin-bottom: $mainBigMargin;
 }
 
-.landActions__list{
+.landActions__list {
   flex: 0 1 40%;
 }
 
-.landActions__item{
-  &:not(:last-child){
+.landActions__item {
+  position: relative;
+
+  &:not(:last-child) {
     margin-bottom: $mainMediumMargin;
   }
 }
 
-.landActions__item-input{
+.landActions__button-button {
   @include fontSize8;
-}
-
-.landActions__item-select{
-  @include fontSize8;
-}
-
-.landActions__item-prefix{
-  @include fontSize8;
-}
-
-.landActions__button-button{
-  @include fontSize8;
-  position: absolute;
-  bottom: 0;
-  right: $mainBigPadding*2;
+  align-self: end;
 }
 
 
 @media (max-width: 1530px) {
 
-  .landActions__container{
+  .landActions__container {
     padding: $mainBigPadding $containerMediumPadding;
   }
 
-  .landActions__title{
+  .landActions__title {
     @include fontH1;
   }
 
-  .landActions__lists{
+  .landActions__lists {
     padding: 0 $mainBigPadding;
   }
 
-  .landActions__list{
+  .landActions__list {
     flex: 0 1 45%
   }
 
-  .landActions__item-input{
-    @include fontSize6;
-  }
-
-  .landActions__item-select{
-    @include fontSize6;
-  }
-
-  .landActions__item-prefix{
-    @include fontSize5;
-  }
-
-  .landActions__button-button{
+  .landActions__button-button {
     @include fontSize6;
     padding: 5px 25px;
-    right: $mainBigPadding;
   }
 }
 
 @media (max-width: 1140px) {
-  .landActions__container{
+  .landActions__container {
     padding: $mainMediumPadding $containerSmallPadding;
   }
 }

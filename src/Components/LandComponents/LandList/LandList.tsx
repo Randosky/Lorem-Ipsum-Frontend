@@ -1,14 +1,29 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Header from "../../../UI/Header/Header";
 import "../../../Styles/Land/LandItemStyles.scss"
 import MyInputWithPrefix from "../../../UI/MyInput/MyInputWithPrefix";
 import {landsExamples} from "../../../Helpers/LandHelper";
 import {useNavigate} from "react-router-dom";
+import {LandCardType} from "../../../Types/Land/LandCardType";
 
 const LandList: React.FC = () => {
 
     const [searchLand, setSearchLand] = useState("");
+    const [isArchivedLand, setIsArchivedLand] = useState(false);
+    const [currentLands, setCurrentLands] = useState<LandCardType[]>([]);
+
+
+    const handleOnCurrentLands = useCallback((e: LandCardType[]) => setCurrentLands(e), [])
     const handleOnSearchLand = useCallback((e: string) => setSearchLand(e), [])
+    const handleOnArchived = useCallback(() => {
+        isArchivedLand
+            ? handleOnCurrentLands(landsExamples)
+            : handleOnCurrentLands(landsExamples.filter(l => l.landArchived))
+
+        setIsArchivedLand(!isArchivedLand)
+    }, [handleOnCurrentLands, isArchivedLand]);
+
+    useEffect(() => handleOnCurrentLands(landsExamples), [handleOnCurrentLands])
 
     const navigate = useNavigate()
 
@@ -20,10 +35,14 @@ const LandList: React.FC = () => {
                 <div className="landList__header">
                     <div className="header__left">
                         <h1 className="header__title">
-                            Земельные участки
+                            {
+                                isArchivedLand ? "Архив земельных участков" : "Земельные участки"
+                            }
                         </h1>
-                        <p className="header__archive">
-                            Открыть архив
+                        <p className="header__archive" onClick={handleOnArchived}>
+                            {
+                                isArchivedLand ? "Открыть активные" : "Открыть архив"
+                            }
                         </p>
                     </div>
                     <MyInputWithPrefix inputStyle="header__search" prefixText="" labelStyle="header__label"
@@ -44,7 +63,7 @@ const LandList: React.FC = () => {
                         </thead>
                         <tbody>
                         {
-                            landsExamples.map((land, ind) =>
+                            currentLands.map((land, ind) =>
                                 <tr key={ind} className="lands__table-land"
                                     onClick={() => navigate(`/landCard?landCardId=${land.landId}`)}>
                                     <td>{land.landStatus}</td>

@@ -1,31 +1,38 @@
-import React, {ChangeEvent, useCallback, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import MyInputWithPrefix from "../MyInput/MyInputWithPrefix";
 
-interface MySelectWithPrefixProps {
+interface MyMultiplySelectProps {
     showSelect: boolean,
     handleOnShowSelect: (e: boolean) => void,
-    handleOnChangeInputValue: (e: string) => void,
+    handleOnChangeInputValue: (e: string[]) => void,
     selectOptions: string[],
     prefixText: string,
 }
 
-const MySelectWithPrefix: React.FC<MySelectWithPrefixProps> = (props: MySelectWithPrefixProps) => {
+const MyMultiplySelectWithPrefix: React.FC<MyMultiplySelectProps> = (props: MyMultiplySelectProps) => {
     const {showSelect, handleOnShowSelect, handleOnChangeInputValue, selectOptions, prefixText} = props
 
-    const [inputValueLocal, setInputValueLocal] = useState<string>("");
+    const [inputValueLocal, setInputValueLocal] = useState<string[]>([]);
     const handleOnInputValueLocal = useCallback((ind: number) => {
         const objToAdd = selectOptions[ind]
+        const optionsArray = inputValueLocal
 
-        setInputValueLocal(objToAdd)
-        handleOnChangeInputValue(objToAdd)
+        if (optionsArray.includes(objToAdd)) {
+            const objInd = optionsArray.findIndex(l => l === objToAdd)
+            optionsArray.splice(objInd, 1)
+            setInputValueLocal([...optionsArray])
+        } else
+            setInputValueLocal([...optionsArray, objToAdd])
 
-    }, [handleOnChangeInputValue, selectOptions])
+        handleOnChangeInputValue(optionsArray)
+    }, [handleOnChangeInputValue, inputValueLocal, selectOptions])
 
     return (
         <div>
-            <div onClick={() => handleOnShowSelect(!showSelect)}>
+            <div onClick={() => handleOnShowSelect(!showSelect)}
+                 className="ui__multiply-main">
                 <MyInputWithPrefix inputStyle="ui__multiply-input"
-                                   prefixText={prefixText} prefixStyle="ui__multiply-prefix"
+                                   prefixText={prefixText} prefixStyle=""
                                    value={inputValueLocal}
                                    handleOnChange={() => {
                                    }}/>
@@ -68,4 +75,4 @@ const MySelectWithPrefix: React.FC<MySelectWithPrefixProps> = (props: MySelectWi
     );
 };
 
-export default MySelectWithPrefix;
+export default MyMultiplySelectWithPrefix;

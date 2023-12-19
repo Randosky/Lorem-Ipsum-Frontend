@@ -4,7 +4,7 @@ import PersonalArea from "../Components/UserComponents/PersonalArea/PersonalArea
 import Auth from "../Components/AuthComponents/Auth/Auth";
 import LandList from "../Components/LandComponents/LandList/LandList";
 import LandCard from "../Components/LandComponents/LandCard/LandCard";
-import ActionsWithLand from "../Components/LandComponents/ActionsWithLand/ActionsWithLand";
+import AddLand from "../Components/LandComponents/AddLand/AddLand";
 
 type RouteType = {
     path: string,
@@ -29,8 +29,8 @@ const AppRouter: React.FC = () => {
             element: <Auth/>
         },
         {
-            path: "/landAction",
-            element: <ActionsWithLand/>,
+            path: "/addLand",
+            element: <AddLand/>,
         },
         {
             path: "/landList",

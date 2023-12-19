@@ -48,18 +48,6 @@
   }
 }
 
-.editing__item-input {
-  @include fontSize8;
-
-  &::placeholder{
-    color: $brandColorBlack60;
-  }
-}
-
-.editing__item-prefix {
-  @include fontSize8;
-}
-
 .editing__image {
   background-color: #D9D9D9;
   margin-right: $mainBigMargin*2;
@@ -80,15 +68,6 @@
     width: 250px;
     height: 250px;
     margin-right: $mainBigMargin;
-  }
-
-  .editing__item-prefix{
-    @include fontSize5;
-  }
-
-  .editing__item-input{
-    @include fontSize6;
-    padding: 7px 20px;
   }
 
   .editing__save{

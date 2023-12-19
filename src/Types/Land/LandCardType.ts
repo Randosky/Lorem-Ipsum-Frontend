@@ -10,4 +10,5 @@ export interface LandCardType {
     landObject: string[]
     landSearchChannel: string
     landAddingDate: Date
+    landArchived: boolean
 }

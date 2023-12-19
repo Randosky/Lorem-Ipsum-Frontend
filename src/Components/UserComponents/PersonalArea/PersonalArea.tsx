@@ -6,7 +6,7 @@ import Kanban from "./Kanban/Kanban";
 import Loading from "../../AdditionalComponets/LoadingPage/Loading";
 import {landActionTypes} from "../../../Helpers/LandHelper";
 import employeeActionsStore from "../../../Store/EmployeeActionsStore";
-import ActionsWithLand from "../../LandComponents/ActionsWithLand/ActionsWithLand";
+import ActionsWithLand from "../../LandComponents/AddLand/AddLand";
 
 const PersonalArea: React.FC = () => {
     const EditingPage = lazy(() => import("../EditingPage/EditingPage"))

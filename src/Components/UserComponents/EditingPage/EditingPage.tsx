@@ -48,41 +48,35 @@ const EditingPage: React.FC<EditingPageProps> = observer((props: EditingPageProp
                 <div className="editing__lists-lists">
                     <ul className="editing__list">
                         <li className="editing__list-item">
-                            <MyInputWithPrefix inputStyle="editing__item-input"
-                                               prefixStyle="editing__item-prefix" type="text" prefixText="ФИО"
+                            <MyInputWithPrefix type="text" prefixText="ФИО"
                                                value={fio}
                                                handleOnChange={(e) => handleOnEmployeeFIO(e.target.value)}/>
                         </li>
                         <li className="editing__list-item">
-                            <MyInputWithPrefix inputStyle="editing__item-input"
-                                               pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
-                                               prefixStyle="editing__item-prefix" type="email" prefixText="E-mail"
+                            <MyInputWithPrefix pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+                                               type="email" prefixText="E-mail"
                                                value={email}
                                                handleOnChange={(e) => handleOnEmployeeEmail(e.target.value)}/>
                         </li>
                         <li className="editing__list-item">
-                            <MyInputWithPrefix inputStyle="editing__item-input"
-                                               prefixStyle="editing__item-prefix" type="tel" prefixText="Телефон"
+                            <MyInputWithPrefix type="tel" prefixText="Телефон"
                                                value={phone}
                                                handleOnChange={(e) => handleOnEmployeePhone(e.target.value)}/>
                         </li>
                     </ul>
                     <ul className="editing__list">
                         <li className="editing__list-item">
-                            <MyInputWithPrefix inputStyle="editing__item-input"
-                                               prefixStyle="editing__item-prefix" type="text" prefixText="Должность"
+                            <MyInputWithPrefix isReadOnly={true} type="text" prefixText="Должность"
                                                value={job}
                                                handleOnChange={(e) => handleOnEmployeeJob(e.target.value)}/>
                         </li>
                         <li className="editing__list-item">
-                            <MyInputWithPrefix inputStyle="editing__item-input"
-                                               prefixStyle="editing__item-prefix" type="text" prefixText="Отдел"
+                            <MyInputWithPrefix isReadOnly={true} type="text" prefixText="Отдел"
                                                value={department}
                                                handleOnChange={(e) => handleOnEmployeeDepartment(e.target.value)}/>
                         </li>
                         <li className="editing__list-item">
-                            <MyInputWithPrefix inputStyle="editing__item-input"
-                                               prefixStyle="editing__item-prefix" type="text" prefixText="Руководитель"
+                            <MyInputWithPrefix isReadOnly={true} type="text" prefixText="Руководитель"
                                                value={supervisor}
                                                handleOnChange={(e) => handleOnEmployeeSupervisor(e.target.value)}/>
                         </li>

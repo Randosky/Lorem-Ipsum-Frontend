@@ -3,7 +3,6 @@ import Logo from "../../Assets/Svg/Logo";
 import ButtonContrast from "../MyButton/ButtonContrast";
 import "../../Styles/UI.scss"
 import {useNavigate} from "react-router-dom";
-import {landActionTypes} from "../../Helpers/LandHelper";
 
 
 const Header: React.FC = () => {
@@ -17,7 +16,7 @@ const Header: React.FC = () => {
                         <Logo/>
                     </div>
                     <ButtonContrast btnText="Добавить"
-                                    handleOnClick={() => navigate(`/landAction?actionType=${landActionTypes[0]}`)}
+                                    handleOnClick={() => navigate(`/addLand`)}
                                     btnStyle="header__left-button header__left-add"/>
                     <ButtonContrast btnText="Перейти"
                                     handleOnClick={() => navigate("/landList")}

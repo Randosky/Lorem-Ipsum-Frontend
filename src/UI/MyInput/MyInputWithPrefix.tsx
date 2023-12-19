@@ -13,6 +13,7 @@ type MyInputWithPrefixProps = {
     inputStyle?: string,
     pattern?: string,
     labelStyle?: string,
+    isReadOnly?: boolean,
 };
 
 const MyInputWithPrefix: React.FC<MyInputWithPrefixProps> = ({
@@ -27,6 +28,7 @@ const MyInputWithPrefix: React.FC<MyInputWithPrefixProps> = ({
                                                                  inputStyle,
                                                                  pattern,
                                                                  labelStyle,
+                                                                 isReadOnly,
                                                              }: MyInputWithPrefixProps) => {
     return (
         <label className={"ui__label" + " " + labelStyle}>
@@ -34,8 +36,10 @@ const MyInputWithPrefix: React.FC<MyInputWithPrefixProps> = ({
                 {prefixText}
             </p>
             <input min={min} max={max} type={type} value={value} placeholder={placeholder}
+                   readOnly={isReadOnly}
                    pattern={pattern}
-                   onChange={e => handleOnChange(e)} className={`ui__label-input ${inputStyle}`}/>
+                   onChange={e => handleOnChange(e)}
+                   className={`ui__label-input ${inputStyle} ${isReadOnly ? "ui__input-readonly" : ""}`}/>
         </label>
     );
 };

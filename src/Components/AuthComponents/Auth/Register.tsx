@@ -26,16 +26,15 @@ const Register: React.FC<RegisterProps> = (props: RegisterProps) => {
             <h1 className="auth__title">
                 CRM-система Земельного&nbsp;банка
             </h1>
-            <MyInputWithPrefix inputStyle="auth__input auth__login"
-                               prefixText="Введите логин"
-                               prefixStyle="auth__prefix login__prefix"
-                               value={currentEmployeeEmail}
-                               handleOnChange={handleOnEmail}/>
+            <div className="auth__login">
+                <MyInputWithPrefix prefixText="Введите логин"
+                                   type="text"
+                                   value={currentEmployeeEmail}
+                                   handleOnChange={handleOnEmail}/>
+            </div>
             <div className="auth__password">
-                <MyInputWithPrefix inputStyle="auth__input auth__password-input"
-                                   prefixText="Введите пароль"
+                <MyInputWithPrefix prefixText="Введите пароль"
                                    type={currentPasswordVisibility ? "text" : "password"}
-                                   prefixStyle="auth__prefix password__prefix"
                                    value={currentEmployeePassword}
                                    handleOnChange={handleOnPassword}/>
                 {

@@ -29,6 +29,7 @@
   @include fontSize7;
   align-self: end;
   cursor: pointer;
+  user-select: none;
 }
 
 .header__label{
