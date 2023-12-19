@@ -65,7 +65,7 @@ const LandList: React.FC = () => {
                         {
                             currentLands.map((land, ind) =>
                                 <tr key={ind} className="lands__table-land"
-                                    onClick={() => navigate(`/landCard/${land.landId}`)}>
+                                    onClick={() => navigate(`/landCard?landCardId=${land.landId}`)}>
                                     <td>{land.landStatus}</td>
                                     <td>{land.landTitle}</td>
                                     <td>{land.landCategory}</td>
