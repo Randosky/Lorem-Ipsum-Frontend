@@ -1,16 +1,14 @@
 import React, {useCallback, useState} from 'react';
 import Header from "../../../UI/Header/Header";
 import "../../../Styles/Land/LandActionStyles.scss"
-import {useSearchParams} from "react-router-dom"
 import MyInputWithPrefix from "../../../UI/MyInput/MyInputWithPrefix";
 import ButtonMain from "../../../UI/MyButton/ButtonMain";
 import landStore from "../../../Store/LandStore";
 import MySelectWithPrefix from "../../../UI/MySelect/MySelectWithPrefix";
 import {
     categoryOptions,
-    categoryOptionsValues,
     objectOptions,
-    searchChannelOptions, searchChannelOptionsValues
+    searchChannelOptions,
 } from "../../../Helpers/LandHelper";
 import MyMultiplySelectWithPrefix from "../../../UI/MySelect/MyMultiplySelectWithPrefix";
 

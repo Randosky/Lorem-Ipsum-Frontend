@@ -37,7 +37,7 @@ const AppRouter: React.FC = () => {
             element: <LandList/>
         },
         {
-            path: "/landCard",
+            path: "/landCard/:landCardId",
             element: <LandCard/>
         }
     ]

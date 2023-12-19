@@ -2,14 +2,11 @@ import React, {useEffect} from 'react';
 import Header from "../../../UI/Header/Header";
 import "../../../Styles/Land/LandActionStyles.scss"
 import landStore from "../../../Store/LandStore";
-import {useSearchParams} from "react-router-dom";
-import ButtonMain from "../../../UI/MyButton/ButtonMain";
+import {useParams} from "react-router-dom";
 
 const LandCard: React.FC = () => {
 
-
-    const [params] = useSearchParams()
-    const landCardId = params.get("landCardId")
+    const {landCardId} = useParams()
 
     useEffect(() => {
         landStore.getCardInfo(landCardId || "").then()
