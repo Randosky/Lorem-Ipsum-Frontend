@@ -64,7 +64,7 @@ const Register: React.FC<RegisterProps> = observer((props: RegisterProps) => {
                     btnStyle="auth__buttons-register"
                     btnText='Зарегистрироваться'
                     handleOnClick={() => authStore.register(currentEmployeeEmail, currentEmployeePassword)
-                        .then((response) => response ? navigate("/personalArea") : "")}/>
+                        .then((response) => response ? handleOnCurrentStage("signIn") : "")}/>
                 <p className="auth__buttons-text"
                    onClick={() => handleOnCurrentStage("signIn")}>
                     Назад

@@ -48,7 +48,7 @@ class AuthStore {
     }
 
     async signOut() {
-
+        return await authService.logout().then(data => "result" in data)
     }
 }
 

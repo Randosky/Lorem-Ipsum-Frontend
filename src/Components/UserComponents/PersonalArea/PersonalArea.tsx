@@ -1,14 +1,12 @@
-import React, {lazy, Suspense, useCallback, useState} from 'react';
+import React, {lazy, Suspense, useCallback, useEffect, useState} from 'react';
 import "../../../Styles/PersonalArea/PersonalArea.scss"
 import UserInfo from "./UserInfo/UserInfo";
 import Header from "../../../UI/Header/Header";
 import Kanban from "./Kanban/Kanban";
 import Loading from "../../AdditionalComponets/LoadingPage/Loading";
-import {landActionTypes} from "../../../Helpers/LandHelper";
 import employeeActionsStore from "../../../Store/EmployeeActionsStore";
-import ActionsWithLand from "../../LandComponents/AddLand/AddLand";
 
-const PersonalArea: React.FC = () => {
+const PersonalArea: React.FC = React.memo(() => {
     const EditingPage = lazy(() => import("../EditingPage/EditingPage"))
 
     const [isEditClicked, setIsEditClicked] = useState(false);
@@ -46,6 +44,10 @@ const PersonalArea: React.FC = () => {
         (e: File | null) => setCurrentEmployeeImage(e), [],
     );
 
+    useEffect(() => {
+        employeeActionsStore.getEmployeeProfileInfo().then()
+    }, [])
+
     return (
         <main className="personalArea">
             <Header/>
@@ -80,6 +82,6 @@ const PersonalArea: React.FC = () => {
             </div>
         </main>
     );
-}
+})
 
 export default PersonalArea;

@@ -3,6 +3,7 @@ import Logo from "../../Assets/Svg/Logo";
 import ButtonContrast from "../MyButton/ButtonContrast";
 import "../../Styles/UI.scss"
 import {useNavigate} from "react-router-dom";
+import authStore from "../../Store/AuthStore";
 
 
 const Header: React.FC = () => {
@@ -25,7 +26,7 @@ const Header: React.FC = () => {
                 <ButtonContrast btnText=""
                                 btnStyle="header__button-contrast"
                                 textStyle="header__button-contrast-text"
-                                handleOnClick={() => navigate("/authentication")}/>
+                                handleOnClick={() => authStore.signOut().then(r => r ? navigate("/") : "")}/>
             </div>
         </header>
     );

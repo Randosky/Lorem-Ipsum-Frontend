@@ -14,7 +14,7 @@ type RouteType = {
 const AppRouter: React.FC = () => {
     const publicRoutes: RouteType[] = [
         {
-            path: "/authentication",
+            path: "/",
             element: <Auth/>
         },
     ]
@@ -25,7 +25,7 @@ const AppRouter: React.FC = () => {
             element: <PersonalArea/>,
         },
         {
-            path: "/authentication",
+            path: "/",
             element: <Auth/>
         },
         {
@@ -43,7 +43,7 @@ const AppRouter: React.FC = () => {
     ]
 
     const location = useLocation()
-    const isAuth = true
+    const isAuth = localStorage.getItem("userToken")
 
     return (
         isAuth ?
@@ -58,7 +58,7 @@ const AppRouter: React.FC = () => {
                         }
                     </Routes>
                     :
-                    <Navigate to="/personalArea"/>
+                    <Navigate to="/"/>
 
             ) :
             (
@@ -72,7 +72,7 @@ const AppRouter: React.FC = () => {
                         }
                     </Routes>
                     :
-                    <Navigate to="/authentication"/>
+                    <Navigate to="/"/>
             )
     );
 };
