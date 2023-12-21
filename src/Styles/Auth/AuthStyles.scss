@@ -33,6 +33,7 @@
 
 .auth__login{
   width: 100%;
+  position: relative;
   margin-bottom: $mainMediumMargin;
 }
 
@@ -40,6 +41,14 @@
   width: 100%;
   position: relative;
   margin-bottom: $mainBigMargin;
+}
+
+.auth__error{
+  @include fontSize5;
+  position: absolute;
+  color: orangered;
+  left: 10px;
+  top: -24px;
 }
 
 .auth__password-visibility{
@@ -76,6 +85,7 @@
 @media (max-width: 1600px) {
   .auth__modal{
     width: 500px;
+    padding: $mainSmallPadding $mainMediumPadding;
   }
 
   .auth__header{
@@ -83,11 +93,20 @@
   }
 
   .auth__title{
+    @include fontH1;
     margin-bottom: $mainMediumMargin;
   }
 
+  .auth__input{
+    height: 40px;
+  }
+
+  .auth__password-visibility{
+    bottom: 5px;
+  }
+
   .auth__login{
-    margin-bottom: $mainSmallMargin;
+    margin-bottom: $mainMediumMargin;
   }
 
   .auth__password{
@@ -95,14 +114,14 @@
   }
 
   .auth__buttons-signIn{
-    @include fontSize7;
-    padding: 10px $mainMediumPadding;
+    @include fontSize6;
+    padding: 7px $mainMediumPadding;
     margin-bottom: $mainSmallestMargin;
   }
 
   .auth__buttons-register{
-    @include fontSize7;
-    padding: 10px $mainMediumPadding;
+    @include fontSize6;
+    padding: 7px $mainMediumPadding;
     margin-bottom: $mainSmallestMargin;
   }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {AuthProps} from "../../../Types/Auth/AuthProps";
 import MyInputWithPrefix from "../../../UI/MyInput/MyInputWithPrefix";
 import PasswordVisibility from "../../../Assets/Svg/PasswordVisibility";
@@ -6,13 +6,14 @@ import PasswordNoVisibility from "../../../Assets/Svg/PasswordNoVisibility";
 import ButtonContrast from "../../../UI/MyButton/ButtonContrast";
 import authStore from "../../../Store/AuthStore";
 import {useNavigate} from "react-router-dom";
+import {observer} from "mobx-react-lite";
 
 interface RegisterProps extends AuthProps {
 
 }
 
 
-const Register: React.FC<RegisterProps> = (props: RegisterProps) => {
+const Register: React.FC<RegisterProps> = observer((props: RegisterProps) => {
     const {
         currentEmployeeEmail, handleOnEmail, currentEmployeePassword,
         handleOnPassword, currentPasswordVisibility, handleOnPasswordVisibility,
@@ -21,6 +22,7 @@ const Register: React.FC<RegisterProps> = (props: RegisterProps) => {
 
     const navigate = useNavigate()
 
+
     return (
         <section className="auth__modal auth__register">
             <h1 className="auth__title">
@@ -28,12 +30,18 @@ const Register: React.FC<RegisterProps> = (props: RegisterProps) => {
             </h1>
             <div className="auth__login">
                 <MyInputWithPrefix prefixText="Введите логин"
+                                   inputStyle="auth__input"
+                                   errorStyle="auth__error"
+                                   errorText={authStore.checkEmailError(currentEmployeeEmail)}
                                    type="text"
                                    value={currentEmployeeEmail}
                                    handleOnChange={handleOnEmail}/>
             </div>
             <div className="auth__password">
                 <MyInputWithPrefix prefixText="Введите пароль"
+                                   inputStyle="auth__input"
+                                   errorStyle="auth__error"
+                                   errorText={authStore.checkPasswordError(currentEmployeePassword)}
                                    type={currentPasswordVisibility ? "text" : "password"}
                                    value={currentEmployeePassword}
                                    handleOnChange={handleOnPassword}/>
@@ -55,7 +63,8 @@ const Register: React.FC<RegisterProps> = (props: RegisterProps) => {
                 <ButtonContrast
                     btnStyle="auth__buttons-register"
                     btnText='Зарегистрироваться'
-                    handleOnClick={() => authStore.register().then(() => navigate("/personalArea"))}/>
+                    handleOnClick={() => authStore.register(currentEmployeeEmail, currentEmployeePassword)
+                        .then((response) => response ? navigate("/personalArea") : "")}/>
                 <p className="auth__buttons-text"
                    onClick={() => handleOnCurrentStage("signIn")}>
                     Назад
@@ -63,6 +72,6 @@ const Register: React.FC<RegisterProps> = (props: RegisterProps) => {
             </div>
         </section>
     );
-};
+});
 
 export default Register;
