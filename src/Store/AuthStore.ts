@@ -50,6 +50,10 @@ class AuthStore {
     async signOut() {
         return await authService.logout().then(data => "result" in data)
     }
+
+    async refreshSession() {
+        return await authService.refreshSession().then(data => "result" in data)
+    }
 }
 
 export default new AuthStore()

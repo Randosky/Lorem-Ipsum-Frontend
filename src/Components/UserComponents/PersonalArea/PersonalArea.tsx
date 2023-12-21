@@ -5,6 +5,7 @@ import Header from "../../../UI/Header/Header";
 import Kanban from "./Kanban/Kanban";
 import Loading from "../../AdditionalComponets/LoadingPage/Loading";
 import employeeActionsStore from "../../../Store/EmployeeActionsStore";
+import authStore from "../../../Store/AuthStore";
 
 const PersonalArea: React.FC = React.memo(() => {
     const EditingPage = lazy(() => import("../EditingPage/EditingPage"))
@@ -45,7 +46,8 @@ const PersonalArea: React.FC = React.memo(() => {
     );
 
     useEffect(() => {
-        employeeActionsStore.getEmployeeProfileInfo().then()
+        authStore.refreshSession()
+            .then(() => employeeActionsStore.getEmployeeProfileInfo().then())
     }, [])
 
     return (

@@ -58,7 +58,7 @@ const AppRouter: React.FC = () => {
                         }
                     </Routes>
                     :
-                    <Navigate to="/"/>
+                    <Navigate to="/personalArea"/>
 
             ) :
             (

@@ -1,5 +1,4 @@
 import axios from "axios"
-import {getCookie} from "../Helpers/ServicesHelper";
 
 const authAPIURL = import.meta.env.VITE_AUTH_API_KEY
 
@@ -43,7 +42,6 @@ class AuthService {
             }
         }, {
             headers: {
-                "Content-Type": "application/json",
             }
         })
             .then((response) => {
@@ -55,6 +53,26 @@ class AuthService {
 
     }
 
+    async refreshSession() {
+        return await axios.post(`${authAPIURL}/refresh_session`, {
+            "jsonrpc": "2.0",
+            "method": "refresh_session",
+            "id": "0",
+            "params": {}
+        }, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+            .then((response) => {
+                if (response.data.result) {
+                    localStorage.setItem("userToken", response.data.result.access_token);
+                }
+                return response.data;
+            });
+    }
+
     async logout() {
         return await axios.post(`${authAPIURL}/logout`, {
             "jsonrpc": "2.0",
@@ -62,14 +80,19 @@ class AuthService {
             "id": "0",
             "params": {}
         }, {
+            withCredentials: true,
             headers: {
                 'authorization': localStorage.getItem("userToken"),
-                'refresh_token': localStorage.getItem("userToken"),
+                "Content-Type": "application/json",
             }
         })
-            .then(response => response.data)
+            .then(response => {
+                if (response.data.result) {
+                    localStorage.removeItem("userToken");
+                }
+                return response.data
+            })
     }
-    
 }
 
 export default new AuthService()

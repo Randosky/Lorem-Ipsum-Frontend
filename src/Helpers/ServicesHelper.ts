@@ -1,6 +1,6 @@
+import getUniversalCookies from "universal-cookie"
+
 export function getCookie(name: string) {
-    const matches = document.cookie.match(new RegExp(
-        "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + "=([^;]*)"
-    ));
-    return matches ? decodeURIComponent(matches[1]) : undefined;
+    const cookies = new getUniversalCookies()
+    return cookies.get(name)
 }
