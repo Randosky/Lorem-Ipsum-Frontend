@@ -1,5 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import MyInputWithPrefix from "../MyInput/MyInputWithPrefix";
+import "../../Styles/UI.scss"
 
 interface MyMultiplySelectProps {
     showSelect: boolean,
@@ -29,8 +30,7 @@ const MyMultiplySelectWithPrefix: React.FC<MyMultiplySelectProps> = (props: MyMu
 
     return (
         <div>
-            <div onClick={() => handleOnShowSelect(!showSelect)}
-                 className="ui__multiply-main">
+            <div onClick={() => handleOnShowSelect(!showSelect)} className="ui__multiply-main">
                 <MyInputWithPrefix inputStyle="ui__multiply-input"
                                    prefixText={prefixText} prefixStyle=""
                                    value={inputValueLocal}

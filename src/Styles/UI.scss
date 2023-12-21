@@ -38,7 +38,6 @@
 }
 
 
-
 .header__left-button {
   @include fontSize8;
   padding: 10px 25px 10px 45px;
@@ -174,30 +173,30 @@
   height: 50px;
 }
 
-.ui__input-readonly{
+.ui__input-readonly {
   background-color: $brandColorBlack40;
 }
 
 // MySelect
 
-.ui__multiply-main{
+.ui__multiply-main {
   position: relative;
 
-  &::before{
+  &::before {
     content: "";
     position: absolute;
     background: url("../Assets/Img/ArrowDown.svg") center no-repeat;
     background-size: contain;
-    width: 20px;
-    height: 20px;
-    right: 0;
-    top: 50%;
+    width: 15px;
+    height: 15px;
+    right: 25px;
+    bottom: 25px;
     z-index: 1000000;
-    transform: translate(0, -50%);
+    transform: translate(0, 50%);
   }
 }
 
-.ui__multiply-input{
+.ui__multiply-input {
   cursor: pointer;
 }
 
@@ -257,12 +256,52 @@
 }
 
 
+// ListCardInfo
+
+.item__infoBlock {
+  flex: 0 1 45%;
+}
+
+.infoBlock__header {
+  @include flexSpaceBetween;
+  align-items: start;
+  margin-bottom: $mainBigMargin;
+}
+
+.infoBlock__h2 {
+  @include bigFontH2;
+}
+
+.infoBlock__edit {
+  @include fontSize8;
+  cursor: pointer;
+}
+
+.infoBlock__lists {
+  @include flexSpaceBetween;
+  padding: 0 $mainBigMargin;
+}
+
+.infoBlock__list {
+  @include flexStartColumn;
+  flex: 0 1 45%;
+}
+
+.list__field {
+  @include fontSize8;
+
+  &:not(:last-child) {
+    margin-bottom: $mainMediumMargin;
+  }
+}
+
+
 @media (max-width: 1530px) {
   .header__button-contrast {
     height: 38px;
     width: 38px;
 
-    &::before{
+    &::before {
       height: 24px;
       width: 24px;
     }
@@ -282,13 +321,40 @@
     padding: 5px 25px;
   }
 
-  .ui__label-input{
+  .ui__label-input {
     @include fontSize6;
     height: 50px;
     padding: 0 15px;
   }
 
-  .ui__label-prefix{
+  .ui__label-prefix {
     @include fontSize5;
+  }
+
+  .infoBlock__lists {
+    padding: 0 $mainMediumPadding;
+  }
+
+  .infoBlock__h2 {
+    @include fontH2;
+  }
+
+  .infoBlock__edit {
+    @include fontSize6;
+  }
+
+  .list__field {
+    @include fontSize6;
+
+    &:not(:last-child) {
+      margin-bottom: $mainSmallMargin;
+    }
+  }
+}
+
+@media (max-width: 1140px) {
+
+  .infoBlock__lists {
+    padding: 0 $mainSmallPadding;
   }
 }

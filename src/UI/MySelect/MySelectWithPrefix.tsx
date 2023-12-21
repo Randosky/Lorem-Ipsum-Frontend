@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useCallback, useState} from 'react';
 import MyInputWithPrefix from "../MyInput/MyInputWithPrefix";
+import "../../Styles/UI.scss"
 
 interface MySelectWithPrefixProps {
     showSelect: boolean,
@@ -23,7 +24,7 @@ const MySelectWithPrefix: React.FC<MySelectWithPrefixProps> = (props: MySelectWi
 
     return (
         <div>
-            <div onClick={() => handleOnShowSelect(!showSelect)}>
+            <div onClick={() => handleOnShowSelect(!showSelect)} className="ui__multiply-main">
                 <MyInputWithPrefix inputStyle="ui__multiply-input"
                                    prefixText={prefixText} prefixStyle="ui__multiply-prefix"
                                    value={inputValueLocal}
