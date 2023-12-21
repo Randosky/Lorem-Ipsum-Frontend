@@ -1,6 +1,6 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import "../../Styles/UI.scss"
-import EditCardInfo from "./EditCardInfo";
+import EditCardInfo from "../EditCardInfo/EditCardInfo";
 
 interface ListCardInfoProp {
     itemBlockStyle?: string,
@@ -14,6 +14,11 @@ const ListCardInfo: React.FC<ListCardInfoProp> = (props: ListCardInfoProp) => {
 
     const [editClicked, setEditClicked] = useState(false);
     const handleOnEditClicked = useCallback(() => setEditClicked(!editClicked), [editClicked])
+
+    useEffect(() => {
+        editClicked ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'auto'
+    }, [editClicked]);
+
 
     return (
         <div className={`item__infoBlock ${itemBlockStyle}`}>
@@ -42,7 +47,7 @@ const ListCardInfo: React.FC<ListCardInfoProp> = (props: ListCardInfoProp) => {
                 </ul>
             </div>
             {
-                editClicked ? <EditCardInfo editTitle={itemH2}/> : ""
+                editClicked ? <EditCardInfo editTitle={itemH2} handleOnClose={handleOnEditClicked}/> : ""
             }
         </div>
     );

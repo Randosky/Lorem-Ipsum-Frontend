@@ -260,6 +260,7 @@
 
 .item__infoBlock {
   flex: 0 1 45%;
+  position: relative;
 }
 
 .infoBlock__header {
@@ -276,6 +277,8 @@
   @include fontSize8;
   cursor: pointer;
   user-select: none;
+  padding: 15px;
+  margin: -15px;
 }
 
 .infoBlock__lists {
@@ -296,8 +299,53 @@
   }
 }
 
+// EditCardInfo
 
-@media (max-width: 1530px) {
+.ui__edit{
+  @include flexCenter;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000000000000;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.ui__edit-front{
+  width: 800px;
+  height: 500px;
+  border-radius: 20px;
+  background-color: $brandColorBlack20;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  padding: $mainSmallPadding;
+}
+
+.ui__edit-header{
+  @include flexSpaceBetween;
+  margin-bottom: $mainBigMargin;
+}
+
+.ui__edit-title{
+  @include fontH2;
+}
+
+.ui__edit-close{
+  cursor: pointer;
+  padding: 15px;
+  margin: -15px;
+}
+
+.ui__edit-editInfo{
+
+}
+
+// Media
+
+
+@media (max-width: 1600px) {
   .header__button-contrast {
     height: 38px;
     width: 38px;

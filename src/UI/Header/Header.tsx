@@ -15,10 +15,10 @@ const Header: React.FC = () => {
                     <div onClick={() => navigate("/personalArea")}>
                         <Logo/>
                     </div>
-                    <ButtonContrast btnText="Добавить"
+                    <ButtonContrast btnText="Добавить участок"
                                     handleOnClick={() => navigate(`/addLand`)}
                                     btnStyle="header__left-button header__left-add"/>
-                    <ButtonContrast btnText="Перейти"
+                    <ButtonContrast btnText="Земельные участки"
                                     handleOnClick={() => navigate("/landList")}
                                     btnStyle="header__left-button header__left-landList"/>
                 </div>
