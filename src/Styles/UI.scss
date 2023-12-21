@@ -275,6 +275,7 @@
 .infoBlock__edit {
   @include fontSize8;
   cursor: pointer;
+  user-select: none;
 }
 
 .infoBlock__lists {

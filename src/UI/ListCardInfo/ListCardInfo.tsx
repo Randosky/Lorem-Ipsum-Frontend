@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import "../../Styles/UI.scss"
+import EditCardInfo from "./EditCardInfo";
 
 interface ListCardInfoProp {
     itemBlockStyle?: string,
@@ -11,13 +12,16 @@ interface ListCardInfoProp {
 const ListCardInfo: React.FC<ListCardInfoProp> = (props: ListCardInfoProp) => {
     const {itemBlockStyle, itemH2, itemListValues, itemListTitles} = props
 
+    const [editClicked, setEditClicked] = useState(false);
+    const handleOnEditClicked = useCallback(() => setEditClicked(!editClicked), [editClicked])
+
     return (
         <div className={`item__infoBlock ${itemBlockStyle}`}>
             <div className="infoBlock__header">
                 <h2 className="infoBlock__h2">
                     {itemH2}
                 </h2>
-                <p className="infoBlock__edit">
+                <p className="infoBlock__edit" onClick={handleOnEditClicked}>
                     Редактировать
                 </p>
             </div>
@@ -37,6 +41,9 @@ const ListCardInfo: React.FC<ListCardInfoProp> = (props: ListCardInfoProp) => {
                     }
                 </ul>
             </div>
+            {
+                editClicked ? <EditCardInfo editTitle={itemH2}/> : ""
+            }
         </div>
     );
 };
