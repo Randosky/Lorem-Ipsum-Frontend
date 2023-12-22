@@ -3,21 +3,24 @@ import {getCookie} from "../Helpers/ServicesHelper";
 
 const authAPIURL = import.meta.env.VITE_AUTH_API_KEY
 
-class EmployeeSevice {
+class EmployeeService {
 
-    async getEmployeeProfileInfo () {
-        return await axios.post(`${authAPIURL}/get_employee_profile_info`, {
-            "jsonrpc": "2.0",
-            "method": "get_employee_profile_info",
-            "id": "0",
-            "params": {}
-        }, {
+    async getEmployeeProfileInfo() {
+        return await fetch(`${authAPIURL}/get_employee_profile_info`, {
+            method: "POST",
             headers: {
-                'authorization': localStorage.getItem("userToken"),
-            }
+                'Authorization': `${localStorage.getItem("userToken")}`,
+            },
+            body: JSON.stringify({
+                "jsonrpc": "2.0",
+                "method": "get_employee_profile_info",
+                "id": "0",
+                "params": {}
+            }),
         })
-            .then(response => response.data)
+            .then((response) => response.json())
+            .then((data) => data);
     }
 }
 
-export default new EmployeeSevice()
+export default new EmployeeService()
