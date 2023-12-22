@@ -8,9 +8,19 @@ interface UserInfoProps extends IEmployeeType {
     handleOnEdit: () => void,
 }
 
-const UserInfo: React.FC<UserInfoProps> = observer((props: UserInfoProps) => {
+const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
 
-    const {handleOnEdit, department, email, image, job, fio, phone, supervisor} = props
+    const {
+        handleOnEdit,
+        fio,
+        position,
+        email,
+        department,
+        id,
+        s3_avatar_file,
+        employee_head,
+        phone_number
+    } = props
 
     return (
         <div className="personalArea__userInfo">
@@ -18,7 +28,7 @@ const UserInfo: React.FC<UserInfoProps> = observer((props: UserInfoProps) => {
                 Личный кабинет сотрудника
             </h1>
             <div className="userInfo__block">
-                <UserImage styles="userInfo__image" userImageUrl={image}/>
+                <UserImage styles="userInfo__image" userImageUrl={s3_avatar_file}/>
                 <div className="userInfo__block-lists">
                     <ul className="userInfo__block-list">
                         <li className="userInfo__list-item">ФИО</li>
@@ -38,18 +48,18 @@ const UserInfo: React.FC<UserInfoProps> = observer((props: UserInfoProps) => {
                             </a>
                         </li>
                         <li className="userInfo__list-item">
-                            <a href={`tel:${phone}`}>
-                                {phone}
+                            <a href={`tel:${phone_number}`}>
+                                {phone_number}
                             </a>
                         </li>
                         <li className="userInfo__list-item">
-                            {job}
+                            {position}
                         </li>
                         <li className="userInfo__list-item">
                             {department}
                         </li>
                         <li className="userInfo__list-item">
-                            {supervisor}
+                            {employee_head}
                         </li>
                     </ul>
                 </div>
@@ -62,6 +72,6 @@ const UserInfo: React.FC<UserInfoProps> = observer((props: UserInfoProps) => {
             </div>
         </div>
     );
-});
+};
 
 export default UserInfo;

@@ -28,13 +28,14 @@ const EditingPage: React.FC<EditingPageProps> = observer((props: EditingPageProp
         handleOnEmployeeFIO,
         handleOnEmployeeJob,
         handleOnEmployeePhone,
-        image,
-        phone,
-        department,
         fio,
-        job,
+        position,
         email,
-        supervisor
+        department,
+        id,
+        s3_avatar_file,
+        employee_head,
+        phone_number,
     } = props
 
     return (
@@ -60,24 +61,24 @@ const EditingPage: React.FC<EditingPageProps> = observer((props: EditingPageProp
                         </li>
                         <li className="editing__list-item">
                             <MyInputWithPrefix type="tel" prefixText="Телефон"
-                                               value={phone}
+                                               value={phone_number}
                                                handleOnChange={(e) => handleOnEmployeePhone(e.target.value)}/>
                         </li>
                     </ul>
                     <ul className="editing__list">
                         <li className="editing__list-item">
                             <MyInputWithPrefix isReadOnly={true} type="text" prefixText="Должность"
-                                               value={job}
+                                               value={position || ""}
                                                handleOnChange={(e) => handleOnEmployeeJob(e.target.value)}/>
                         </li>
                         <li className="editing__list-item">
                             <MyInputWithPrefix isReadOnly={true} type="text" prefixText="Отдел"
-                                               value={department}
+                                               value={department || ""}
                                                handleOnChange={(e) => handleOnEmployeeDepartment(e.target.value)}/>
                         </li>
                         <li className="editing__list-item">
                             <MyInputWithPrefix isReadOnly={true} type="text" prefixText="Руководитель"
-                                               value={supervisor}
+                                               value={employee_head || ""}
                                                handleOnChange={(e) => handleOnEmployeeSupervisor(e.target.value)}/>
                         </li>
                     </ul>

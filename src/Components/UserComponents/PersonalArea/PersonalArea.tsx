@@ -6,17 +6,24 @@ import Kanban from "./Kanban/Kanban";
 import Loading from "../../AdditionalComponets/LoadingPage/Loading";
 import employeeActionsStore from "../../../Store/EmployeeActionsStore";
 import authStore from "../../../Store/AuthStore";
+import {observer} from "mobx-react-lite";
 
-const PersonalArea: React.FC = React.memo(() => {
+const PersonalArea: React.FC = observer(() => {
+
+    useEffect(() => {
+        authStore.refreshSession()
+            .then(() => employeeActionsStore.getEmployeeProfileInfo().then())
+    }, [])
+
     const EditingPage = lazy(() => import("../EditingPage/EditingPage"))
 
     const [isEditClicked, setIsEditClicked] = useState(false);
-    const [currentEmployeeFIO, setCurrentEmployeeFIO] = useState("Тестовый Тест Тестович")
-    const [currentEmployeeEmail, setCurrentEmployeeEmail] = useState("ttestovii@brusnika.ru")
-    const [currentEmployeePhone, setCurrentEmployeePhone] = useState("8-963-094-68-34")
-    const [currentEmployeeJob, setCurrentEmployeeJob] = useState("Специалист1")
-    const [currentEmployeeDepartment, setCurrentEmployeeDepartment] = useState("Аналитический отдел")
-    const [currentEmployeeSupervisor, setCurrentEmployeeSupervisor] = useState("Пробковый Пробка Пробкович")
+    const [currentEmployeeFIO, setCurrentEmployeeFIO] = useState("")
+    const [currentEmployeeEmail, setCurrentEmployeeEmail] = useState("")
+    const [currentEmployeePhone, setCurrentEmployeePhone] = useState("")
+    const [currentEmployeeJob, setCurrentEmployeeJob] = useState("")
+    const [currentEmployeeDepartment, setCurrentEmployeeDepartment] = useState("")
+    const [currentEmployeeSupervisor, setCurrentEmployeeSupervisor] = useState("")
     const [currentEmployeeImage, setCurrentEmployeeImage] = useState<File | null>(null)
 
     const handleOnEdit = useCallback(
@@ -45,11 +52,6 @@ const PersonalArea: React.FC = React.memo(() => {
         (e: File | null) => setCurrentEmployeeImage(e), [],
     );
 
-    useEffect(() => {
-        authStore.refreshSession()
-            .then(() => employeeActionsStore.getEmployeeProfileInfo().then())
-    }, [])
-
     return (
         <main className="personalArea">
             <Header/>
@@ -59,10 +61,14 @@ const PersonalArea: React.FC = React.memo(() => {
                         ?
                         <Suspense fallback={<Loading/>}>
                             <EditingPage handleOnEdit={handleOnEdit}
-                                         email={currentEmployeeEmail} fio={currentEmployeeFIO}
-                                         job={currentEmployeeJob} phone={currentEmployeePhone}
-                                         department={currentEmployeeDepartment} supervisor={currentEmployeeSupervisor}
-                                         image={currentEmployeeImage}
+                                         id={employeeActionsStore.currentEmployeeInfo?.id || ""}
+                                         email={employeeActionsStore.currentEmployeeInfo?.email || ""}
+                                         fio={employeeActionsStore.currentEmployeeInfo?.fio || ""}
+                                         position={employeeActionsStore.currentEmployeeInfo?.position || ""}
+                                         phone_number={employeeActionsStore.currentEmployeeInfo?.phone_number || ""}
+                                         department={employeeActionsStore.currentEmployeeInfo?.department || ""}
+                                         employee_head={employeeActionsStore.currentEmployeeInfo?.employee_head || ""}
+                                         s3_avatar_file={employeeActionsStore.currentEmployeeInfo?.s3_avatar_file || null}
                                          handleOnEmployeeFIO={handleOnEmployeeFIO}
                                          handleOnEmployeeEmail={handleOnEmployeeEmail}
                                          handleOnEmployeePhone={handleOnEmployeePhone}
@@ -74,10 +80,14 @@ const PersonalArea: React.FC = React.memo(() => {
                         :
                         <div>
                             <UserInfo handleOnEdit={handleOnEdit}
-                                      email={currentEmployeeEmail} fio={currentEmployeeFIO}
-                                      job={currentEmployeeJob} phone={currentEmployeePhone}
-                                      department={currentEmployeeDepartment} supervisor={currentEmployeeSupervisor}
-                                      image={currentEmployeeImage}/>
+                                      id={employeeActionsStore.currentEmployeeInfo?.id || ""}
+                                      email={employeeActionsStore.currentEmployeeInfo?.email || ""}
+                                      fio={employeeActionsStore.currentEmployeeInfo?.fio || ""}
+                                      position={employeeActionsStore.currentEmployeeInfo?.position || ""}
+                                      phone_number={employeeActionsStore.currentEmployeeInfo?.phone_number || ""}
+                                      department={employeeActionsStore.currentEmployeeInfo?.department || ""}
+                                      employee_head={employeeActionsStore.currentEmployeeInfo?.employee_head || ""}
+                                      s3_avatar_file={employeeActionsStore.currentEmployeeInfo?.s3_avatar_file || null}/>
                             <Kanban/>
                         </div>
                 }
