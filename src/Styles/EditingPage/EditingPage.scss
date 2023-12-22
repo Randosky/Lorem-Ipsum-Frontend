@@ -49,14 +49,37 @@
 }
 
 .editing__image {
-  background-color: #D9D9D9;
+  background-color: $brandColorBlack60;
+  margin-bottom: $mainSmallMargin;
+}
+
+.editing__images{
+  @include flexStartColumn;
+  align-items: end;
+  flex-direction: column;
   margin-right: $mainBigMargin*2;
   flex-shrink: 0;
 }
 
+.editing__images-preview{
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.editing__buttons{
+  @include flexStart;
+  justify-content: end;
+  flex-grow: 1;
+  width: 100%;
+}
+
 .editing__save {
   @include fontSize8;
-  align-self: end;
+
+  &:not(:last-child){
+    margin-right: $mainMediumMargin;
+  }
 }
 
 @media (max-width: 1600px) {
@@ -64,9 +87,7 @@
     @include fontH1;
   }
 
-  .editing__image{
-    width: 250px;
-    height: 250px;
+  .editing__images{
     margin-right: $mainBigMargin;
   }
 

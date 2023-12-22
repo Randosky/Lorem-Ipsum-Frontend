@@ -4,22 +4,16 @@ import UserImage from "../../../../UI/UserImage/UserImage";
 import {observer} from "mobx-react-lite";
 import {IEmployeeType} from "../../../../Types/Employee/EmployeeType";
 
-interface UserInfoProps extends IEmployeeType {
+interface UserInfoProps {
     handleOnEdit: () => void,
+    employeeInfo: IEmployeeType,
 }
 
 const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
 
     const {
         handleOnEdit,
-        fio,
-        position,
-        email,
-        department,
-        id,
-        s3_avatar_file,
-        employee_head,
-        phone_number
+        employeeInfo,
     } = props
 
     return (
@@ -28,7 +22,7 @@ const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
                 Личный кабинет сотрудника
             </h1>
             <div className="userInfo__block">
-                <UserImage styles="userInfo__image" userImageUrl={s3_avatar_file}/>
+                <UserImage styles="userInfo__image" userImageUrl={employeeInfo.s3_avatar_file || ""}/>
                 <div className="userInfo__block-lists">
                     <ul className="userInfo__block-list">
                         <li className="userInfo__list-item">ФИО</li>
@@ -40,26 +34,33 @@ const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
                     </ul>
                     <ul className="userInfo__block-list">
                         <li className="userInfo__list-item">
-                            {fio}
+                            {`${employeeInfo.last_name} ${employeeInfo.first_name} ${employeeInfo.patronymic}`}
                         </li>
                         <li className="userInfo__list-item">
-                            <a href={`mailto:${email}`}>
-                                {email}
+                            <a href={`mailto:${employeeInfo.email}`}>
+                                {employeeInfo.email}
                             </a>
                         </li>
                         <li className="userInfo__list-item">
-                            <a href={`tel:${phone_number}`}>
-                                {phone_number}
+                            <a href={`tel:${employeeInfo?.phone_number}`}>
+                                {employeeInfo?.phone_number || "нет данных"}
                             </a>
                         </li>
                         <li className="userInfo__list-item">
-                            {position}
+                            {employeeInfo.position?.position_name || "нет данных"}
                         </li>
                         <li className="userInfo__list-item">
-                            {department}
+                            {employeeInfo.department?.department_name || "нет данных"}
                         </li>
                         <li className="userInfo__list-item">
-                            {employee_head}
+                            {
+                                employeeInfo.employee_head
+                                    ?
+                                    `${employeeInfo.employee_head?.last_name} 
+                            ${employeeInfo.employee_head?.first_name} 
+                            ${employeeInfo.employee_head?.patronymic}`
+                                    : "нет данных"
+                            }
                         </li>
                     </ul>
                 </div>

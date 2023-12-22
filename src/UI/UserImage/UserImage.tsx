@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 
 type UserImageProps = {
     isFileDraggable?: boolean;
-    userImageUrl?: File | null;
+    userImageUrl?: string | null;
     styles?: string;
     handleOnChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
@@ -25,11 +25,11 @@ const UserImage: React.FC<UserImageProps> = ({
                         <div></div>
                     </label>
                     :
-                    <div>
+                    <div className="userImage__block">
                         {
                             userImageUrl
                                 ?
-                                <img src="src/UI" alt="" className="userImage__image"/>
+                                <img src={userImageUrl} alt="" className="userImage__image"/>
                                 :
                                 <div className="userImage__icon">
                                 </div>

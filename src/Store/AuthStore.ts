@@ -17,8 +17,8 @@ class AuthStore {
     }
 
     checkPasswordError(password: string) {
-        if (password.length < 12)
-            return "Длина пароля должа быть минимум 12 символов"
+        if (password.length < 8)
+            return "Длина пароля должа быть минимум 8 символов"
     }
 
     async register(email: string, password: string) {

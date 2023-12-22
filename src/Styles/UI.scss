@@ -141,7 +141,9 @@
 }
 
 .userImage__image {
-
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
 }
 
 .userImage__icon {
@@ -362,6 +364,11 @@
   }
 
   .ui__userImage {
+    width: 250px;
+    height: 250px;
+  }
+
+  .userImage__image{
     width: 250px;
     height: 250px;
   }
