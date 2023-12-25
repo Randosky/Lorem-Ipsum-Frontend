@@ -14,8 +14,8 @@ class EmployeeActionsStore {
         this.currentEmployeeInfo = info
     }
 
-    async getEmployeeProfileInfo(employee_id: string) {
-        return await employeeService.getEmployeeProfileInfo(employee_id)
+    async getEmployeeProfileInfoById(employee_id: string) {
+        return await employeeService.getEmployeeProfileInfoById(employee_id)
             .then(data => {
                 if ("result" in data)
                     this.updateCurrentEmployeeInfo({
@@ -32,6 +32,29 @@ class EmployeeActionsStore {
                         position_id: data.result.position_id,
                         s3_avatar_file: data.result.s3_avatar_file,
                     })
+            })
+    }
+
+    async getEmployeeProfileInfoByAccessToken() {
+        return await employeeService.getEmployeeProfileInfoByAccessToken()
+            .then(data => {
+                if ("result" in data)
+                    this.updateCurrentEmployeeInfo({
+                        last_name: data.result.last_name,
+                        first_name: data.result.first_name,
+                        patronymic: data.result.patronymic,
+                        email: data.result.email,
+                        employee_head: data.result.employee_head,
+                        department: data.result.department,
+                        department_id: data.result.department_id,
+                        id: data.result.id,
+                        phone_number: data.result.phone_number,
+                        position: data.result.position,
+                        position_id: data.result.position_id,
+                        s3_avatar_file: data.result.s3_avatar_file,
+                    })
+
+                return data
             })
     }
 
@@ -76,7 +99,9 @@ class EmployeeActionsStore {
         const first_name: string = splitedFIO[1]
         const patronymic: string = splitedFIO[2]
 
-        return await employeeService.updateEmployeeProfileInfo(last_name, first_name, patronymic, phone_number).then()
+        return await employeeService.updateEmployeeProfileInfo(last_name, first_name, patronymic, phone_number)
+            .then(() => this.getEmployeeProfileInfoByAccessToken()
+                .then((data) => this.getEmployeeProfilePhoto(data.result.id)))
     }
 }
 

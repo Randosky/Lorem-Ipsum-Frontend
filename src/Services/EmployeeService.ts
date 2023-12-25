@@ -6,7 +6,7 @@ const userRESTAPIURL = import.meta.env.VITE_USER_REST_API_KEY
 
 class EmployeeService {
 
-    async getEmployeeProfileInfo(employee_id: string) {
+    async getEmployeeProfileInfoById(employee_id: string) {
         return await fetch(`${userAPIURL}/get_employee_profile_by_id`, {
             method: "POST",
             headers: {
@@ -19,6 +19,23 @@ class EmployeeService {
                 "params": {
                     "employee_id": employee_id
                 }
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => data);
+    }
+
+    async getEmployeeProfileInfoByAccessToken() {
+        return await fetch(`${userAPIURL}/get_profile`, {
+            method: "POST",
+            headers: {
+                'Authorization': `${localStorage.getItem("userToken")}`,
+            },
+            body: JSON.stringify({
+                "jsonrpc": "2.0",
+                "id": "0",
+                "method": "get_profile",
+                "params": {}
             }),
         })
             .then((response) => response.json())
