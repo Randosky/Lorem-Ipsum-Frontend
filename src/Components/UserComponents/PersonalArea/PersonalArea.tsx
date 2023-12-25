@@ -8,6 +8,7 @@ import {observer} from "mobx-react-lite";
 import EditingPage from "../EditingPage/EditingPage";
 import UserInfo from "./UserInfo/UserInfo";
 import Kanban from "./Kanban/Kanban";
+import RefreshSession from "../RefreshSession/RefreshSession";
 
 const PersonalArea: React.FC = observer(() => {
 
@@ -40,7 +41,8 @@ const PersonalArea: React.FC = observer(() => {
                                           employeeInfo={employeeActionsStore.currentEmployeeInfo}/>
                                 <Kanban/>
                             </div>
-                        : "adadawd"
+                        :
+                        <RefreshSession/>
                 }
             </div>
         </main>

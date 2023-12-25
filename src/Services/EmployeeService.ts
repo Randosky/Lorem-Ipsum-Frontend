@@ -1,6 +1,3 @@
-import axios from "axios"
-import {getCookie} from "../Helpers/ServicesHelper";
-
 const userAPIURL = import.meta.env.VITE_USER_API_KEY
 const userRESTAPIURL = import.meta.env.VITE_USER_REST_API_KEY
 
