@@ -1,14 +1,16 @@
 export interface LandCardType {
-    landId: string
-    landStatus: string,
-    landTitle: string
-    landCadastrial: string
-    landSquare: string
-    landAddress: string
-    landCopyrightHolder: string
-    landCategory: string
-    landObject: string[]
-    landSearchChannel: string
-    landAddingDate: Date
-    landArchived: boolean
+    id: string,
+    cadastral_number: string,
+    area_category: string,
+    area_square: number,
+    area_cost: number,
+    entered_at_base: string,
+    status: {
+        id: string,
+        status_name: string
+    },
+    stage: {
+        id: string,
+        stage_name: string
+    }
 }

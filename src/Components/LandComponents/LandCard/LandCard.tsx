@@ -1,61 +1,78 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Header from "../../../UI/Header/Header";
 import "../../../Styles/Land/LandActionStyles.scss"
 import landStore from "../../../Store/LandStore";
 import {useSearchParams} from "react-router-dom";
 import ListCardInfo from "../../../UI/ListCardInfo/ListCardInfo";
-import {
-    additionalInfoTitles,
-    copyrightInfoTitles,
-    legalInfoTitles,
-    mainInfoTitles,
-    objectsInfoTitles, tasksInfoTitles
-} from "../../../Helpers/LandHelper";
+import {ReturnedLandType} from "../../../Types/Land/ReturnedLandType";
 
 const LandCard: React.FC = () => {
 
     const [params] = useSearchParams()
     const landCardId = params.get("landCardId")
 
+    const [land, setLand] = useState<ReturnedLandType | null>(null);
+    const handleOnLand = useCallback((l: ReturnedLandType) => setLand(l), [])
+
     useEffect(() => {
-        landStore.getCardInfo(landCardId || "").then()
-    }, [landCardId])
+        if (landCardId)
+            landStore.getLandById(landCardId).then((data) => "result" in data ? handleOnLand(data.result) : "")
+    }, [handleOnLand, landCardId])
 
     return (
         <main className="landCard">
             <Header/>
             <div className="landCard__container">
-                <div className="landCard__item">
-                    <div className="item__header">
-                        <h1 className="item__title">
-                            Земельный участок "Тест"
-                        </h1>
-                    </div>
-                    <div className="item__row">
-                        <ListCardInfo itemBlockStyle="item__mainInfo" itemH2="Основная информация"
-                                      itemListTitles={mainInfoTitles}
-                                      itemListValues={mainInfoTitles}/>
-                        <ListCardInfo itemBlockStyle="item__legalInfo" itemH2="Юридические сведения"
-                                      itemListTitles={legalInfoTitles}
-                                      itemListValues={legalInfoTitles}/>
-                    </div>
-                    <div className="item__row">
-                        <ListCardInfo itemBlockStyle="item__objectsInfo" itemH2="Информация об объектах"
-                                      itemListTitles={objectsInfoTitles}
-                                      itemListValues={objectsInfoTitles}/>
-                        <ListCardInfo itemBlockStyle="item__additionalInfo" itemH2="Дополнительная информация"
-                                      itemListTitles={additionalInfoTitles}
-                                      itemListValues={additionalInfoTitles}/>
-                    </div>
-                    <div className="item__row">
-                        <ListCardInfo itemBlockStyle="item__copyrightInfo" itemH2="Данные о правообладателе"
-                                      itemListTitles={copyrightInfoTitles}
-                                      itemListValues={copyrightInfoTitles}/>
-                        <ListCardInfo itemBlockStyle="item__tasks" itemH2="Задачи"
-                                      itemListTitles={tasksInfoTitles}
-                                      itemListValues={tasksInfoTitles}/>
-                    </div>
-                </div>
+                {
+                    land
+                        ?
+                        <div className="landCard__item">
+                            <div className="item__header">
+                                <h1 className="item__title">
+                                    Земельный участок "Тест"
+                                </h1>
+                            </div>
+                            <div className="item__row">
+                                <ListCardInfo itemBlockStyle="item__mainInfo" itemH2="Основная информация"
+                                              itemListTitles={["Кадастровый номер", "Дата внесения в базу",
+                                                  "Площадь", "Адрес", "Категория",
+                                                  "Статус", "Этап", "Канал поиска"]}
+                                              itemListValues={[land.cadastral_number, land.entered_at_base,
+                                                  land.area_square.toString(), land.address, land.area_category,
+                                                  land.status?.status_name, land.stage?.stage_name, land.search_channel]}/>
+
+                                <ListCardInfo itemBlockStyle="item__legalInfo" itemH2="Юридические сведения"
+                                              itemListTitles={["Количество объектов",
+                                                  "Количество собственников",
+                                                  "Вид разрешенного использования",
+                                                  "Ограничения и обременения", "Кадастровая стоимость"]}
+                                              itemListValues={[land.area_buildings.length.toString(),
+                                                  land.owners.length.toString(),
+                                                  "нет данных", "нет данных", "20"
+                                              ]}/>
+                            </div>
+                            <div className="item__row">
+                                <ListCardInfo itemBlockStyle="item__objectsInfo" itemH2="Информация об объектах"
+                                              itemListTitles={["Объект"]}
+                                              itemListValues={[land.area_buildings[0].name]}/>
+                                <ListCardInfo itemBlockStyle="item__additionalInfo" itemH2="Дополнительная информация"
+                                              itemListTitles={["Наличие инженерных сетей",
+                                                  "Наличие транспорта", "Экономика"]}
+                                              itemListValues={["нет данных", "нет данных", "нет данных"]}/>
+                            </div>
+                            <div className="item__row">
+                                <ListCardInfo itemBlockStyle="item__copyrightInfo" itemH2="Данные о правообладателе"
+                                              itemListTitles={["Правообладатель",
+                                                  "Почта", "Телефон"]}
+                                              itemListValues={[land.owners[0].name,
+                                                  land.owners[0].email, land.owners[0].phone_number]}/>
+                                <ListCardInfo itemBlockStyle="item__tasks" itemH2="Задачи"
+                                              itemListTitles={["Завершено"]}
+                                              itemListValues={["нет данных"]}/>
+                            </div>
+                        </div>
+                        : ""
+                }
             </div>
         </main>
     );

@@ -285,6 +285,7 @@
 
 .infoBlock__lists {
   @include flexSpaceBetween;
+  align-items: start;
   padding: 0 $mainBigMargin;
 }
 

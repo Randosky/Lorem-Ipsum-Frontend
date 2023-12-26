@@ -11,6 +11,7 @@ import {
     searchChannelOptions,
 } from "../../../Helpers/LandHelper";
 import MyMultiplySelectWithPrefix from "../../../UI/MySelect/MyMultiplySelectWithPrefix";
+import {useNavigate} from "react-router-dom";
 
 const AddLand: React.FC = () => {
     const [landTitle, setLandTitle] = useState("");
@@ -51,6 +52,8 @@ const AddLand: React.FC = () => {
     const handleOnShowObjectSelect = useCallback((e: boolean) => setShowObjectSelect(e), [])
     const handleOnShowCategorySelect = useCallback((e: boolean) => setShowCategorySelect(e), [])
     const handleOnShowChannelSelect = useCallback((e: boolean) => setShowChannelSelect(e), [])
+
+    const navigate = useNavigate()
 
     return (
         <main className="landActions"
@@ -132,7 +135,34 @@ const AddLand: React.FC = () => {
                 </div>
                 <ButtonMain btnStyle="landActions__button-button"
                             btnText="Сохранить"
-                            handleOnClick={() => landStore.saveLand()}/>
+                            handleOnClick={
+                                () => landStore.saveLand({
+                                    landArea: {
+                                        name: landTitle,
+                                        address: landAddress,
+                                        area_category: landCategory,
+                                        area_square: Number(landSquare),
+                                        cadastral_number: landCadastrial,
+                                        search_channel: landSearchChannel,
+                                    },
+                                    areaOwners: [
+                                        {
+                                            name: landCopyrightHolder,
+                                            email: landCopyrightHolderEmail,
+                                            phone_number: landCopyrightHolderPhone,
+                                            location: "Омерика",
+                                        },
+                                    ],
+                                    buildings: [
+                                        {
+                                            name: landObject[0],
+                                            description: "decstption",
+                                            commissioning_year: "2020"
+                                        },
+                                    ],
+                                })
+                                    .then((noError) => noError && landStore.selectedLand
+                                        ? navigate(`/landCard?landCardId=${landStore.selectedLand.id}`) : "")}/>
             </div>
         </main>
     );

@@ -66,7 +66,7 @@ class LandService {
             .then((data) => data);
     }
 
-    async getAllLands(offset = 0, limit = 20) {
+    async getAllLands(offset: number, limit: number, sortParams: string[], order: string) {
         return await fetch(`${areaAPIURL}/select_land_area`, {
             method: "POST",
             headers: {
@@ -82,10 +82,8 @@ class LandService {
                         "limit": limit
                     },
                     "sort_params": {
-                        "fields": [
-                            "string"
-                        ],
-                        "order": "asc"
+                        "fields": sortParams,
+                        "order": order
                     }
                 }
             }),

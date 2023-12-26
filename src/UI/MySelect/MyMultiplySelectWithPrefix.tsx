@@ -22,10 +22,12 @@ const MyMultiplySelectWithPrefix: React.FC<MyMultiplySelectProps> = (props: MyMu
             const objInd = optionsArray.findIndex(l => l === objToAdd)
             optionsArray.splice(objInd, 1)
             setInputValueLocal([...optionsArray])
-        } else
+            handleOnChangeInputValue([...optionsArray])
+        } else {
             setInputValueLocal([...optionsArray, objToAdd])
+            handleOnChangeInputValue([...optionsArray, objToAdd])
+        }
 
-        handleOnChangeInputValue(optionsArray)
     }, [handleOnChangeInputValue, inputValueLocal, selectOptions])
 
     return (
