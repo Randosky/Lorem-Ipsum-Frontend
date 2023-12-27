@@ -1,14 +1,15 @@
 import React from 'react';
 import "../../Styles/UI.scss"
 import CloseIcon from "../../Assets/Svg/CloseIcon";
-import MainInfoStage from "../../Components/LandComponents/EditCardInfoStages/MainInfoStage";
-import LegalInfoStage from "../../Components/LandComponents/EditCardInfoStages/LegalInfoStage";
-import ObjectsInfoStage from "../../Components/LandComponents/EditCardInfoStages/ObjectsInfoStage";
-import AdditionalInfoStage from "../../Components/LandComponents/EditCardInfoStages/AdditionalInfoStage";
-import CopyrighterInfoStage from "../../Components/LandComponents/EditCardInfoStages/CopyrighterInfoStage";
-import TasksInfoStage from "../../Components/LandComponents/EditCardInfoStages/TasksInfoStage";
+import MainInfoStage from "../../Components/LandComponents/CardInfoStages/MainInfoStage";
+import LegalInfoStage from "../../Components/LandComponents/CardInfoStages/LegalInfoStage";
+import ObjectsInfoStage from "../../Components/LandComponents/CardInfoStages/ObjectsInfoStage";
+import AdditionalInfoStage from "../../Components/LandComponents/CardInfoStages/AdditionalInfoStage";
+import CopyrighterInfoStage from "../../Components/LandComponents/CardInfoStages/CopyrighterInfoStage";
+import TasksInfoStage from "../../Components/LandComponents/CardInfoStages/TasksInfoStage";
 import landStore from "../../Store/LandStore";
 import {ReturnedLandType} from "../../Types/Land/ReturnedLandType";
+import ObjectsListStage from "../../Components/LandComponents/CardInfoStages/ObjectsListStage";
 
 interface EditCardInfoProps {
     editTitle: string,
@@ -16,23 +17,25 @@ interface EditCardInfoProps {
     land: ReturnedLandType,
 }
 
-const EditCardInfo: React.FC<EditCardInfoProps> = (props: EditCardInfoProps) => {
+const CardInfoModal: React.FC<EditCardInfoProps> = (props: EditCardInfoProps) => {
     const {editTitle, handleOnClose, land} = props
 
     const getCurrentEditStage = (title: string, land: ReturnedLandType) => {
         switch (title) {
-            case "Основная информация":
+            case "Редактирование основной информации":
                 return <MainInfoStage land={land} handleOnClose={handleOnClose}/>
-            case "Юридические сведения":
+            case "Редактирование юридических сведений":
                 return <LegalInfoStage land={land} handleOnClose={handleOnClose}/>
-            case "Информация об объектах":
+            case "Создание объекта":
                 return <ObjectsInfoStage land={land} handleOnClose={handleOnClose}/>
-            case "Дополнительная информация":
+            case "Редактирование дополнительной информации":
                 return <AdditionalInfoStage land={land} handleOnClose={handleOnClose}/>
-            case "Данные о правообладателе":
+            case "Редактирование данных о правообладателе":
                 return <CopyrighterInfoStage land={land} handleOnClose={handleOnClose}/>
-            case "Задачи":
+            case "Создание задачи":
                 return <TasksInfoStage land={land} handleOnClose={handleOnClose}/>
+            case "Список объектов":
+                return <ObjectsListStage land={land} handleOnClose={handleOnClose}/>
         }
     }
 
@@ -57,4 +60,4 @@ const EditCardInfo: React.FC<EditCardInfoProps> = (props: EditCardInfoProps) => 
     );
 };
 
-export default EditCardInfo;
+export default CardInfoModal;

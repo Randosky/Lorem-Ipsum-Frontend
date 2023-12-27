@@ -1,7 +1,8 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import "../../Styles/UI.scss"
-import EditCardInfo from "../EditCardInfo/EditCardInfo";
+import CardInfoModal from "../CardInfoModal/CardInfoModal";
 import {ReturnedLandType} from "../../Types/Land/ReturnedLandType";
+import {getCurrentEditTitle} from "../../Helpers/LandHelper";
 
 interface ListCardInfoProp {
     itemBlockStyle?: string,
@@ -9,20 +10,20 @@ interface ListCardInfoProp {
     itemListTitles: string[],
     itemListValues: string[],
     land: ReturnedLandType,
-    linkTitlesIndexes?: number[],
-    linkTitlesHandles?: (() => void)[],
 }
 
 const ListCardInfo: React.FC<ListCardInfoProp> = React.memo((props: ListCardInfoProp) => {
-    const {itemBlockStyle, itemH2, itemListValues, itemListTitles, land, linkTitlesIndexes, linkTitlesHandles} = props
+    const {itemBlockStyle, itemH2, itemListValues, itemListTitles, land} = props
 
     const [editClicked, setEditClicked] = useState(false);
     const handleOnEditClicked = useCallback(() => setEditClicked(!editClicked), [editClicked])
 
+    const [objectListClicked, setObjectListClicked] = useState(false);
+    const handleOnObjectListClicked = useCallback(() => setObjectListClicked(!objectListClicked), [objectListClicked])
+
     useEffect(() => {
         editClicked ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'auto'
     }, [editClicked]);
-
 
     return (
         <div className={`item__infoBlock ${itemBlockStyle}`}>
@@ -31,25 +32,27 @@ const ListCardInfo: React.FC<ListCardInfoProp> = React.memo((props: ListCardInfo
                     {itemH2}
                 </h2>
                 {
-                    itemH2 === "Информация об объектах"
-                        ? ""
-                        : <p className="infoBlock__edit" onClick={handleOnEditClicked}>
-                            Редактировать
-                        </p>
+                    <p className="infoBlock__edit" onClick={handleOnEditClicked}>
+                        {
+                            itemH2 === "Информация об объектах"
+                                ? "Создать объект"
+                                : "Редактировать"
+                        }
+                    </p>
                 }
             </div>
             <div className="infoBlock__lists">
                 <ul className="infoBlock__list">
                     {
-                        itemListTitles.map((title, ind) => {
-                                if (linkTitlesIndexes && linkTitlesHandles && linkTitlesIndexes.includes(ind))
-                                    return <li className="list__field field__link" key={ind}
-                                               onClick={() => linkTitlesHandles[ind]()}>
-                                        {title}
-                                    </li>
-                                else
-                                    return <li className="list__field" key={ind}>{title}</li>
-                            }
+                        itemListTitles.map((title, ind) =>
+                            itemH2 === "Информация об объектах" ?
+                                <li className="list__field field__link" key={ind} onClick={handleOnObjectListClicked}>
+                                    {title}
+                                </li>
+                                :
+                                <li className="list__field" key={ind}>
+                                    {title}
+                                </li>
                         )
                     }
                 </ul>
@@ -62,7 +65,12 @@ const ListCardInfo: React.FC<ListCardInfoProp> = React.memo((props: ListCardInfo
                 </ul>
             </div>
             {
-                editClicked ? <EditCardInfo editTitle={itemH2} handleOnClose={handleOnEditClicked} land={land}/> : ""
+                editClicked ? <CardInfoModal editTitle={getCurrentEditTitle(itemH2)}
+                                            handleOnClose={handleOnEditClicked} land={land}/> : ""
+            }
+            {
+                objectListClicked ? <CardInfoModal editTitle={"Список объектов"}
+                                            handleOnClose={handleOnObjectListClicked} land={land}/> : ""
             }
         </div>
     );

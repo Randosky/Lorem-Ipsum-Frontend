@@ -55,8 +55,6 @@ const LandCard: React.FC = () => {
                             </div>
                             <div className="item__row">
                                 <ListCardInfo land={land}
-                                              linkTitlesIndexes={[0]}
-                                              linkTitlesHandles={[() => console.log("dad")]}
                                               itemBlockStyle="item__objectsInfo" itemH2="Информация об объектах"
                                               itemListTitles={["Открыть список объектов"]}
                                               itemListValues={[""]}/>

@@ -24,9 +24,9 @@ const MainInfoStage: React.FC<MainInfoStageProps> = ({land, handleOnClose}: Main
     const handleOnShowCategorySelect = useCallback((e: boolean) => setShowCategorySelect(e), [])
 
     return (
-        <div className="editInfo__modal" onClick={() => handleOnShowCategorySelect(false)}>
-            <ul className="editInfo__modal-list">
-                <li className="editInfo__modal-item" onClick={e => e.stopPropagation()}>
+        <div className="cardInfo__modal" onClick={() => handleOnShowCategorySelect(false)}>
+            <ul className="cardInfo__modal-list">
+                <li className="cardInfo__modal-item" onClick={e => e.stopPropagation()}>
                     <MySelectWithPrefix showSelect={showCategorySelect}
                                         prefixText="Категория"
                                         inputValue={landCategory}
@@ -34,19 +34,19 @@ const MainInfoStage: React.FC<MainInfoStageProps> = ({land, handleOnClose}: Main
                                         handleOnShowSelect={(e) => handleOnShowCategorySelect(e)}
                                         handleOnChangeInputValue={(e) => handleOnLandCategory(e)}/>
                 </li>
-                <li className="editInfo__modal-item">
+                <li className="cardInfo__modal-item">
                     <MyInputWithPrefix prefixText="Площадь" type="number"
                                        value={landSquare}
                                        handleOnChange={(e) => handleOnLandSquare(e.target.value)}/>
                 </li>
-                <li className="editInfo__modal-item">
+                <li className="cardInfo__modal-item">
                     <MyInputWithPrefix inputStyle="landActions__item-input"
                                        prefixText="Адрес" prefixStyle="landActions__item-prefix"
                                        value={landAddress}
                                        handleOnChange={(e) => handleOnLandAddress(e.target.value)}/>
                 </li>
             </ul>
-            <div className="editInfo__modal-btn">
+            <div className="cardInfo__modal-btn">
                 <ButtonMain handleOnClick={handleOnClose}
                             btnText="Сохранить"/>
             </div>

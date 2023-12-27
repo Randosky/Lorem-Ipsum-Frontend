@@ -29,6 +29,25 @@ export const permittedUseOptions = [
     "Земельные участки (территории) общего назначения",
 ]
 
+export const getCurrentEditTitle = (title: string | undefined) => {
+    switch (title) {
+        case "Основная информация":
+            return "Редактирование основной информации"
+        case "Юридические сведения":
+            return "Редактирование юридических сведений"
+        case "Информация об объектах":
+            return "Создание объекта"
+        case "Дополнительная информация":
+            return "Редактирование дополнительной информации"
+        case "Данные о правообладателе":
+            return "Редактирование данных о правообладателе"
+        case "Задачи":
+            return "Создание задачи"
+        default:
+            return ""
+    }
+}
+
 
 // export const permittedUseOptions = [
 //     "Сельскохозяйственное использование",

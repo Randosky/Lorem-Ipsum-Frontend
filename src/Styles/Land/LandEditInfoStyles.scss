@@ -1,15 +1,22 @@
 @import "../Variables";
 
-.editInfo__modal{
+.cardInfo__modal{
   @include flexCenterColumn;
   height: 100%;
 }
 
-.editInfo__modal-list{
-  width: 75%;
+.cardInfo__modal-list{
+  width: 85%;
 }
 
-.editInfo__modal-item{
+.cardInfo__modal-row{
+  @include flexCenter;
+  justify-content: space-between;
+  width: 85%;
+  margin-top: $mainMediumMargin;
+}
+
+.cardInfo__modal-item{
   position: relative;
 
   &:not(:last-child){
@@ -17,7 +24,31 @@
   }
 }
 
-.editInfo__modal-btn{
+.cardInfo__modal-block{
+  width: 46%;
+}
+
+.cardInfo__modal-prefix{
+  @include fontSize7;
+  width: fit-content;
+  word-wrap: break-word;
+  word-break: break-word;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.cardInfo__modal-textarea{
+  @include fontSize8;
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid $brandColorBlack100;
+  background: #FFF;
+  padding: 10px 25px;
+  height: 100px;
+  resize: none;
+}
+
+.cardInfo__modal-btn{
   @include flexCenter;
   flex-grow: 1;
   width: 100%;
@@ -30,9 +61,18 @@
 }
 
 @media (max-width: 1600px) {
-  .editInfo__modal-btn{
+  .cardInfo__modal-btn{
     button{
       @include fontSize6;
     }
+  }
+
+  .cardInfo__modal-textarea {
+    @include fontSize6;
+    padding: 10px 15px;
+  }
+
+  .cardInfo__modal-prefix {
+    @include fontSize5;
   }
 }

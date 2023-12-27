@@ -314,7 +314,7 @@
   margin: -$mainSmallMargin;
 }
 
-// EditCardInfo
+// CardInfoModal
 
 .ui__edit{
   @include flexCenter;
@@ -331,8 +331,8 @@
 
 .ui__edit-front{
   @include flexStartColumn;
-  width: 600px;
-  height: 550px;
+  width: 800px;
+  height: 600px;
   border-radius: 20px;
   background-color: $brandColorBlack20;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);

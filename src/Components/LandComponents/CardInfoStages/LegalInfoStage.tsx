@@ -28,12 +28,12 @@ const LegalInfoStage: React.FC<LegalInfoStageProps> = ({land, handleOnClose}: Le
 
 
     return (
-        <div className="editInfo__modal" onClick={() => {
+        <div className="cardInfo__modal" onClick={() => {
             handleOnShowPermittedUseSelect(false)
             handleOnShowRestrictionsSelect(false)
         }}>
-            <ul className="editInfo__modal-list">
-                <li className="editInfo__modal-item" onClick={e => e.stopPropagation()}>
+            <ul className="cardInfo__modal-list">
+                <li className="cardInfo__modal-item" onClick={e => e.stopPropagation()}>
                     <MyMultiplySelectWithPrefix showSelect={showPermittedUseSelect}
                                                 prefixText="Вид разрешенного использования"
                                                 inputValue={landPermittedUse}
@@ -41,7 +41,7 @@ const LegalInfoStage: React.FC<LegalInfoStageProps> = ({land, handleOnClose}: Le
                                                 handleOnShowSelect={(e) => handleOnShowPermittedUseSelect(e)}
                                                 handleOnChangeInputValue={(e) => handleOnLandPermittedUse(e)}/>
                 </li>
-                <li className="editInfo__modal-item" onClick={e => e.stopPropagation()}>
+                <li className="cardInfo__modal-item" onClick={e => e.stopPropagation()}>
                     <MyMultiplySelectWithPrefix showSelect={showRestrictionsSelect}
                                                 prefixText="Ограничения и обременения"
                                                 inputValue={landRestrictions}
@@ -49,7 +49,7 @@ const LegalInfoStage: React.FC<LegalInfoStageProps> = ({land, handleOnClose}: Le
                                                 handleOnShowSelect={(e) => handleOnShowRestrictionsSelect(e)}
                                                 handleOnChangeInputValue={(e) => handleOnLandRestrictions(e)}/>
                 </li>
-                <li className="editInfo__modal-item">
+                <li className="cardInfo__modal-item">
                     <MyInputWithPrefix inputStyle="landActions__item-input"
                                        prefixText="Кадастровая стоимость" prefixStyle="landActions__item-prefix"
                                        value={landCost}
@@ -57,7 +57,7 @@ const LegalInfoStage: React.FC<LegalInfoStageProps> = ({land, handleOnClose}: Le
                                        handleOnChange={(e) => handleOnLandCost(e.target.value)}/>
                 </li>
             </ul>
-            <div className="editInfo__modal-btn">
+            <div className="cardInfo__modal-btn">
                 <ButtonMain handleOnClick={handleOnClose}
                             btnText="Сохранить"/>
             </div>
