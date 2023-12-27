@@ -8,12 +8,13 @@ interface MySelectWithPrefixProps {
     handleOnChangeInputValue: (e: string) => void,
     selectOptions: string[],
     prefixText: string,
+    inputValue?: string,
 }
 
 const MySelectWithPrefix: React.FC<MySelectWithPrefixProps> = (props: MySelectWithPrefixProps) => {
-    const {showSelect, handleOnShowSelect, handleOnChangeInputValue, selectOptions, prefixText} = props
+    const {showSelect, handleOnShowSelect, handleOnChangeInputValue, selectOptions, prefixText, inputValue} = props
 
-    const [inputValueLocal, setInputValueLocal] = useState<string>("");
+    const [inputValueLocal, setInputValueLocal] = useState<string>(inputValue || "");
     const handleOnInputValueLocal = useCallback((ind: number) => {
         const objToAdd = selectOptions[ind]
 

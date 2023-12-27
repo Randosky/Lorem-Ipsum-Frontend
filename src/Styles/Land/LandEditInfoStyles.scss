@@ -1,0 +1,38 @@
+@import "../Variables";
+
+.editInfo__modal{
+  @include flexCenterColumn;
+  height: 100%;
+}
+
+.editInfo__modal-list{
+  width: 75%;
+}
+
+.editInfo__modal-item{
+  position: relative;
+
+  &:not(:last-child){
+    margin-bottom: $mainMediumMargin;
+  }
+}
+
+.editInfo__modal-btn{
+  @include flexCenter;
+  flex-grow: 1;
+  width: 100%;
+  align-items: end;
+  justify-content: end;
+
+  button{
+    @include fontSize7;
+  }
+}
+
+@media (max-width: 1600px) {
+  .editInfo__modal-btn{
+    button{
+      @include fontSize6;
+    }
+  }
+}

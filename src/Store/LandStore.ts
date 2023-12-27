@@ -6,24 +6,13 @@ import {MainLandInfoType} from "../Types/Land/MainLandInfoType";
 
 class LandStore {
 
-    selectedLand: ReturnedLandType | null = null
-
     constructor() {
         makeAutoObservable(this)
     }
 
     async saveLand(land: ILandType) {
 
-        return await LandService.createLand(land)
-            .then(data => {
-                if ("result" in data) {
-                    this.selectedLand = data.result
-                    return true
-                }
-
-                alert(data.error.data.errors[0].msg)
-                return false
-            })
+        return await LandService.createLand(land).then(data => data)
     }
 
     async getLandById(landId: string) {

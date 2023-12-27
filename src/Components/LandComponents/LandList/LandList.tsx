@@ -67,7 +67,6 @@ const LandList: React.FC = () => {
                                     <th>Категория</th>
                                     <th>Кадстровый номер</th>
                                     <th>Правообладатель</th>
-                                    <th>Кадастровая стоимость</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -80,7 +79,6 @@ const LandList: React.FC = () => {
                                             <td>{land.area_category}</td>
                                             <td>{land.cadastral_number}</td>
                                             <td>{land.area_square}</td>
-                                            <td>{land.area_cost}</td>
                                         </tr>
                                     )
                                 }

@@ -39,7 +39,7 @@
 
 
 .header__left-button {
-  @include fontSize8;
+  @include fontSize7;
   padding: 10px 25px 10px 45px;
   border-radius: 20px;
   position: relative;
@@ -203,10 +203,9 @@
 }
 
 .ui__multiply-popup {
-  width: 50%;
+  width: 300px;
   min-height: fit-content;
-  max-height: 200px;
-  overflow-y: auto;
+  max-height: 250px;
   border: 1px solid $brandColorBlack100;
   padding: $mainSmallPadding;
   border-radius: 20px;
@@ -224,6 +223,8 @@
 
 .popup__title {
   @include fontH2;
+  font-size: 18px;
+  line-height: 20px;
 }
 
 .popup__close {
@@ -234,6 +235,10 @@
 
 .popup__objects {
   @include flexStartColumn;
+  justify-content: start;
+  min-height: fit-content;
+  max-height: 150px;
+  overflow-y: auto;
 }
 
 .popup__object {
@@ -302,6 +307,13 @@
   }
 }
 
+.field__link{
+  cursor: pointer;
+  font-weight: 500 !important;
+  padding: $mainSmallPadding;
+  margin: -$mainSmallMargin;
+}
+
 // EditCardInfo
 
 .ui__edit{
@@ -318,8 +330,9 @@
 }
 
 .ui__edit-front{
-  width: 800px;
-  height: 500px;
+  @include flexStartColumn;
+  width: 600px;
+  height: 550px;
   border-radius: 20px;
   background-color: $brandColorBlack20;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
@@ -329,6 +342,7 @@
 .ui__edit-header{
   @include flexSpaceBetween;
   margin-bottom: $mainBigMargin;
+  width: 100%;
 }
 
 .ui__edit-title{
@@ -342,7 +356,8 @@
 }
 
 .ui__edit-editInfo{
-
+  width: 100%;
+  flex-grow: 1;
 }
 
 // Media

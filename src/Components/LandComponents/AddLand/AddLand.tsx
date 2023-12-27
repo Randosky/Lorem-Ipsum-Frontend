@@ -28,8 +28,7 @@ const AddLand: React.FC = () => {
     const [showCategorySelect, setShowCategorySelect] = useState(false);
     const [showChannelSelect, setShowChannelSelect] = useState(false);
 
-    const handleOnLandTitle = useCallback(
-        (e: string) => setLandTitle(e), [])
+    const handleOnLandTitle = useCallback((e: string) => setLandTitle(e), [])
 
     const handleOnLandCadastrial = useCallback((e: string) => setLandCadastrial(e), [])
 
@@ -161,8 +160,8 @@ const AddLand: React.FC = () => {
                                         },
                                     ],
                                 })
-                                    .then((noError) => noError && landStore.selectedLand
-                                        ? navigate(`/landCard?landCardId=${landStore.selectedLand.id}`) : "")}/>
+                                    .then((data) => "result" in data
+                                        ? navigate(`/landCard?landCardId=${data.result.id}`) : "")}/>
             </div>
         </main>
     );
