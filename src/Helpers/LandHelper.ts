@@ -43,6 +43,10 @@ export const getCurrentEditTitle = (title: string | undefined) => {
             return "Редактирование данных о правообладателе"
         case "Задачи":
             return "Создание задачи"
+        case "Список объектов":
+            return "Список объектов"
+        case "Редактирование объекта":
+            return "Редактирование объекта"
         default:
             return ""
     }

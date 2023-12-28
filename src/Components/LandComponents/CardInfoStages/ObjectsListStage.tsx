@@ -1,51 +1,70 @@
 import React from 'react';
 import {ReturnedLandType} from "../../../Types/Land/ReturnedLandType";
 import CloseIcon from "../../../Assets/Svg/CloseIcon";
+import EditIcon from "../../../Assets/Svg/EditIcon";
+import {observer} from "mobx-react-lite";
+import landStore from "../../../Store/LandStore";
 
 interface ObjectsListStageProps {
     land: ReturnedLandType,
-    handleOnClose: () => void,
 }
 
-const objects = [
-    {
-        description: "Текст описание объекта, сокращённый до 100 знаков, тестовое описание тестовое описание",
-        address: "ул. Гдетотамова 17/А",
-        year: "2002"
-    },
-    {
-        description: "Текст описание объекта, сокращённый до 100 знаков, тестовое описание тестовое описание",
-        address: "ул. Гдетотамова 17/А",
-        year: "2002"
-    },
-    {
-        description: "Текст описание объекта, сокращённый до 100 знаков, тестовое описание тестовое описание",
-        address: "ул. Гдетотамова 17/А",
-        year: "2002"
-    },
-    {
-        description: "Текст описание объекта, сокращённый до 100 знаков, тестовое описание тестовое описание",
-        address: "ул. Гдетотамова 17/А",
-        year: "2002"
-    },
-]
+const ObjectsListStage: React.FC<ObjectsListStageProps> = ({land}: ObjectsListStageProps) => {
 
-const ObjectsListStage: React.FC<ObjectsListStageProps> = ({land, handleOnClose}: ObjectsListStageProps) => {
+    const objects = land.area_buildings || [
+        {
+            name: "Название объекта",
+            description: "Текст описание объекта, сокращённый до 100 знаков, тестовое описание тестовое описание",
+            commissioning_year: "2002",
+            id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            land_area_id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        },
+        {
+            name: "Название объекта",
+            description: "Текст описание объекта, сокращённый до 100 знаков, тестовое описание тестовое описание",
+            commissioning_year: "2002",
+            id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            land_area_id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        },
+        {
+            name: "Название объекта",
+            description: "Текст описание объекта, сокращённый до 100 знаков, тестовое описание тестовое описание",
+            commissioning_year: "2002",
+            id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            land_area_id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        },
+        {
+            name: "Название объекта",
+            description: "Текст описание объекта, сокращённый до 100 знаков, тестовое описание тестовое описание",
+            commissioning_year: "2002",
+            id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            land_area_id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        },
+    ]
+
     return (
         <div className="cardInfo__modal">
             <ul className="cardInfo__modal-objects">
                 {
                     objects.map((object, ind) =>
-                        <li className="cardInfo__modal-object">
+                        <li className="cardInfo__modal-object" key={ind}>
                             <div className="object__header">
                                 <h3 className="object__title">
-                                    Объект&nbsp;&nbsp;{"\"Тестовый объект\""}
+                                    Объект&nbsp;&nbsp;{`"${object.name}"`}
                                 </h3>
-                                <div className="object__close" onClick={() => console.log("Объект удалён")}>
-                                    <CloseIcon/>
+                                <div className="object__actions">
+                                    <div className="object__edit" onClick={() => {
+                                        landStore.updateIsObjectListClicked()
+                                        landStore.updateIsObjectEditClicked(ind)
+                                    }}>
+                                        <EditIcon/>
+                                    </div>
+                                    <div className="object__close" onClick={() => console.log("Объект удалён")}>
+                                        <CloseIcon/>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="object__rows" key={ind}>
+                            <div className="object__rows">
                                 <div className="objects__row">
                                     <p className="object__item object__item-title">Описание</p>
                                     <p className="object__item">
@@ -57,12 +76,8 @@ const ObjectsListStage: React.FC<ObjectsListStageProps> = ({land, handleOnClose}
                                     </p>
                                 </div>
                                 <div className="objects__row">
-                                    <p className="object__item object__item-title">Адрес</p>
-                                    <p className="object__item">{object.address}</p>
-                                </div>
-                                <div className="objects__row">
                                     <p className="object__item object__item-title">Введен в эксплуатацию</p>
-                                    <p className="object__item">{object.year + " г."}</p>
+                                    <p className="object__item">{object.commissioning_year + " г."}</p>
                                 </div>
                             </div>
                         </li>

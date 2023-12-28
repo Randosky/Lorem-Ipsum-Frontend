@@ -36,34 +36,34 @@
   height: 100%;
 }
 
-.userInfo__block-lists {
-  @include flexStart;
+.userInfo__block-rows {
+  @include flexStartColumn;
   flex-grow: 1;
   height: 100%;
   align-items: start;
 }
 
-.userInfo__block-list {
-  height: 100%;
+.userInfo__block-row {
+  @include flexSpaceBetween;
+  width: 100%;
 
-  &:first-child {
-    margin-right: calc($mainBigMargin*2);
-  }
-
-  &:last-child {
-    flex-grow: 1;
+  &:not(:last-child){
+    margin-bottom: $mainBigMargin;
   }
 }
 
 .userInfo__list-item {
   @include fontSize8;
+  color: inherit;
 
-  a{
-    color: inherit;
+  &:first-child {
+    min-width: 150px;
+    max-width: 150px;
+    margin-right: calc($mainBigMargin*2);
   }
 
-  &:not(:last-child) {
-    margin-bottom: $mainBigMargin;
+  &:last-child{
+    flex-grow: 1;
   }
 }
 
@@ -147,12 +147,14 @@
     @include fontH1;
   }
 
-  .userInfo__list-item {
-    @include fontSize6;
-
+  .userInfo__block-row {
     &:not(:last-child){
       margin-bottom: $mainMediumMargin;
     }
+  }
+
+  .userInfo__list-item {
+    @include fontSize6;
   }
 
   .userInfo__edit-btn {

@@ -4,17 +4,17 @@ import MyMultiplySelectWithPrefix from "../../../UI/MySelect/MyMultiplySelectWit
 import {permittedUseOptions, restrictionsOptions} from "../../../Helpers/LandHelper";
 import MyInputWithPrefix from "../../../UI/MyInput/MyInputWithPrefix";
 import ButtonMain from "../../../UI/MyButton/ButtonMain";
+import landStore from "../../../Store/LandStore";
 
 interface AdditionalInfoStageProps {
     land: ReturnedLandType,
-    handleOnClose: () => void,
 }
 
-const AdditionalInfoStage: React.FC<AdditionalInfoStageProps> = ({land, handleOnClose}: AdditionalInfoStageProps) => {
+const AdditionalInfoStage: React.FC<AdditionalInfoStageProps> = ({land}: AdditionalInfoStageProps) => {
 
-    const [landEngineeringNetwork, setLandEngineeringNetwork] = useState("");
-    const [landTransport, setLandTransport] = useState("");
-    const [landEconomy, setLandEconomy] = useState("");
+    const [landEngineeringNetwork, setLandEngineeringNetwork] = useState(land.extra_data?.engineering_networks || "");
+    const [landTransport, setLandTransport] = useState(land.extra_data?.transport || "");
+    const [landEconomy, setLandEconomy] = useState(land.extra_data?.result || "");
 
     const handleOnLandEngineeringNetwork = useCallback((e: string) => setLandEngineeringNetwork(e), [])
     const handleOnLandTransport = useCallback((e: string) => setLandTransport(e), [])
@@ -47,8 +47,26 @@ const AdditionalInfoStage: React.FC<AdditionalInfoStageProps> = ({land, handleOn
                 </li>
             </ul>
             <div className="cardInfo__modal-btn">
-                <ButtonMain handleOnClick={handleOnClose}
-                            btnText="Сохранить"/>
+                {
+                    land.extra_data?.id
+                        ?
+                        <ButtonMain handleOnClick={() => landStore.updateExtraData(land.extra_data?.id, {
+                            engineering_networks: landEngineeringNetwork,
+                            transport: landTransport,
+                            result: landEconomy,
+                        })
+                            .then(() => landStore.updateIsLandInfoEditClicked(""))
+                            .then(() => window.location.reload())} btnText="Сохранить"/>
+                        :
+                        <ButtonMain handleOnClick={() => landStore.createExtraData(land.id, {
+                            engineering_networks: landEngineeringNetwork,
+                            transport: landTransport,
+                            result: landEconomy,
+                        })
+                            .then(() => landStore.updateIsLandInfoEditClicked(""))
+                            .then(() => window.location.reload())} btnText="Сохранить"/>
+                }
+
             </div>
         </div>
     );

@@ -1,7 +1,11 @@
 import {ILandType} from "../Types/Land/ILandType";
 import {MainLandInfoType} from "../Types/Land/MainLandInfoType";
+import {AreaOwnersType} from "../Types/Land/AreaOwnersType";
+import {LandBuildings} from "../Types/Land/LandBuildings";
+import {ExtraDataType} from "../Types/Land/ExtraDataType";
 
 const areaAPIURL = import.meta.env.VITE_AREAS_API_KEY
+const extraDataAPIURL = import.meta.env.VITE_EXTRA_DATA_API_KEY
 
 
 class LandService {
@@ -111,9 +115,11 @@ class LandService {
                         "area_category": landArea.area_category,
                         "area_square": landArea.area_square,
                         "address": landArea.address,
-                        "search_channel": landArea.search_channel
+                        "search_channel": landArea.search_channel,
+                        "working_status": landArea.working_status,
+                        "stage": landArea.stage,
                     },
-                    "id": landId
+                    "land_area_id": landId
                 }
             }),
         })
@@ -121,6 +127,102 @@ class LandService {
             .then((data) => data);
     }
 
+    async updateOwner(ownerId: string, ownerData: AreaOwnersType) {
+        return await fetch(`${areaAPIURL}/update_owner`, {
+            method: "POST",
+            headers: {
+                'Authorization': `${localStorage.getItem("userToken")}`,
+            },
+            body: JSON.stringify({
+                "jsonrpc": "2.0",
+                "id": "0",
+                "method": "update_owner",
+                "params": {
+                    "owner": {
+                        "name": ownerData.name,
+                        "email": ownerData.email,
+                        "phone_number": ownerData.phone_number,
+                        "location": ownerData.location,
+                    },
+                    "owner_id": ownerId
+                }
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => data);
+    }
+
+    async updateBuilding(buildingId: string, buildingData: LandBuildings) {
+        return await fetch(`${areaAPIURL}/update_building`, {
+            method: "POST",
+            headers: {
+                'Authorization': `${localStorage.getItem("userToken")}`,
+            },
+            body: JSON.stringify({
+                "jsonrpc": "2.0",
+                "id": "0",
+                "method": "update_building",
+                "params": {
+                    "building": {
+                        "name": buildingData.name,
+                        "description": buildingData.description,
+                        "commissioning_year": buildingData.commissioning_year,
+                    },
+                    "building_id": buildingId,
+                }
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => data);
+    }
+
+    async updateExtraData(extraDataId: string, data: ExtraDataType) {
+        return await fetch(`${extraDataAPIURL}/edit_extra_data`, {
+            method: "POST",
+            headers: {
+                'Authorization': `${localStorage.getItem("userToken")}`,
+            },
+            body: JSON.stringify({
+                "jsonrpc": "2.0",
+                "id": "0",
+                "method": "edit_extra_data",
+                "params": {
+                    "data": {
+                        "engineering_networks": data.engineering_networks,
+                        "transport": data.transport,
+                        "result": data.result
+                    },
+                    "id": extraDataId
+                }
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => data);
+    }
+
+    async createExtraData(landId: string, data: ExtraDataType) {
+        return await fetch(`${extraDataAPIURL}/create_extra_data`, {
+            method: "POST",
+            headers: {
+                'Authorization': `${localStorage.getItem("userToken")}`,
+            },
+            body: JSON.stringify({
+                "jsonrpc": "2.0",
+                "id": "0",
+                "method": "create_extra_data",
+                "params": {
+                    "data": {
+                        "engineering_networks": data.engineering_networks,
+                        "transport": data.transport,
+                        "result": data.result,
+                        "land_area_id": landId
+                    }
+                }
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => data);
+    }
 }
 
 export default new LandService()

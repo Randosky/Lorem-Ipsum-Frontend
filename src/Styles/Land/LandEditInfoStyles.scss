@@ -10,23 +10,12 @@
   width: 85%;
 }
 
-.cardInfo__modal-row{
-  @include flexCenter;
-  justify-content: space-between;
-  width: 85%;
-  margin-top: $mainMediumMargin;
-}
-
 .cardInfo__modal-item{
   position: relative;
 
   &:not(:last-child){
     margin-bottom: $mainMediumMargin;
   }
-}
-
-.cardInfo__modal-block{
-  width: 46%;
 }
 
 .cardInfo__modal-prefix{
@@ -91,10 +80,22 @@
   font-weight: 600;
 }
 
+.object__actions{
+  @include flexStart;
+}
+
+.object__edit{
+  cursor: pointer;
+  margin: -$mainSmallMargin;
+  margin-right: $mainSmallMargin;
+  padding: $mainSmallPadding 0 $mainSmallPadding $mainSmallPadding;
+}
+
 .object__close{
   cursor: pointer;
-  padding: $mainSmallPadding;
   margin: -$mainSmallMargin;
+  margin-left: 0;
+  padding: $mainSmallPadding $mainSmallPadding $mainSmallPadding 0;
 }
 
 .object__rows{

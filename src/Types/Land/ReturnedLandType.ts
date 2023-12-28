@@ -12,7 +12,7 @@ export interface ReturnedLandType {
     area_buildings: {
         name: string,
         description: string,
-        commissioning_year: string,
+        commissioning_year: number,
         id: string,
         land_area_id: string
     }[],

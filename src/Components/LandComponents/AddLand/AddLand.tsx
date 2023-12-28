@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Header from "../../../UI/Header/Header";
 import "../../../Styles/Land/LandActionStyles.scss"
 import MyInputWithPrefix from "../../../UI/MyInput/MyInputWithPrefix";
@@ -12,11 +12,12 @@ import {
 } from "../../../Helpers/LandHelper";
 import MyMultiplySelectWithPrefix from "../../../UI/MySelect/MyMultiplySelectWithPrefix";
 import {useNavigate} from "react-router-dom";
+import authStore from "../../../Store/AuthStore";
 
 const AddLand: React.FC = () => {
     const [landTitle, setLandTitle] = useState("");
     const [landCadastrial, setLandCadastrial] = useState("");
-    const [landSquare, setLandSquare] = useState("");
+    const [landSquare, setLandSquare] = useState(0);
     const [landAddress, setLandAddress] = useState("");
     const [landCategory, setLandCategory] = useState("");
     const [landObject, setLandObject] = useState<string[]>([]);
@@ -32,7 +33,7 @@ const AddLand: React.FC = () => {
 
     const handleOnLandCadastrial = useCallback((e: string) => setLandCadastrial(e), [])
 
-    const handleOnLandSquare = useCallback((e: string) => setLandSquare(e), [])
+    const handleOnLandSquare = useCallback((e: number) => setLandSquare(e), [])
 
     const handleOnLandAddress = useCallback((e: string) => setLandAddress(e), [])
 
@@ -54,6 +55,10 @@ const AddLand: React.FC = () => {
     const handleOnShowChannelSelect = useCallback((e: boolean) => setShowChannelSelect(e), [])
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        authStore.refreshSession().then()
+    }, []);
 
     return (
         <main className="landActions"
@@ -78,9 +83,9 @@ const AddLand: React.FC = () => {
                                                handleOnChange={(e) => handleOnLandCadastrial(e.target.value)}/>
                         </li>
                         <li className="landActions__item">
-                            <MyInputWithPrefix prefixText="Площадь" type="number"
+                            <MyInputWithPrefix prefixText="Площадь (м2)" type="number"
                                                value={landSquare}
-                                               handleOnChange={(e) => handleOnLandSquare(e.target.value)}/>
+                                               handleOnChange={(e) => handleOnLandSquare(Number(e.target.value))}/>
                         </li>
                         <li className="landActions__item"
                             onClick={(e) => e.stopPropagation()}>
@@ -121,12 +126,15 @@ const AddLand: React.FC = () => {
                         </li>
                         <li className="landActions__item">
                             <MyInputWithPrefix inputStyle="landActions__item-input"
+                                               type="email"
                                                prefixText="Почта" prefixStyle="landActions__item-prefix"
                                                value={landCopyrightHolderEmail}
                                                handleOnChange={(e) => handleOnLandCopyrightHolderEmail(e.target.value)}/>
                         </li>
                         <li className="landActions__item">
                             <MyInputWithPrefix inputStyle="landActions__item-input"
+                                               type="tel"
+                                               placeholder="+79000000000"
                                                prefixText="Телефон" prefixStyle="landActions__item-prefix"
                                                value={landCopyrightHolderPhone}
                                                handleOnChange={(e) => handleOnLandCopyrightHolderPhone(e.target.value)}/>
@@ -141,7 +149,7 @@ const AddLand: React.FC = () => {
                                         name: landTitle,
                                         address: landAddress,
                                         area_category: landCategory,
-                                        area_square: Number(landSquare),
+                                        area_square: landSquare,
                                         cadastral_number: landCadastrial,
                                         search_channel: landSearchChannel,
                                         working_status: "Новый",
@@ -152,14 +160,14 @@ const AddLand: React.FC = () => {
                                             name: landCopyrightHolder,
                                             email: landCopyrightHolderEmail,
                                             phone_number: landCopyrightHolderPhone,
-                                            location: "Омерика",
+                                            location: "Нет данных",
                                         },
                                     ],
                                     buildings: [
                                         {
                                             name: landObject[0],
-                                            description: "decstption",
-                                            commissioning_year: "2020"
+                                            description: "Нет данных",
+                                            commissioning_year: new Date().getFullYear()
                                         },
                                     ],
                                 })

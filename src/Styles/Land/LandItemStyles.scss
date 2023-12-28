@@ -189,13 +189,101 @@
     @include fontH1;
   }
 
-  .item__row{
+  .item__row {
     padding: 0 $mainMediumPadding;
   }
 }
 
+.landList__none {
+  @include fontSize8;
+  font-weight: 600;
+  width: 100%;
+  text-align: center;
+}
+
+// ListCardInfo
+
+.item__infoBlock {
+  flex: 0 1 45%;
+  position: relative;
+}
+
+.infoBlock__header {
+  @include flexSpaceBetween;
+  align-items: start;
+  margin-bottom: $mainBigMargin;
+}
+
+.infoBlock__h2 {
+  @include bigFontH2;
+}
+
+.infoBlock__edit {
+  @include fontSize8;
+  cursor: pointer;
+  user-select: none;
+  padding: 15px;
+  margin: -15px;
+}
+
+.infoBlock__rows {
+  @include flexStartColumn;
+  align-items: start;
+  padding: 0 $mainBigMargin;
+}
+
+.infoBlock__row {
+  @include flexSpaceBetween;
+  width: 100%;
+
+  &:not(:last-child) {
+    margin-bottom: $mainMediumMargin;
+  }
+}
+
+.row__field {
+  @include fontSize8;
+  min-width: 45%;
+  max-width: 45%;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.field__link {
+  cursor: pointer;
+  font-weight: 500 !important;
+  padding: $mainSmallPadding;
+  margin: -$mainSmallMargin;
+}
+
+// MEDIA
+
+@media (max-width: 1600px) {
+  .infoBlock__rows {
+    padding: 0 $mainMediumPadding;
+  }
+
+  .infoBlock__row {
+    &:not(:last-child) {
+      margin-bottom: $mainSmallMargin;
+    }
+  }
+
+  .row__field {
+    @include fontSize6;
+  }
+
+  .infoBlock__h2 {
+    @include fontH2;
+  }
+
+  .infoBlock__edit {
+    @include fontSize6;
+  }
+}
+
 @media (max-width: 1140px) {
-  .item__row{
+  .item__row {
     padding: 0 $mainSmallPadding;
   }
 }

@@ -263,57 +263,6 @@
 }
 
 
-// ListCardInfo
-
-.item__infoBlock {
-  flex: 0 1 45%;
-  position: relative;
-}
-
-.infoBlock__header {
-  @include flexSpaceBetween;
-  align-items: start;
-  margin-bottom: $mainBigMargin;
-}
-
-.infoBlock__h2 {
-  @include bigFontH2;
-}
-
-.infoBlock__edit {
-  @include fontSize8;
-  cursor: pointer;
-  user-select: none;
-  padding: 15px;
-  margin: -15px;
-}
-
-.infoBlock__lists {
-  @include flexSpaceBetween;
-  align-items: start;
-  padding: 0 $mainBigMargin;
-}
-
-.infoBlock__list {
-  @include flexStartColumn;
-  flex: 0 1 45%;
-}
-
-.list__field {
-  @include fontSize8;
-
-  &:not(:last-child) {
-    margin-bottom: $mainMediumMargin;
-  }
-}
-
-.field__link{
-  cursor: pointer;
-  font-weight: 500 !important;
-  padding: $mainSmallPadding;
-  margin: -$mainSmallMargin;
-}
-
 // CardInfoModal
 
 .ui__edit{
@@ -335,7 +284,7 @@
   height: 600px;
   border-radius: 20px;
   background-color: $brandColorBlack20;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
   padding: $mainSmallPadding;
 }
 
@@ -404,26 +353,6 @@
 
   .ui__label-prefix {
     @include fontSize5;
-  }
-
-  .infoBlock__lists {
-    padding: 0 $mainMediumPadding;
-  }
-
-  .infoBlock__h2 {
-    @include fontH2;
-  }
-
-  .infoBlock__edit {
-    @include fontSize6;
-  }
-
-  .list__field {
-    @include fontSize6;
-
-    &:not(:last-child) {
-      margin-bottom: $mainSmallMargin;
-    }
   }
 
   .ui__edit-title{

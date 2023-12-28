@@ -25,8 +25,9 @@ const LandList: React.FC = () => {
     // }, [handleOnCurrentLands, isArchivedLand]);
 
     useEffect(() => {
-        landStore.getAllLands(0, 20, ["name"], "asc")
-            .then((data) => "result" in data ? handleOnCurrentLands(data.result) : "")
+        authStore.refreshSession()
+            .then(() => landStore.getAllLands(0, 20, ["name"], "asc")
+                .then((data) => "result" in data ? handleOnCurrentLands(data.result) : ""))
     }, [handleOnCurrentLands]);
 
 
@@ -57,7 +58,7 @@ const LandList: React.FC = () => {
                                        prefixStyle="header__search-text"/>
                 </div>
                 {
-                    currentLands
+                    currentLands && currentLands.length !== 0
                         ?
                         <div className="landList__lands">
                             <table className="lands__table">
@@ -86,14 +87,17 @@ const LandList: React.FC = () => {
                                 </tbody>
                             </table>
                         </div>
-                        : ""
+                        :
+                        <p className="landList__none">
+                            Нет земельных участков
+                        </p>
                 }
                 <div className="landList__pagination">
                     <p className="pagination__objects">
-                        Объектов в списке: N
+                        Объектов в списке: 20
                     </p>
                     <p className="pagination__pages">
-                        Страница: 1 2 ... N
+                        Страница: 1
                     </p>
                 </div>
             </div>

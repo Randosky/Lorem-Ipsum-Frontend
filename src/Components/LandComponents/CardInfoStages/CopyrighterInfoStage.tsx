@@ -2,13 +2,13 @@ import React, {useCallback, useState} from 'react';
 import {ReturnedLandType} from "../../../Types/Land/ReturnedLandType";
 import MyInputWithPrefix from "../../../UI/MyInput/MyInputWithPrefix";
 import ButtonMain from "../../../UI/MyButton/ButtonMain";
+import landStore from "../../../Store/LandStore";
 
 interface CopyrighterInfoStageProps {
     land: ReturnedLandType,
-    handleOnClose: () => void,
 }
 
-const CopyrighterInfoStage: React.FC<CopyrighterInfoStageProps> = ({land, handleOnClose}: CopyrighterInfoStageProps) => {
+const CopyrighterInfoStage: React.FC<CopyrighterInfoStageProps> = ({land}: CopyrighterInfoStageProps) => {
 
     const [landCopyrightHolder, setLandCopyrightHolder] = useState(land.owners[0].name || "");
     const [landCopyrightHolderEmail, setLandCopyrightHolderEmail] = useState(land.owners[0].email || "");
@@ -44,7 +44,14 @@ const CopyrighterInfoStage: React.FC<CopyrighterInfoStageProps> = ({land, handle
                 </li>
             </ul>
             <div className="cardInfo__modal-btn">
-                <ButtonMain handleOnClick={handleOnClose}
+                <ButtonMain handleOnClick={() => landStore.updateOwner(land.owners[0].id, {
+                    name: landCopyrightHolder,
+                    location: land.owners[0].location,
+                    email: landCopyrightHolderEmail,
+                    phone_number: landCopyrightHolderPhone,
+                })
+                    .then(() => landStore.updateIsLandInfoEditClicked(""))
+                    .then(() => window.location.reload())}
                             btnText="Сохранить"/>
             </div>
         </div>

@@ -78,11 +78,13 @@ const EditingPage: React.FC<EditingPageProps> = observer((props: EditingPageProp
                         <li className="editing__list-item">
                             <MyInputWithPrefix pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
                                                type="email" prefixText="E-mail"
+                                               isReadOnly={true}
                                                value={employeeEmail}
                                                handleOnChange={(e) => handleOnEmployeeEmail(e.target.value)}/>
                         </li>
                         <li className="editing__list-item">
                             <MyInputWithPrefix type="tel" prefixText="Телефон"
+                                               placeholder="+70000000000"
                                                value={employeePhone}
                                                handleOnChange={(e) => handleOnEmployeePhone(e.target.value)}/>
                         </li>

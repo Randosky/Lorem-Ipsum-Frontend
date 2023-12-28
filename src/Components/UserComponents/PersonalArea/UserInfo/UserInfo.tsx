@@ -23,36 +23,52 @@ const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
             </h1>
             <div className="userInfo__block">
                 <UserImage styles="userInfo__image" userImageUrl={employeeInfo.s3_avatar_file || ""}/>
-                <div className="userInfo__block-lists">
-                    <ul className="userInfo__block-list">
-                        <li className="userInfo__list-item">ФИО</li>
-                        <li className="userInfo__list-item">E-mail</li>
-                        <li className="userInfo__list-item">Телефон</li>
-                        <li className="userInfo__list-item">Должность</li>
-                        <li className="userInfo__list-item">Отдел</li>
-                        <li className="userInfo__list-item">Руководитель</li>
-                    </ul>
-                    <ul className="userInfo__block-list">
-                        <li className="userInfo__list-item">
+                <div className="userInfo__block-rows">
+                    <div className="userInfo__block-row">
+                        <p className="userInfo__list-item">
+                            ФИО
+                        </p>
+                        <p className="userInfo__list-item">
                             {`${employeeInfo.last_name} ${employeeInfo.first_name} ${employeeInfo.patronymic}`}
-                        </li>
-                        <li className="userInfo__list-item">
-                            <a href={`mailto:${employeeInfo.email}`}>
-                                {employeeInfo.email}
-                            </a>
-                        </li>
-                        <li className="userInfo__list-item">
-                            <a href={`tel:${employeeInfo?.phone_number}`}>
-                                {employeeInfo?.phone_number || "нет данных"}
-                            </a>
-                        </li>
-                        <li className="userInfo__list-item">
+                        </p>
+                    </div>
+                    <div className="userInfo__block-row">
+                        <p className="userInfo__list-item">
+                            E-mail
+                        </p>
+                        <a href={`mailto:${employeeInfo.email}`} className="userInfo__list-item">
+                            {employeeInfo.email}
+                        </a>
+                    </div>
+                    <div className="userInfo__block-row">
+                        <p className="userInfo__list-item">
+                            Телефон
+                        </p>
+                        <a href={`tel:${employeeInfo?.phone_number}`} className="userInfo__list-item">
+                            {employeeInfo?.phone_number || "нет данных"}
+                        </a>
+                    </div>
+                    <div className="userInfo__block-row">
+                        <p className="userInfo__list-item">
+                            Должность
+                        </p>
+                        <p className="userInfo__list-item">
                             {employeeInfo.position?.position_name || "нет данных"}
-                        </li>
-                        <li className="userInfo__list-item">
+                        </p>
+                    </div>
+                    <div className="userInfo__block-row">
+                        <p className="userInfo__list-item">
+                            Отдел
+                        </p>
+                        <p className="userInfo__list-item">
                             {employeeInfo.department?.department_name || "нет данных"}
-                        </li>
-                        <li className="userInfo__list-item">
+                        </p>
+                    </div>
+                    <div className="userInfo__block-row">
+                        <p className="userInfo__list-item">
+                            Руководитель
+                        </p>
+                        <p className="userInfo__list-item">
                             {
                                 employeeInfo.employee_head
                                     ?
@@ -61,8 +77,8 @@ const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
                             ${employeeInfo.employee_head?.patronymic}`
                                     : "нет данных"
                             }
-                        </li>
-                    </ul>
+                        </p>
+                    </div>
                 </div>
                 <div className="userInfo__edit">
                     <ButtonMain

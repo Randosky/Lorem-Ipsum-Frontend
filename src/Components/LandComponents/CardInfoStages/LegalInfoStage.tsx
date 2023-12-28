@@ -4,13 +4,13 @@ import {permittedUseOptions, restrictionsOptions} from "../../../Helpers/LandHel
 import MyInputWithPrefix from "../../../UI/MyInput/MyInputWithPrefix";
 import ButtonMain from "../../../UI/MyButton/ButtonMain";
 import MyMultiplySelectWithPrefix from "../../../UI/MySelect/MyMultiplySelectWithPrefix";
+import landStore from "../../../Store/LandStore";
 
 interface LegalInfoStageProps {
     land: ReturnedLandType,
-    handleOnClose: () => void,
 }
 
-const LegalInfoStage: React.FC<LegalInfoStageProps> = ({land, handleOnClose}: LegalInfoStageProps) => {
+const LegalInfoStage: React.FC<LegalInfoStageProps> = ({land}: LegalInfoStageProps) => {
 
     const [landPermittedUse, setLandPermittedUse] = useState<string[]>([]);
     const [landRestrictions, setLandRestrictions] = useState<string[]>([]);
@@ -58,7 +58,7 @@ const LegalInfoStage: React.FC<LegalInfoStageProps> = ({land, handleOnClose}: Le
                 </li>
             </ul>
             <div className="cardInfo__modal-btn">
-                <ButtonMain handleOnClick={handleOnClose}
+                <ButtonMain handleOnClick={() => landStore.updateIsLandInfoEditClicked("")}
                             btnText="Сохранить"/>
             </div>
         </div>

@@ -3,39 +3,43 @@ import "../../Styles/UI.scss"
 import CloseIcon from "../../Assets/Svg/CloseIcon";
 import MainInfoStage from "../../Components/LandComponents/CardInfoStages/MainInfoStage";
 import LegalInfoStage from "../../Components/LandComponents/CardInfoStages/LegalInfoStage";
-import ObjectsInfoStage from "../../Components/LandComponents/CardInfoStages/ObjectsInfoStage";
+import CreateObjectStage from "../../Components/LandComponents/CardInfoStages/CreateObjectStage";
 import AdditionalInfoStage from "../../Components/LandComponents/CardInfoStages/AdditionalInfoStage";
 import CopyrighterInfoStage from "../../Components/LandComponents/CardInfoStages/CopyrighterInfoStage";
 import TasksInfoStage from "../../Components/LandComponents/CardInfoStages/TasksInfoStage";
-import landStore from "../../Store/LandStore";
 import {ReturnedLandType} from "../../Types/Land/ReturnedLandType";
 import ObjectsListStage from "../../Components/LandComponents/CardInfoStages/ObjectsListStage";
+import {observer} from "mobx-react-lite";
+import landStore from "../../Store/LandStore";
+import ObjectInfoStage from "../../Components/LandComponents/CardInfoStages/ObjectInfoStage";
 
 interface EditCardInfoProps {
     editTitle: string,
-    handleOnClose: () => void,
     land: ReturnedLandType,
+    handleOnClose: () => void,
 }
 
-const CardInfoModal: React.FC<EditCardInfoProps> = (props: EditCardInfoProps) => {
-    const {editTitle, handleOnClose, land} = props
+const CardInfoModal: React.FC<EditCardInfoProps> = observer((props: EditCardInfoProps) => {
+    const {editTitle, land, handleOnClose} = props
 
     const getCurrentEditStage = (title: string, land: ReturnedLandType) => {
         switch (title) {
             case "Редактирование основной информации":
-                return <MainInfoStage land={land} handleOnClose={handleOnClose}/>
+                return <MainInfoStage land={land}/>
             case "Редактирование юридических сведений":
-                return <LegalInfoStage land={land} handleOnClose={handleOnClose}/>
-            case "Создание объекта":
-                return <ObjectsInfoStage land={land} handleOnClose={handleOnClose}/>
+                return <LegalInfoStage land={land}/>
             case "Редактирование дополнительной информации":
-                return <AdditionalInfoStage land={land} handleOnClose={handleOnClose}/>
+                return <AdditionalInfoStage land={land}/>
             case "Редактирование данных о правообладателе":
-                return <CopyrighterInfoStage land={land} handleOnClose={handleOnClose}/>
+                return <CopyrighterInfoStage land={land}/>
             case "Создание задачи":
-                return <TasksInfoStage land={land} handleOnClose={handleOnClose}/>
+                return <TasksInfoStage land={land}/>
+            case "Создание объекта":
+                return <CreateObjectStage land={land}/>
             case "Список объектов":
-                return <ObjectsListStage land={land} handleOnClose={handleOnClose}/>
+                return <ObjectsListStage land={land}/>
+            case "Редактирование объекта":
+                return <ObjectInfoStage land={land}/>
         }
     }
 
@@ -58,6 +62,6 @@ const CardInfoModal: React.FC<EditCardInfoProps> = (props: EditCardInfoProps) =>
             </div>
         </div>
     );
-};
+});
 
 export default CardInfoModal;
