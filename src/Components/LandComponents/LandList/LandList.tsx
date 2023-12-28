@@ -3,17 +3,18 @@ import Header from "../../../UI/Header/Header";
 import "../../../Styles/Land/LandItemStyles.scss"
 import MyInputWithPrefix from "../../../UI/MyInput/MyInputWithPrefix";
 import {useNavigate} from "react-router-dom";
-import {LandCardType} from "../../../Types/Land/LandCardType";
+import {LandListCardType} from "../../../Types/Land/LandListCardType";
 import landStore from "../../../Store/LandStore";
+import authStore from "../../../Store/AuthStore";
 
 const LandList: React.FC = () => {
 
     const [searchLand, setSearchLand] = useState("");
     const [isArchivedLand, setIsArchivedLand] = useState(false);
-    const [currentLands, setCurrentLands] = useState<LandCardType[] | null>(null);
+    const [currentLands, setCurrentLands] = useState<LandListCardType[] | null>(null);
 
 
-    const handleOnCurrentLands = useCallback((e: LandCardType[]) => setCurrentLands(e), [])
+    const handleOnCurrentLands = useCallback((e: LandListCardType[]) => setCurrentLands(e), [])
     const handleOnSearchLand = useCallback((e: string) => setSearchLand(e), [])
     // const handleOnArchived = useCallback(() => {
     //     isArchivedLand
@@ -74,11 +75,11 @@ const LandList: React.FC = () => {
                                     currentLands.map((land, ind) =>
                                         <tr key={ind} className="lands__table-land"
                                             onClick={() => navigate(`/landCard?landCardId=${land.id}`)}>
-                                            <td>{land.status?.status_name}</td>
-                                            <td>{land.stage?.stage_name}</td>
+                                            <td>{land.working_status}</td>
+                                            <td>{land.name}</td>
                                             <td>{land.area_category}</td>
                                             <td>{land.cadastral_number}</td>
-                                            <td>{land.area_square}</td>
+                                            <td>{land.owners[0].name}</td>
                                         </tr>
                                     )
                                 }

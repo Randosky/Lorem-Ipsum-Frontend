@@ -28,21 +28,21 @@ const AdditionalInfoStage: React.FC<AdditionalInfoStageProps> = ({land, handleOn
                     <MyInputWithPrefix inputStyle="landActions__item-input"
                                        prefixText="Наличие инженерных сетей" prefixStyle="landActions__item-prefix"
                                        value={landEngineeringNetwork}
-                                       type="string"
+                                       type="text"
                                        handleOnChange={(e) => handleOnLandEngineeringNetwork(e.target.value)}/>
                 </li>
                 <li className="cardInfo__modal-item">
                     <MyInputWithPrefix inputStyle="landActions__item-input"
                                        prefixText="Наличие транспорта" prefixStyle="landActions__item-prefix"
                                        value={landTransport}
-                                       type="string"
+                                       type="text"
                                        handleOnChange={(e) => handleOnLandTransport(e.target.value)}/>
                 </li>
                 <li className="cardInfo__modal-item">
                     <MyInputWithPrefix inputStyle="landActions__item-input"
                                        prefixText="Экономика" prefixStyle="landActions__item-prefix"
                                        value={landEconomy}
-                                       type="string"
+                                       type="text"
                                        handleOnChange={(e) => handleOnLandEconomy(e.target.value)}/>
                 </li>
             </ul>

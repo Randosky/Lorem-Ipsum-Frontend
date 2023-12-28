@@ -22,8 +22,11 @@ const ListCardInfo: React.FC<ListCardInfoProp> = React.memo((props: ListCardInfo
     const handleOnObjectListClicked = useCallback(() => setObjectListClicked(!objectListClicked), [objectListClicked])
 
     useEffect(() => {
-        editClicked ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'auto'
-    }, [editClicked]);
+        if (editClicked || objectListClicked)
+            document.body.style.overflow = 'hidden'
+        else
+            document.body.style.overflow = 'auto'
+    }, [editClicked, objectListClicked]);
 
     return (
         <div className={`item__infoBlock ${itemBlockStyle}`}>
@@ -66,11 +69,11 @@ const ListCardInfo: React.FC<ListCardInfoProp> = React.memo((props: ListCardInfo
             </div>
             {
                 editClicked ? <CardInfoModal editTitle={getCurrentEditTitle(itemH2)}
-                                            handleOnClose={handleOnEditClicked} land={land}/> : ""
+                                             handleOnClose={handleOnEditClicked} land={land}/> : ""
             }
             {
                 objectListClicked ? <CardInfoModal editTitle={"Список объектов"}
-                                            handleOnClose={handleOnObjectListClicked} land={land}/> : ""
+                                                   handleOnClose={handleOnObjectListClicked} land={land}/> : ""
             }
         </div>
     );

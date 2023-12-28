@@ -5,4 +5,6 @@ export interface MainLandInfoType {
     area_square: number,
     address: string,
     search_channel: string
+    working_status: string
+    stage: string
 }

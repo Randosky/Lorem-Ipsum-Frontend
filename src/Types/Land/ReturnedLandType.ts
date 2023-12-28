@@ -7,16 +7,8 @@ export interface ReturnedLandType {
     search_channel: string,
     id: string,
     entered_at_base: string,
-    working_status_id: string,
-    stage_id: string,
-    stage: {
-        id: string,
-        stage_name: string
-    },
-    status: {
-        id: string,
-        status_name: string
-    },
+    stage: string,
+    working_status: string
     area_buildings: {
         name: string,
         description: string,
@@ -42,5 +34,12 @@ export interface ReturnedLandType {
             last_name: string,
             first_name: string
         }
-    }[]
+    }[],
+    extra_data: {
+        engineering_networks: string,
+        transport: string,
+        result: string,
+        land_area_id: string,
+        id: string,
+    }
 }

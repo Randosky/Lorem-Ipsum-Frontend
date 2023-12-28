@@ -23,7 +23,9 @@ class LandService {
                         "area_category": land.landArea.area_category,
                         "area_square": land.landArea.area_square,
                         "address": land.landArea.address,
-                        "search_channel": land.landArea.search_channel
+                        "search_channel": land.landArea.search_channel,
+                        "working_status": land.landArea.working_status,
+                        "stage": land.landArea.stage,
                     },
                     "area_owners": [
                         {

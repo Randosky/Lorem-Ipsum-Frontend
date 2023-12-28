@@ -40,7 +40,7 @@ const LandCard: React.FC = () => {
                                                   "Статус", "Этап", "Канал поиска"]}
                                               itemListValues={[land.cadastral_number, land.entered_at_base,
                                                   land.area_square.toString(), land.address, land.area_category,
-                                                  land.status?.status_name, land.stage?.stage_name, land.search_channel]}/>
+                                                  land.working_status, land.stage, land.search_channel]}/>
 
                                 <ListCardInfo land={land}
                                               itemBlockStyle="item__legalInfo" itemH2="Юридические сведения"

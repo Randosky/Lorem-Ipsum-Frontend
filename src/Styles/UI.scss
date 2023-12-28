@@ -346,7 +346,9 @@
 }
 
 .ui__edit-title{
-  @include fontH2;
+  @include bigFontH2;
+  font-size: 26px;
+  line-height: 30px;
 }
 
 .ui__edit-close{
@@ -358,6 +360,7 @@
 .ui__edit-editInfo{
   width: 100%;
   flex-grow: 1;
+  overflow-y: auto;
 }
 
 // Media
@@ -421,6 +424,11 @@
     &:not(:last-child) {
       margin-bottom: $mainSmallMargin;
     }
+  }
+
+  .ui__edit-title{
+    @include fontH2;
+    font-weight: 600;
   }
 }
 

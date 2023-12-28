@@ -18,10 +18,10 @@ const AddLand: React.FC = () => {
     const [landCadastrial, setLandCadastrial] = useState("");
     const [landSquare, setLandSquare] = useState("");
     const [landAddress, setLandAddress] = useState("");
-    const [landCopyrightHolder, setLandCopyrightHolder] = useState("");
     const [landCategory, setLandCategory] = useState("");
     const [landObject, setLandObject] = useState<string[]>([]);
     const [landSearchChannel, setLandSearchChannel] = useState("");
+    const [landCopyrightHolder, setLandCopyrightHolder] = useState("");
     const [landCopyrightHolderEmail, setLandCopyrightHolderEmail] = useState("");
     const [landCopyrightHolderPhone, setLandCopyrightHolderPhone] = useState("");
     const [showObjectSelect, setShowObjectSelect] = useState(false);
@@ -36,13 +36,14 @@ const AddLand: React.FC = () => {
 
     const handleOnLandAddress = useCallback((e: string) => setLandAddress(e), [])
 
-    const handleOnLandCopyrightHolder = useCallback((e: string) => setLandCopyrightHolder(e), [])
 
     const handleOnLandCategory = useCallback((e: string) => setLandCategory(e), [])
 
     const handleOnLandObject = useCallback((objects: string[]) => setLandObject(objects), [])
 
     const handleOnLandSearchChannel = useCallback((e: string) => setLandSearchChannel(e), [])
+
+    const handleOnLandCopyrightHolder = useCallback((e: string) => setLandCopyrightHolder(e), [])
 
     const handleOnLandCopyrightHolderEmail = useCallback((e: string) => setLandCopyrightHolderEmail(e), [])
 
@@ -133,7 +134,7 @@ const AddLand: React.FC = () => {
                     </ul>
                 </div>
                 <ButtonMain btnStyle="landActions__button-button"
-                            btnText="Сохранить"
+                            btnText="Добавить"
                             handleOnClick={
                                 () => landStore.saveLand({
                                     landArea: {
@@ -143,6 +144,8 @@ const AddLand: React.FC = () => {
                                         area_square: Number(landSquare),
                                         cadastral_number: landCadastrial,
                                         search_channel: landSearchChannel,
+                                        working_status: "Новый",
+                                        stage: "Поиск",
                                     },
                                     areaOwners: [
                                         {

@@ -3,6 +3,7 @@
 .cardInfo__modal{
   @include flexCenterColumn;
   height: 100%;
+  justify-content: start;
 }
 
 .cardInfo__modal-list{
@@ -60,6 +61,69 @@
   }
 }
 
+// Objects
+
+.cardInfo__modal-objects{
+  width: 100%;
+  padding-right: $mainSmallPadding;
+}
+
+.cardInfo__modal-object{
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid $brandColorBlack100;
+  background: $brandColorBlack20;
+  padding: $mainSmallPadding;
+
+  &:not(:last-child){
+    margin-bottom: $mainMediumMargin;
+  }
+}
+
+.object__header{
+  @include flexSpaceBetween;
+  margin-bottom: $mainSmallMargin;
+}
+
+.object__title{
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.object__close{
+  cursor: pointer;
+  padding: $mainSmallPadding;
+  margin: -$mainSmallMargin;
+}
+
+.object__rows{
+  @include flexStartColumn;
+}
+
+.objects__row{
+  @include flexStart;
+  align-items: start;
+
+  &:not(:last-child){
+    margin-bottom: $mainSmallMargin;
+  }
+}
+
+.object__item{
+  @include fontSize6;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+.object__item-title{
+  min-width: 200px;
+  max-width: 200px;
+  margin-right: $mainMediumMargin;
+}
+
+// MEDIA
+
 @media (max-width: 1600px) {
   .cardInfo__modal-btn{
     button{
@@ -73,6 +137,10 @@
   }
 
   .cardInfo__modal-prefix {
+    @include fontSize5;
+  }
+
+  .object__item{
     @include fontSize5;
   }
 }
