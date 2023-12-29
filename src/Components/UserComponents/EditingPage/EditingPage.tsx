@@ -85,7 +85,7 @@ const EditingPage: React.FC<EditingPageProps> = observer((props: EditingPageProp
                         <li className="editing__list-item">
                             <MyInputWithPrefix type="tel" prefixText="Телефон"
                                                placeholder="+70000000000"
-                                               value={employeePhone}
+                                               value={employeePhone.slice(0, 15)}
                                                handleOnChange={(e) => handleOnEmployeePhone(e.target.value)}/>
                         </li>
                     </ul>

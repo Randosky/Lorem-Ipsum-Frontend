@@ -1,10 +1,10 @@
-const userAPIURL = import.meta.env.VITE_USER_API_KEY
-const userRESTAPIURL = import.meta.env.VITE_USER_REST_API_KEY
+
+const backAPIURL = import.meta.env.VITE_BACKEND_API_KEY
 
 class EmployeeService {
 
     async getEmployeeProfileInfoById(employee_id: string) {
-        return await fetch(`${userAPIURL}/get_employee_profile_by_id`, {
+        return await fetch(`${backAPIURL}/api/v1/usr/get_employee_profile_by_id`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -23,7 +23,7 @@ class EmployeeService {
     }
 
     async getEmployeeProfileInfoByAccessToken() {
-        return await fetch(`${userAPIURL}/get_profile`, {
+        return await fetch(`${backAPIURL}/api/v1/usr/get_profile`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -40,7 +40,7 @@ class EmployeeService {
     }
 
     async getEmployeeProfilePhoto(employee_id: string) {
-        return await fetch(`${userAPIURL}/get_employee_profile_photo`, {
+        return await fetch(`${backAPIURL}/api/v1/usr/get_employee_profile_photo`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -59,7 +59,7 @@ class EmployeeService {
     }
 
     async setEmployeeProfilePhoto(formData: FormData) {
-        return await fetch(`${userRESTAPIURL}/set_profile_avatar`, {
+        return await fetch(`${backAPIURL}/rest/api/v1/usr/set_profile_avatar`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -71,7 +71,7 @@ class EmployeeService {
     }
 
     async updateEmployeeProfileInfo(last_name: string, first_name: string, patronymic: string, phone_number: string) {
-        return await fetch(`${userAPIURL}/update_profile_info`, {
+        return await fetch(`${backAPIURL}/api/v1/usr/update_profile_info`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,

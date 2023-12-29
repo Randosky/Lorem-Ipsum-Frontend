@@ -4,14 +4,12 @@ import {AreaOwnersType} from "../Types/Land/AreaOwnersType";
 import {LandBuildings} from "../Types/Land/LandBuildings";
 import {ExtraDataType} from "../Types/Land/ExtraDataType";
 
-const areaAPIURL = import.meta.env.VITE_AREAS_API_KEY
-const extraDataAPIURL = import.meta.env.VITE_EXTRA_DATA_API_KEY
-
+const backAPIURL = import.meta.env.VITE_BACKEND_API_KEY
 
 class LandService {
 
     async createLand(land: ILandType) {
-        return await fetch(`${areaAPIURL}/create_cadastral_land_area`, {
+        return await fetch(`${backAPIURL}/api/v1/areas/create_cadastral_land_area`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -54,7 +52,7 @@ class LandService {
     }
 
     async getLandById(landId: string) {
-        return await fetch(`${areaAPIURL}/get_land_area`, {
+        return await fetch(`${backAPIURL}/api/v1/areas/get_land_area`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -73,7 +71,7 @@ class LandService {
     }
 
     async getAllLands(offset: number, limit: number, sortParams: string[], order: string) {
-        return await fetch(`${areaAPIURL}/select_land_area`, {
+        return await fetch(`${backAPIURL}/api/v1/areas/select_land_area`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -99,7 +97,7 @@ class LandService {
     }
 
     async updateMainLandInfo(landId: string, landArea: MainLandInfoType) {
-        return await fetch(`${areaAPIURL}/update_cadastral_land_area`, {
+        return await fetch(`${backAPIURL}/api/v1/areas/update_cadastral_land_area`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -128,7 +126,7 @@ class LandService {
     }
 
     async updateOwner(ownerId: string, ownerData: AreaOwnersType) {
-        return await fetch(`${areaAPIURL}/update_owner`, {
+        return await fetch(`${backAPIURL}/api/v1/areas/update_owner`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -153,7 +151,7 @@ class LandService {
     }
 
     async updateBuilding(buildingId: string, buildingData: LandBuildings) {
-        return await fetch(`${areaAPIURL}/update_building`, {
+        return await fetch(`${backAPIURL}/api/v1/areas/update_building`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -177,7 +175,7 @@ class LandService {
     }
 
     async updateExtraData(extraDataId: string, data: ExtraDataType) {
-        return await fetch(`${extraDataAPIURL}/edit_extra_data`, {
+        return await fetch(`${backAPIURL}/api/v1/extra_data/edit_extra_data`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -201,7 +199,7 @@ class LandService {
     }
 
     async createExtraData(landId: string, data: ExtraDataType) {
-        return await fetch(`${extraDataAPIURL}/create_extra_data`, {
+        return await fetch(`${backAPIURL}/api/v1/extra_data/create_extra_data`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,

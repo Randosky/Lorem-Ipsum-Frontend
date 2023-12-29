@@ -17,7 +17,7 @@ import authStore from "../../../Store/AuthStore";
 const AddLand: React.FC = () => {
     const [landTitle, setLandTitle] = useState("");
     const [landCadastrial, setLandCadastrial] = useState("");
-    const [landSquare, setLandSquare] = useState(0);
+    const [landSquare, setLandSquare] = useState("");
     const [landAddress, setLandAddress] = useState("");
     const [landCategory, setLandCategory] = useState("");
     const [landObject, setLandObject] = useState<string[]>([]);
@@ -30,29 +30,34 @@ const AddLand: React.FC = () => {
     const [showChannelSelect, setShowChannelSelect] = useState(false);
 
     const handleOnLandTitle = useCallback((e: string) => setLandTitle(e), [])
-
-    const handleOnLandCadastrial = useCallback((e: string) => setLandCadastrial(e), [])
-
-    const handleOnLandSquare = useCallback((e: number) => setLandSquare(e), [])
-
+    const handleOnLandCadastrial = useCallback((e: string) => {
+        if (!/[a-zA-Zа-яА-Я]/.test(e))
+            setLandCadastrial(e)
+    }, [])
+    const handleOnLandSquare = useCallback((e: string) => setLandSquare(e), [])
     const handleOnLandAddress = useCallback((e: string) => setLandAddress(e), [])
-
-
     const handleOnLandCategory = useCallback((e: string) => setLandCategory(e), [])
-
     const handleOnLandObject = useCallback((objects: string[]) => setLandObject(objects), [])
-
     const handleOnLandSearchChannel = useCallback((e: string) => setLandSearchChannel(e), [])
-
     const handleOnLandCopyrightHolder = useCallback((e: string) => setLandCopyrightHolder(e), [])
-
     const handleOnLandCopyrightHolderEmail = useCallback((e: string) => setLandCopyrightHolderEmail(e), [])
-
     const handleOnLandCopyrightHolderPhone = useCallback((e: string) => setLandCopyrightHolderPhone(e), [])
 
-    const handleOnShowObjectSelect = useCallback((e: boolean) => setShowObjectSelect(e), [])
-    const handleOnShowCategorySelect = useCallback((e: boolean) => setShowCategorySelect(e), [])
-    const handleOnShowChannelSelect = useCallback((e: boolean) => setShowChannelSelect(e), [])
+    const handleOnShowObjectSelect = useCallback((e: boolean) => {
+        setShowCategorySelect(false)
+        setShowChannelSelect(false)
+        setShowObjectSelect(e)
+    }, [])
+    const handleOnShowCategorySelect = useCallback((e: boolean) => {
+        setShowCategorySelect(e)
+        setShowChannelSelect(false)
+        setShowObjectSelect(false)
+    }, [])
+    const handleOnShowChannelSelect = useCallback((e: boolean) => {
+        setShowCategorySelect(false)
+        setShowChannelSelect(e)
+        setShowObjectSelect(false)
+    }, [])
 
     const navigate = useNavigate()
 
@@ -85,7 +90,7 @@ const AddLand: React.FC = () => {
                         <li className="landActions__item">
                             <MyInputWithPrefix prefixText="Площадь (м2)" type="number"
                                                value={landSquare}
-                                               handleOnChange={(e) => handleOnLandSquare(Number(e.target.value))}/>
+                                               handleOnChange={(e) => handleOnLandSquare(e.target.value)}/>
                         </li>
                         <li className="landActions__item"
                             onClick={(e) => e.stopPropagation()}>
@@ -136,7 +141,7 @@ const AddLand: React.FC = () => {
                                                type="tel"
                                                placeholder="+79000000000"
                                                prefixText="Телефон" prefixStyle="landActions__item-prefix"
-                                               value={landCopyrightHolderPhone}
+                                               value={landCopyrightHolderPhone.slice(0, 15)}
                                                handleOnChange={(e) => handleOnLandCopyrightHolderPhone(e.target.value)}/>
                         </li>
                     </ul>
@@ -149,7 +154,7 @@ const AddLand: React.FC = () => {
                                         name: landTitle,
                                         address: landAddress,
                                         area_category: landCategory,
-                                        area_square: landSquare,
+                                        area_square: Number(landSquare),
                                         cadastral_number: landCadastrial,
                                         search_channel: landSearchChannel,
                                         working_status: "Новый",

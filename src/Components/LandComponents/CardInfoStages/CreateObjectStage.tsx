@@ -15,16 +15,13 @@ const CreateObjectStage: React.FC<ObjectsInfoStageProps> = (props: ObjectsInfoSt
 
     const {land} = props
 
-    const [landObjectName, setLandObjectName] = useState<string>("")
-    land.area_buildings[0].name || ""
-    const [landObjectDescription, setLandObjectDescription] = useState<string>("")
-    land.area_buildings[0].description || ""
-    const [landObjectCommissionedYear, setLandObjectCommissionedYear] = useState<number>(new Date().getFullYear())
-    land.area_buildings[0].commissioning_year || new Date().getFullYear()
+    const [landObjectName, setLandObjectName] = useState("")
+    const [landObjectDescription, setLandObjectDescription] = useState("")
+    const [landObjectCommissionedYear, setLandObjectCommissionedYear] = useState("")
 
     const handleOnLandObjectName = useCallback((e: string) => setLandObjectName(e), [])
     const handleOnLandObjectDescription = useCallback((e: string) => setLandObjectDescription(e), [])
-    const handleOnLandObjectCommissionedYear = useCallback((e: number) => setLandObjectCommissionedYear(e), [])
+    const handleOnLandObjectCommissionedYear = useCallback((e: string) => setLandObjectCommissionedYear(e), [])
 
     const [showObjectSelect, setShowObjectSelect] = useState(false);
     const handleOnShowObjectSelect = useCallback((e: boolean) => setShowObjectSelect(e), [])
@@ -49,8 +46,9 @@ const CreateObjectStage: React.FC<ObjectsInfoStageProps> = (props: ObjectsInfoSt
                     <MyInputWithPrefix inputStyle="landActions__item-input"
                                        prefixText="Год введения в эксплуатацию" prefixStyle="landActions__item-prefix"
                                        value={landObjectCommissionedYear}
+                                       placeholder={new Date().getFullYear().toString()}
                                        type="number"
-                                       handleOnChange={(e) => handleOnLandObjectCommissionedYear(Number(e.target.value))}/>
+                                       handleOnChange={(e) => handleOnLandObjectCommissionedYear(e.target.value)}/>
                 </li>
             </ul>
             <div className="cardInfo__modal-btn">

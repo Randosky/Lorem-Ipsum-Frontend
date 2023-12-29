@@ -23,8 +23,14 @@ const LegalInfoStage: React.FC<LegalInfoStageProps> = ({land}: LegalInfoStagePro
     const [showPermittedUseSelect, setShowPermittedUseSelect] = useState(false);
     const [showRestrictionsSelect, setShowRestrictionsSelect] = useState(false);
 
-    const handleOnShowPermittedUseSelect = useCallback((e: boolean) => setShowPermittedUseSelect(e), [])
-    const handleOnShowRestrictionsSelect = useCallback((e: boolean) => setShowRestrictionsSelect(e), [])
+    const handleOnShowPermittedUseSelect = useCallback((e: boolean) => {
+        setShowPermittedUseSelect(e)
+        setShowRestrictionsSelect(false)
+    }, [])
+    const handleOnShowRestrictionsSelect = useCallback((e: boolean) => {
+        setShowPermittedUseSelect(false)
+        setShowRestrictionsSelect(e)
+    }, [])
 
 
     return (

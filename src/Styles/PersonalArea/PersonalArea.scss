@@ -44,7 +44,7 @@
 }
 
 .userInfo__block-row {
-  @include flexSpaceBetween;
+  @include flexStart;
   width: 100%;
 
   &:not(:last-child){
@@ -63,7 +63,8 @@
   }
 
   &:last-child{
-    flex-grow: 1;
+    width: fit-content;
+    word-break: break-word;
   }
 }
 

@@ -34,50 +34,92 @@ class LandStore {
 
     async saveLand(land: ILandType) {
 
-        return await LandService.createLand(land).then(data => data)
+        return await LandService.createLand(land).then(data => {
+            if ("result" in data) {
+                return data
+            }
+
+            alert(data.error.data?.errors[0].msg || data.error.data)
+            return data
+        })
     }
 
     async getLandById(landId: string) {
-        return await LandService.getLandById(landId).then(data => data)
+        return await LandService.getLandById(landId).then(data => {
+            if ("result" in data) {
+                return data
+            }
+
+            alert(data.error.data?.errors[0].msg || data.error.data)
+            return data
+        })
     }
 
     async getAllLands(offset: number, limit: number, sortParams: string[], order: string) {
 
-        return await LandService.getAllLands(offset, limit, sortParams, order).then(data => data)
+        return await LandService.getAllLands(offset, limit, sortParams, order).then(data => {
+            if ("result" in data) {
+                return data
+            }
+
+            alert(data.error.data?.errors[0].msg || data.error.data)
+            return data
+        })
     }
 
     async updateMainLandInfo(landId: string, landArea: MainLandInfoType) {
-        return await LandService.updateMainLandInfo(landId, landArea)
-            .then(data => {
-            })
+        return await LandService.updateMainLandInfo(landId, landArea).then(data => {
+            if ("result" in data) {
+                return data
+            }
+
+            alert(data.error.data?.errors[0].msg || data.error.data)
+            return data
+        })
     }
 
     async updateOwner(ownerId: string, ownerData: AreaOwnersType) {
-        return await LandService.updateOwner(ownerId, ownerData)
-            .then(data => {
+        return await LandService.updateOwner(ownerId, ownerData).then(data => {
+            if ("result" in data) {
+                return data
+            }
 
-            })
+            alert(data.error.data?.errors[0].msg || data.error.data)
+            return data
+        })
     }
 
     async updateBuilding(buildingId: string, buildingData: LandBuildings) {
-        return await LandService.updateBuilding(buildingId, buildingData)
-            .then(data => {
+        return await LandService.updateBuilding(buildingId, buildingData).then(data => {
+            if ("result" in data) {
+                return data
+            }
 
-            })
+            alert(data.error.data?.errors[0].msg || data.error.data)
+            return data
+        })
     }
 
     async updateExtraData(extraDataId: string, data: ExtraDataType) {
-        return await LandService.updateExtraData(extraDataId, data)
-            .then(data => {
+        return await LandService.updateExtraData(extraDataId, data).then(data => {
+            if ("result" in data) {
+                return data
+            }
 
-            })
+            alert(data.error.data?.errors[0].msg || data.error.data)
+            return data
+        })
     }
 
     async createExtraData(landId: string, data: ExtraDataType) {
-        return await LandService.createExtraData(landId, data)
-            .then(data => {
+        return await LandService.createExtraData(landId, data).then(data => {
+            if ("result" in data) {
+                return data
+            }
 
-            })
+            alert(data.error.data?.errors[0].msg || data.error.data)
+            return data
+        })
     }
 }
 

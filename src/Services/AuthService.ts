@@ -1,12 +1,10 @@
-import axios from "axios"
 
-
-const authAPIURL = import.meta.env.VITE_AUTH_API_KEY
+const backAPIURL = import.meta.env.VITE_BACKEND_API_KEY
 
 
 class AuthService {
     async register(email: string, password: string) {
-        return await fetch(`${authAPIURL}/register_user`, {
+        return await fetch(`${backAPIURL}/api/v1/auth/register_user`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -33,7 +31,7 @@ class AuthService {
     }
 
     async authentication(email: string, password: string) {
-        return await fetch(`${authAPIURL}/login_user`, {
+        return await fetch(`${backAPIURL}/api/v1/auth/login_user`, {
             method: "POST",
             credentials: "include",
             headers: {},
@@ -59,7 +57,7 @@ class AuthService {
     }
 
     async refreshSession() {
-        return await fetch(`${authAPIURL}/refresh_session`, {
+        return await fetch(`${backAPIURL}/api/v1/auth/refresh_session`, {
             method: "POST",
             credentials: "include",
             headers: {
@@ -83,7 +81,7 @@ class AuthService {
     }
 
     async logout() {
-        return await fetch(`${authAPIURL}/logout`, {
+        return await fetch(`${backAPIURL}/api/v1/auth/logout`, {
             method: "POST",
             credentials: "include",
             headers: {

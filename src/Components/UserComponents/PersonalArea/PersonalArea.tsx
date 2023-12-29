@@ -41,8 +41,8 @@ const PersonalArea: React.FC = observer(() => {
                                           employeeInfo={employeeActionsStore.currentEmployeeInfo}/>
                                 <Kanban/>
                             </div>
-                        :
-                        <RefreshSession/>
+                        : ""
+                        // <RefreshSession/>
                 }
             </div>
         </main>

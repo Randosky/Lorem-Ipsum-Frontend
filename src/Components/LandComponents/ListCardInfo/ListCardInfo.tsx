@@ -20,8 +20,10 @@ const ListCardInfo: React.FC<ListCardInfoProp> = observer((props: ListCardInfoPr
     useEffect(() => {
         if (landStore.isLandInfoEditClicked || landStore.isObjectEditClicked !== -1 || landStore.isObjectListClicked)
             document.body.style.overflow = 'hidden'
-        else
-            document.body.style.overflow = 'auto'
+        else {
+            document.body.style.overflowX = 'hidden'
+            document.body.style.overflowY = 'auto'
+        }
     }, [landStore.isLandInfoEditClicked, landStore.isObjectEditClicked, landStore.isObjectListClicked]);
 
     return (

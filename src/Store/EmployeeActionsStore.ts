@@ -95,9 +95,17 @@ class EmployeeActionsStore {
 
     async updateEmployeeProfileInfo(fio: string, phone_number: string) {
         const splitedFIO = fio.split(" ")
-        const last_name: string = splitedFIO[0]
-        const first_name: string = splitedFIO[1]
-        const patronymic: string = splitedFIO[2]
+
+        let last_name = ""
+        let first_name = ""
+        let patronymic = ""
+
+        if (splitedFIO.length === 3) {
+            last_name = splitedFIO[0]
+            first_name = splitedFIO[1]
+            patronymic = splitedFIO[2]
+        } else
+            first_name = fio
 
         return await employeeService.updateEmployeeProfileInfo(last_name, first_name, patronymic, phone_number)
             .then(() => this.getEmployeeProfileInfoByAccessToken()

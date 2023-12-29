@@ -1,10 +1,10 @@
 import {TaskType} from "../Types/Tasks/TaskType";
 
-const schedulerAPIURL = import.meta.env.VITE_SCHEDULER_API_KEY
+const backAPIURL = import.meta.env.VITE_BACKEND_API_KEY
 
 class SchedulerService {
     async createLandTask(task: TaskType) {
-        return await fetch(`${schedulerAPIURL}/create_land_area_task`, {
+        return await fetch(`${backAPIURL}/api/v1/scheduler/create_land_area_task`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -30,7 +30,7 @@ class SchedulerService {
     }
 
     async updateLandTask(task: TaskType, taskId: string) {
-        return await fetch(`${schedulerAPIURL}/update_land_area_task`, {
+        return await fetch(`${backAPIURL}/api/v1/scheduler/update_land_area_task`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -58,7 +58,7 @@ class SchedulerService {
     }
 
     async getEmployeeTasks() {
-        return await fetch(`${schedulerAPIURL}/get_employee_tasks`, {
+        return await fetch(`${backAPIURL}/api/v1/scheduler/get_employee_tasks`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,

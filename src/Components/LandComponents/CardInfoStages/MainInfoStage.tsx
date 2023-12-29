@@ -17,11 +17,12 @@ const MainInfoStage: React.FC<MainInfoStageProps> = ({land}: MainInfoStageProps)
     const [landSquare, setLandSquare] = useState(land.area_square || 0);
     const [landAddress, setLandAddress] = useState(land.address || "");
     const [landCategory, setLandCategory] = useState(land.area_category || "");
-    const [showCategorySelect, setShowCategorySelect] = useState(false);
 
     const handleOnLandSquare = useCallback((e: number) => setLandSquare(e), [])
     const handleOnLandAddress = useCallback((e: string) => setLandAddress(e), [])
     const handleOnLandCategory = useCallback((e: string) => setLandCategory(e), [])
+
+    const [showCategorySelect, setShowCategorySelect] = useState(false);
     const handleOnShowCategorySelect = useCallback((e: boolean) => setShowCategorySelect(e), [])
 
     return (

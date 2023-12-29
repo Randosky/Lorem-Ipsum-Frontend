@@ -15,14 +15,15 @@ const ObjectInfoStage: React.FC<ObjectInfoStageProps> = (props: ObjectInfoStageP
     const {land} = props
     const objInd = landStore.isObjectEditClicked
 
-    const [landObjectName, setLandObjectName] = useState<string>(land.area_buildings[objInd].name || "")
-    const [landObjectDescription, setLandObjectDescription] = useState<string>(land.area_buildings[objInd].description || "")
-    const [landObjectCommissionedYear, setLandObjectCommissionedYear] = useState<number>(land.area_buildings[objInd].commissioning_year || new Date().getFullYear())
+    const [landObjectName, setLandObjectName] = useState(land.area_buildings[objInd].name || "")
+    const [landObjectDescription, setLandObjectDescription] = useState(land.area_buildings[objInd].description || "")
+    const [landObjectCommissionedYear, setLandObjectCommissionedYear] =
+        useState(land.area_buildings[objInd].commissioning_year.toString() || "")
 
 
     const handleOnLandObjectName = useCallback((e: string) => setLandObjectName(e), [])
     const handleOnLandObjectDescription = useCallback((e: string) => setLandObjectDescription(e), [])
-    const handleOnLandObjectCommissionedYear = useCallback((e: number) => setLandObjectCommissionedYear(e), [])
+    const handleOnLandObjectCommissionedYear = useCallback((e: string) => setLandObjectCommissionedYear(e), [])
 
     const [showObjectSelect, setShowObjectSelect] = useState(false);
     const handleOnShowObjectSelect = useCallback((e: boolean) => setShowObjectSelect(e), [])
@@ -44,10 +45,11 @@ const ObjectInfoStage: React.FC<ObjectInfoStageProps> = (props: ObjectInfoStageP
                 </li>
                 <li className="cardInfo__modal-item">
                     <MyInputWithPrefix inputStyle="landActions__item-input"
+                                       placeholder={new Date().getFullYear().toString()}
                                        prefixText="Год введения в эксплуатацию" prefixStyle="landActions__item-prefix"
                                        value={landObjectCommissionedYear}
                                        type="number"
-                                       handleOnChange={(e) => handleOnLandObjectCommissionedYear(Number(e.target.value))}/>
+                                       handleOnChange={(e) => handleOnLandObjectCommissionedYear(e.target.value)}/>
                 </li>
             </ul>
             <div className="cardInfo__modal-btn">
@@ -55,7 +57,7 @@ const ObjectInfoStage: React.FC<ObjectInfoStageProps> = (props: ObjectInfoStageP
                     {
                         name: landObjectName,
                         description: landObjectDescription,
-                        commissioning_year: landObjectCommissionedYear,
+                        commissioning_year: Number(landObjectCommissionedYear),
                     })
                     .then(() => landStore.updateIsObjectEditClicked(-1))
                     .then(() => window.location.reload())}
