@@ -11,13 +11,13 @@ class AuthStore {
     }
 
     checkEmailError(email: string) {
-        if (!email.includes("@"))
+        if (!email.includes("@") && email.length !== 0)
             return "Вы ввели неверный формат email-адреса"
         return ""
     }
 
     checkPasswordError(password: string) {
-        if (password.length < 8)
+        if (password.length < 8 && password.length !== 0)
             return "Длина пароля должа быть минимум 8 символов"
     }
 

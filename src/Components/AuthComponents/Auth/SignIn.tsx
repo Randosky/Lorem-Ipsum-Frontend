@@ -27,7 +27,7 @@ const SignIn: React.FC<SignInProps> = observer((props: SignInProps) => {
                 CRM-система Земельного&nbsp;банка
             </h1>
             <div className="auth__login">
-                <MyInputWithPrefix prefixText="Введите логин"
+                <MyInputWithPrefix prefixText="Введите почту"
                                    inputStyle="auth__input"
                                    type="text"
                                    value={currentEmployeeEmail}

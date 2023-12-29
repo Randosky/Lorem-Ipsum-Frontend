@@ -9,9 +9,18 @@ export const categoryOptions = [
     "Земли запаса",
 ]
 export const objectOptions = ["Пустырь", "Дом", "Завод", "Гараж"]
-export const searchChannelOptions = ["Аукцион", "Сторонний источник", "Тест1"]
+export const searchChannelOptions = ["Аукцион", "Сторонний источник"]
 
-export const restrictionsOptions = ["Шлак", "Дом", "Землянка"]
+export const restrictionsOptions = [
+    "Ипотека",
+    "Арест",
+    "Запрет на совершение регистрационных действий",
+    "Рента",
+    "Сервитут",
+    "Аренда",
+    "Доверительное управление",
+    "Право на безвозмездное пользование",
+]
 
 export const permittedUseOptions = [
     "Сельскохозяйственное использование",
