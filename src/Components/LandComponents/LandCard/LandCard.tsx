@@ -17,8 +17,8 @@ const LandCard: React.FC = () => {
 
     useEffect(() => {
         if (landCardId)
-            authStore.refreshSession().then(() => landStore.getLandById(landCardId)
-                .then((data) => "result" in data ? handleOnLand(data.result) : ""))
+            landStore.getLandById(landCardId)
+                .then((data) => "result" in data ? handleOnLand(data.result) : "")
     }, [handleOnLand, landCardId])
 
     return (

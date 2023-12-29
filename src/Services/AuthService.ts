@@ -1,3 +1,4 @@
+
 const backAPIURL = import.meta.env.VITE_BACKEND_API_KEY
 
 
@@ -60,7 +61,7 @@ class AuthService {
             method: "POST",
             credentials: "include",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 "jsonrpc": "2.0",
