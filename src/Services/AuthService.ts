@@ -1,4 +1,3 @@
-
 const backAPIURL = import.meta.env.VITE_BACKEND_API_KEY
 
 
@@ -62,7 +61,6 @@ class AuthService {
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.1.2222.33 Safari/537.36",
             },
             body: JSON.stringify({
                 "jsonrpc": "2.0",
@@ -87,7 +85,6 @@ class AuthService {
             headers: {
                 "Content-Type": "application/json",
                 'Authorization': `${localStorage.getItem("userToken")}`,
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.1.2222.33 Safari/537.36",
             },
             body: JSON.stringify({
                 "jsonrpc": "2.0",
