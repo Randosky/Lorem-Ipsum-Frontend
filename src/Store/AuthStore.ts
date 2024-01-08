@@ -1,5 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import authService from "../Services/AuthService";
+import {logoutRequest} from "../Helpers/RequestRefreshHelper";
 
 class AuthStore {
 
@@ -48,14 +49,7 @@ class AuthStore {
     }
 
     async signOut() {
-        return await authService.logout().then(data => {
-            if ("result" in data) {
-                return true
-            }
-
-            alert(data.error.data?.errors[0].msg || data.error.data)
-            return false
-        })
+        return !!await logoutRequest([])
     }
 
     async refreshSession() {

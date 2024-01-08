@@ -25,7 +25,7 @@ const LandList: React.FC = () => {
 
     useEffect(() => {
         landStore.getAllLands(0, 20, ["name"], "asc")
-            .then((data) => "result" in data ? handleOnCurrentLands(data.result) : "")
+            .then((data) => data ? handleOnCurrentLands(data.result) : window.location.reload())
     }, [handleOnCurrentLands]);
 
 

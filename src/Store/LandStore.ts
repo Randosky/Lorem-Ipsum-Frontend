@@ -9,7 +9,13 @@ import {ExtraDataType} from "../Types/Land/ExtraDataType";
 import {ReturnedAreaOwnersType} from "../Types/Land/ReturnedAreaOwnersType";
 import {ReturnedExtraDataType} from "../Types/Land/ReturnedExtraDataType";
 import {ReturnedBuildingType} from "../Types/Land/ReturnedBuildingType";
-import {createLandRequest} from "../Helpers/RequestRefreshHelper";
+import {
+    createExtraDataRequest,
+    createLandRequest,
+    getAllLandsRequest,
+    getLandByIdRequest, updateBuildingRequest, updateExtraDataRequest,
+    updateMainLandInfoRequest, updateOwnerRequest
+} from "../Helpers/RequestRefreshHelper";
 
 class LandStore {
 
@@ -74,121 +80,108 @@ class LandStore {
     }
 
     async getLandById(landId: string) {
-        return await LandService.getLandById(landId).then(data => {
-            if ("result" in data) {
-                this.updateSelectedLand(data.result)
-                return data
-            }
+        const data = await getLandByIdRequest([landId])
 
-            alert(data.error.data || data.error.data?.errors[0].msg)
+        if (data) {
+            this.updateSelectedLand(data.result)
             return data
-        })
+        }
+
+        return null
     }
 
     async getAllLands(offset: number, limit: number, sortParams: string[], order: string) {
-
-        return await LandService.getAllLands(offset, limit, sortParams, order).then(data => {
-            if ("result" in data) {
-                return data
-            }
-
-            alert(data.error.data || data.error.data?.errors[0].msg)
-            return data
-        })
+        const data = await getAllLandsRequest([offset, limit, sortParams, order])
+        return data ? data : null
     }
 
     async updateMainLandInfo(landId: string, landArea: MainLandInfoType) {
-        return await LandService.updateMainLandInfo(landId, landArea).then(data => {
-            if ("result" in data && this.selectedLand) {
-                this.updateSelectedLandMainInfo({
-                    name: data.result.name,
-                    cadastral_number: data.result.cadastral_number,
-                    area_category: data.result.area_category,
-                    area_square: data.result.area_square,
-                    address: data.result.address,
-                    search_channel: data.result.search_channel,
-                    working_status: data.result.working_status,
-                    stage: data.result.stage,
-                })
-                return data
-            }
+        const data = await updateMainLandInfoRequest([landId, landArea])
 
-            alert(data.error.data || data.error.data?.errors[0].msg)
+        if (data) {
+            this.updateSelectedLandMainInfo({
+                name: data.result.name,
+                cadastral_number: data.result.cadastral_number,
+                area_category: data.result.area_category,
+                area_square: data.result.area_square,
+                address: data.result.address,
+                search_channel: data.result.search_channel,
+                working_status: data.result.working_status,
+                stage: data.result.stage,
+            })
             return data
-        })
+        }
+
+        return null
     }
 
     async updateOwner(ownerId: string, ownerData: AreaOwnersType) {
-        return await LandService.updateOwner(ownerId, ownerData).then(data => {
-            if ("result" in data) {
-                this.updateSelectedLandOwnerInfo({
-                    name: data.result.name,
-                    email: data.result.email,
-                    phone_number: data.result.phone_number,
-                    location: data.result.location,
-                    id: data.result.id,
-                    land_area_id: data.result.land_area_id,
-                })
-                return data
-            }
+        const data = await updateOwnerRequest([ownerId, ownerData])
 
-            alert(data.error.data || data.error.data?.errors[0].msg)
+        if (data) {
+            this.updateSelectedLandOwnerInfo({
+                name: data.result.name,
+                email: data.result.email,
+                phone_number: data.result.phone_number,
+                location: data.result.location,
+                id: data.result.id,
+                land_area_id: data.result.land_area_id,
+            })
             return data
-        })
+        }
+
+        return null
     }
 
     async updateBuilding(buildingId: string, buildingData: LandBuildings) {
-        return await LandService.updateBuilding(buildingId, buildingData).then(data => {
-            if ("result" in data) {
-                this.updateSelectedLandBuildingInfo({
-                    name: data.result.name,
-                    commissioning_year: data.result.commissioning_year,
-                    description: data.result.description,
-                    id: data.result.id,
-                    land_area_id: data.result.land_area_id,
-                })
-                return data
-            }
+        const data = await updateBuildingRequest([buildingId, buildingData])
 
-            alert(data.error.data || data.error.data?.errors[0].msg)
+        if (data) {
+            this.updateSelectedLandBuildingInfo({
+                name: data.result.name,
+                commissioning_year: data.result.commissioning_year,
+                description: data.result.description,
+                id: data.result.id,
+                land_area_id: data.result.land_area_id,
+            })
             return data
-        })
+        }
+
+        return null
     }
 
-    async updateExtraData(extraDataId: string, data: ExtraDataType) {
-        return await LandService.updateExtraData(extraDataId, data).then(data => {
-            if ("result" in data) {
-                this.updateSelectedLandExtraDataInfo({
-                    id: data.result.id,
-                    land_area_id: data.result.land_area_id,
-                    engineering_networks: data.result.engineering_networks,
-                    result: data.result.result,
-                    transport: data.result.transport,
-                })
-                return data
-            }
+    async updateExtraData(extraDataId: string, extraData: ExtraDataType) {
+        const data = await updateExtraDataRequest([extraDataId, extraData])
 
-            alert(data.error.data || data.error.data?.errors[0].msg)
+        if (data) {
+            this.updateSelectedLandExtraDataInfo({
+                id: data.result.id,
+                land_area_id: data.result.land_area_id,
+                engineering_networks: data.result.engineering_networks,
+                result: data.result.result,
+                transport: data.result.transport,
+            })
             return data
-        })
+        }
+
+        return null
     }
 
-    async createExtraData(landId: string, data: ExtraDataType) {
-        return await LandService.createExtraData(landId, data).then(data => {
-            if ("result" in data) {
-                this.updateSelectedLandExtraDataInfo({
-                    id: data.result.id,
-                    land_area_id: data.result.land_area_id,
-                    engineering_networks: data.result.engineering_networks,
-                    result: data.result.result,
-                    transport: data.result.transport,
-                })
-                return data
-            }
+    async createExtraData(landId: string, extraData: ExtraDataType) {
+        const data = await createExtraDataRequest([landId, extraData])
 
-            alert(data.error.data || data.error.data?.errors[0].msg)
+        if (data) {
+            this.updateSelectedLandExtraDataInfo({
+                id: data.result.id,
+                land_area_id: data.result.land_area_id,
+                engineering_networks: data.result.engineering_networks,
+                result: data.result.result,
+                transport: data.result.transport,
+            })
             return data
-        })
+        }
+
+        return null
     }
 }
 

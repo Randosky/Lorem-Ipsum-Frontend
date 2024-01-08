@@ -1,6 +1,13 @@
 import {makeAutoObservable} from "mobx";
 import employeeService from "../Services/EmployeeService";
 import {IEmployeeType} from "../Types/Employee/EmployeeType";
+import {
+    getEmployeeProfileInfoByAccessTokenRequest,
+    getEmployeeProfileInfoByIdRequest,
+    getEmployeeProfilePhotoRequest,
+    setEmployeeProfilePhotoRequest,
+    updateEmployeeProfileInfoRequest
+} from "../Helpers/RequestRefreshHelper";
 
 class EmployeeActionsStore {
 
@@ -15,82 +22,76 @@ class EmployeeActionsStore {
     }
 
     async getEmployeeProfileInfoById(employee_id: string) {
-        return await employeeService.getEmployeeProfileInfoById(employee_id)
-            .then(data => {
-                if ("result" in data)
-                    this.updateCurrentEmployeeInfo({
-                        last_name: data.result.last_name,
-                        first_name: data.result.first_name,
-                        patronymic: data.result.patronymic,
-                        email: data.result.email,
-                        employee_head: data.result.employee_head,
-                        department: data.result.department,
-                        department_id: data.result.department_id,
-                        id: data.result.id,
-                        phone_number: data.result.phone_number,
-                        position: data.result.position,
-                        position_id: data.result.position_id,
-                        s3_avatar_file: data.result.s3_avatar_file,
-                    })
+        const data = await getEmployeeProfileInfoByIdRequest([employee_id])
+        if (data)
+            this.updateCurrentEmployeeInfo({
+                last_name: data.result.last_name,
+                first_name: data.result.first_name,
+                patronymic: data.result.patronymic,
+                email: data.result.email,
+                employee_head: data.result.employee_head,
+                department: data.result.department,
+                department_id: data.result.department_id,
+                id: data.result.id,
+                phone_number: data.result.phone_number,
+                position: data.result.position,
+                position_id: data.result.position_id,
+                s3_avatar_file: data.result.s3_avatar_file,
             })
     }
 
     async getEmployeeProfileInfoByAccessToken() {
-        return await employeeService.getEmployeeProfileInfoByAccessToken()
-            .then(data => {
-                if ("result" in data)
-                    this.updateCurrentEmployeeInfo({
-                        last_name: data.result.last_name,
-                        first_name: data.result.first_name,
-                        patronymic: data.result.patronymic,
-                        email: data.result.email,
-                        employee_head: data.result.employee_head,
-                        department: data.result.department,
-                        department_id: data.result.department_id,
-                        id: data.result.id,
-                        phone_number: data.result.phone_number,
-                        position: data.result.position,
-                        position_id: data.result.position_id,
-                        s3_avatar_file: data.result.s3_avatar_file,
-                    })
-
-                return data
+        const data = await getEmployeeProfileInfoByAccessTokenRequest([])
+        if (data) {
+            this.updateCurrentEmployeeInfo({
+                last_name: data.result.last_name,
+                first_name: data.result.first_name,
+                patronymic: data.result.patronymic,
+                email: data.result.email,
+                employee_head: data.result.employee_head,
+                department: data.result.department,
+                department_id: data.result.department_id,
+                id: data.result.id,
+                phone_number: data.result.phone_number,
+                position: data.result.position,
+                position_id: data.result.position_id,
+                s3_avatar_file: data.result.s3_avatar_file,
             })
+            return data
+        }
+
+        return null
     }
 
     async getEmployeeProfilePhoto(employee_id: string) {
-        return await employeeService.getEmployeeProfilePhoto(employee_id)
-            .then(data => {
-                if ("result" in data && this.currentEmployeeInfo) {
-                    const newInfo: IEmployeeType = {
-                        ...this.currentEmployeeInfo,
-                        s3_avatar_file: data.result.profile_photo_link,
-                    }
+        const data = await getEmployeeProfilePhotoRequest([employee_id])
+        if (data && this.currentEmployeeInfo) {
+            const newInfo: IEmployeeType = {
+                ...this.currentEmployeeInfo,
+                s3_avatar_file: data.result.profile_photo_link,
+            }
 
-                    this.updateCurrentEmployeeInfo(newInfo)
-                }
-            })
+            this.updateCurrentEmployeeInfo(newInfo)
+        }
     }
 
     async setEmployeeProfilePhoto(file: File) {
         const formData = new FormData()
         formData.append("file", file)
 
-        return await employeeService.setEmployeeProfilePhoto(formData)
-            .then(data => {
-                if ("profile_photo_link" in data && this.currentEmployeeInfo) {
-                    const newInfo: IEmployeeType = {
-                        ...this.currentEmployeeInfo,
-                        s3_avatar_file: data.profile_photo_link,
-                    }
+        const data = await setEmployeeProfilePhotoRequest([formData])
+        if ("profile_photo_link" in data && this.currentEmployeeInfo) {
+            const newInfo: IEmployeeType = {
+                ...this.currentEmployeeInfo,
+                s3_avatar_file: data.profile_photo_link,
+            }
 
-                    this.updateCurrentEmployeeInfo(newInfo)
+            this.updateCurrentEmployeeInfo(newInfo)
 
-                    return data.profile_photo_link
-                }
+            return data.profile_photo_link
+        }
 
-                return ""
-            })
+        return ""
     }
 
     async updateEmployeeProfileInfo(fio: string, phone_number: string) {
@@ -107,9 +108,10 @@ class EmployeeActionsStore {
         } else
             first_name = fio
 
-        return await employeeService.updateEmployeeProfileInfo(last_name, first_name, patronymic, phone_number)
-            .then(() => this.getEmployeeProfileInfoByAccessToken()
-                .then((data) => this.getEmployeeProfilePhoto(data.result.id)))
+        const data = await updateEmployeeProfileInfoRequest([last_name, first_name, patronymic, phone_number])
+
+        this.getEmployeeProfileInfoByAccessToken()
+            .then((data) => data ? this.getEmployeeProfilePhoto(data.result.id) : null)
     }
 }
 

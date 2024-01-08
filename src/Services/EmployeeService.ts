@@ -1,9 +1,11 @@
-
 const backAPIURL = import.meta.env.VITE_BACKEND_API_KEY
 
 class EmployeeService {
 
-    async getEmployeeProfileInfoById(employee_id: string) {
+    async getEmployeeProfileInfoById(args: string[]) {
+
+        const employee_id = args[0]
+
         return await fetch(`${backAPIURL}/api/v1/usr/get_employee_profile_by_id`, {
             method: "POST",
             headers: {
@@ -39,7 +41,10 @@ class EmployeeService {
             .then((data) => data);
     }
 
-    async getEmployeeProfilePhoto(employee_id: string) {
+    async getEmployeeProfilePhoto(args: string[]) {
+
+        const employee_id: string = args[0]
+
         return await fetch(`${backAPIURL}/api/v1/usr/get_employee_profile_photo`, {
             method: "POST",
             headers: {
@@ -58,7 +63,10 @@ class EmployeeService {
             .then((data) => data);
     }
 
-    async setEmployeeProfilePhoto(formData: FormData) {
+    async setEmployeeProfilePhoto(args: FormData[]) {
+
+        const formData: FormData = args[0]
+
         return await fetch(`${backAPIURL}/rest/api/v1/usr/set_profile_avatar`, {
             method: "POST",
             headers: {
@@ -70,7 +78,13 @@ class EmployeeService {
             .then((data) => data);
     }
 
-    async updateEmployeeProfileInfo(last_name: string, first_name: string, patronymic: string, phone_number: string) {
+    async updateEmployeeProfileInfo(args: string[]) {
+
+        const last_name: string = args[0]
+        const first_name: string = args[1]
+        const patronymic: string = args[2]
+        const phone_number: string = args[3]
+
         return await fetch(`${backAPIURL}/api/v1/usr/update_profile_info`, {
             method: "POST",
             headers: {

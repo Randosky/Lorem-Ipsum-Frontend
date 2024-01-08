@@ -54,7 +54,10 @@ class LandService {
             .then((data) => data);
     }
 
-    async getLandById(landId: string) {
+    async getLandById(args: string[]) {
+
+        const landId: string = args[0]
+
         return await fetch(`${backAPIURL}/api/v1/areas/get_land_area`, {
             method: "POST",
             headers: {
@@ -73,7 +76,13 @@ class LandService {
             .then((data) => data);
     }
 
-    async getAllLands(offset: number, limit: number, sortParams: string[], order: string) {
+    async getAllLands(args: (number | string[] | string)[]) {
+
+        const offset = args[0];
+        const limit = args[1];
+        const sortParams = args[2];
+        const order = args[3];
+
         return await fetch(`${backAPIURL}/api/v1/areas/select_land_area`, {
             method: "POST",
             headers: {
@@ -99,130 +108,155 @@ class LandService {
             .then((data) => data);
     }
 
-    async updateMainLandInfo(landId: string, landArea: MainLandInfoType) {
-        return await fetch(`${backAPIURL}/api/v1/areas/update_cadastral_land_area`, {
-            method: "POST",
-            headers: {
-                'Authorization': `${localStorage.getItem("userToken")}`,
-            },
-            body: JSON.stringify({
-                "jsonrpc": "2.0",
-                "id": "0",
-                "method": "update_cadastral_land_area",
-                "params": {
-                    "land_area": {
-                        "name": landArea.name,
-                        "cadastral_number": landArea.cadastral_number,
-                        "area_category": landArea.area_category,
-                        "area_square": landArea.area_square,
-                        "address": landArea.address,
-                        "search_channel": landArea.search_channel,
-                        "working_status": landArea.working_status,
-                        "stage": landArea.stage,
-                    },
-                    "land_area_id": landId
-                }
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => data);
-    }
+    async updateMainLandInfo(args: (string | MainLandInfoType)[]) {
 
-    async updateOwner(ownerId: string, ownerData: AreaOwnersType) {
-        return await fetch(`${backAPIURL}/api/v1/areas/update_owner`, {
-            method: "POST",
-            headers: {
-                'Authorization': `${localStorage.getItem("userToken")}`,
-            },
-            body: JSON.stringify({
-                "jsonrpc": "2.0",
-                "id": "0",
-                "method": "update_owner",
-                "params": {
-                    "owner": {
-                        "name": ownerData.name,
-                        "email": ownerData.email,
-                        "phone_number": ownerData.phone_number,
-                        "location": ownerData.location,
-                    },
-                    "owner_id": ownerId
-                }
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => data);
-    }
+        const landId = args[0]
+        const landArea = args[1]
 
-    async updateBuilding(buildingId: string, buildingData: LandBuildings) {
-        return await fetch(`${backAPIURL}/api/v1/areas/update_building`, {
-            method: "POST",
-            headers: {
-                'Authorization': `${localStorage.getItem("userToken")}`,
-            },
-            body: JSON.stringify({
-                "jsonrpc": "2.0",
-                "id": "0",
-                "method": "update_building",
-                "params": {
-                    "building": {
-                        "name": buildingData.name,
-                        "description": buildingData.description,
-                        "commissioning_year": buildingData.commissioning_year,
-                    },
-                    "building_id": buildingId,
-                }
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => data);
-    }
-
-    async updateExtraData(extraDataId: string, data: ExtraDataType) {
-        return await fetch(`${backAPIURL}/api/v1/extra_data/edit_extra_data`, {
-            method: "POST",
-            headers: {
-                'Authorization': `${localStorage.getItem("userToken")}`,
-            },
-            body: JSON.stringify({
-                "jsonrpc": "2.0",
-                "id": "0",
-                "method": "edit_extra_data",
-                "params": {
-                    "data": {
-                        "engineering_networks": data.engineering_networks,
-                        "transport": data.transport,
-                        "result": data.result
-                    },
-                    "id": extraDataId
-                }
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => data);
-    }
-
-    async createExtraData(landId: string, data: ExtraDataType) {
-        return await fetch(`${backAPIURL}/api/v1/extra_data/create_extra_data`, {
-            method: "POST",
-            headers: {
-                'Authorization': `${localStorage.getItem("userToken")}`,
-            },
-            body: JSON.stringify({
-                "jsonrpc": "2.0",
-                "id": "0",
-                "method": "create_extra_data",
-                "params": {
-                    "data": {
-                        "engineering_networks": data.engineering_networks,
-                        "transport": data.transport,
-                        "result": data.result,
+        if (typeof landArea === "object")
+            return await fetch(`${backAPIURL}/api/v1/areas/update_cadastral_land_area`, {
+                method: "POST",
+                headers: {
+                    'Authorization': `${localStorage.getItem("userToken")}`,
+                },
+                body: JSON.stringify({
+                    "jsonrpc": "2.0",
+                    "id": "0",
+                    "method": "update_cadastral_land_area",
+                    "params": {
+                        "land_area": {
+                            "name": landArea.name,
+                            "cadastral_number": landArea.cadastral_number,
+                            "area_category": landArea.area_category,
+                            "area_square": landArea.area_square,
+                            "address": landArea.address,
+                            "search_channel": landArea.search_channel,
+                            "working_status": landArea.working_status,
+                            "stage": landArea.stage,
+                        },
                         "land_area_id": landId
                     }
-                }
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => data);
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => data);
+    }
+
+    async updateOwner(args: (string | AreaOwnersType)[]) {
+
+        const ownerId = args[0]
+        const ownerData = args[1]
+
+        if (typeof ownerData === "object")
+            return await fetch(`${backAPIURL}/api/v1/areas/update_owner`, {
+                method: "POST",
+                headers: {
+                    'Authorization': `${localStorage.getItem("userToken")}`,
+                },
+                body: JSON.stringify({
+                    "jsonrpc": "2.0",
+                    "id": "0",
+                    "method": "update_owner",
+                    "params": {
+                        "owner": {
+                            "name": ownerData.name,
+                            "email": ownerData.email,
+                            "phone_number": ownerData.phone_number,
+                            "location": ownerData.location,
+                        },
+                        "owner_id": ownerId
+                    }
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => data);
+    }
+
+    async updateBuilding(args: (string | LandBuildings)[]) {
+
+        const buildingId = args[0];
+        const buildingData = args[1];
+
+        if (typeof buildingData === "object")
+            return await fetch(`${backAPIURL}/api/v1/areas/update_building`, {
+                method: "POST",
+                headers: {
+                    'Authorization': `${localStorage.getItem("userToken")}`,
+                },
+                body: JSON.stringify({
+                    "jsonrpc": "2.0",
+                    "id": "0",
+                    "method": "update_building",
+                    "params": {
+                        "building": {
+                            "name": buildingData.name,
+                            "description": buildingData.description,
+                            "commissioning_year": buildingData.commissioning_year,
+                        },
+                        "building_id": buildingId,
+                    }
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => data);
+    }
+
+    async updateExtraData(args: (string | ExtraDataType)[]) {
+
+        const extraDataId = args[0]
+        const data = args[1]
+
+        if (typeof data === "object")
+            return await fetch(`${backAPIURL}/api/v1/extra_data/edit_extra_data`, {
+                method: "POST",
+                headers: {
+                    'Authorization': `${localStorage.getItem("userToken")}`,
+                },
+                body: JSON.stringify({
+                    "jsonrpc": "2.0",
+                    "id": "0",
+                    "method": "edit_extra_data",
+                    "params": {
+                        "data": {
+                            "engineering_networks": data.engineering_networks,
+                            "transport": data.transport,
+                            "result": data.result
+                        },
+                        "id": extraDataId
+                    }
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => data);
+    }
+
+    async createExtraData(args: (string | ExtraDataType)[]) {
+
+        const landId = args[0]
+        const data = args[1]
+
+        if (typeof data === "object")
+            return await fetch(`${backAPIURL}/api/v1/extra_data/create_extra_data`, {
+                method: "POST",
+                headers: {
+                    'Authorization': `${localStorage.getItem("userToken")}`,
+                },
+                body: JSON.stringify({
+                    "jsonrpc": "2.0",
+                    "id": "0",
+                    "method": "create_extra_data",
+                    "params": {
+                        "data": {
+                            "engineering_networks": data.engineering_networks,
+                            "transport": data.transport,
+                            "result": data.result,
+                            "land_area_id": landId
+                        }
+                    }
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => data);
     }
 }
 
