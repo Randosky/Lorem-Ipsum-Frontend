@@ -18,8 +18,17 @@ const CopyrighterInfoStage: React.FC<CopyrighterInfoStageProps> = ({land}: Copyr
     const handleOnLandCopyrightHolderEmail = useCallback((e: string) => setLandCopyrightHolderEmail(e), [])
     const handleOnLandCopyrightHolderPhone = useCallback((e: string) => setLandCopyrightHolderPhone(e), [])
 
+    const handleOnSave = () => landStore.updateOwner(land.owners[0].id, {
+        name: landCopyrightHolder,
+        location: land.owners[0].location,
+        email: landCopyrightHolderEmail,
+        phone_number: landCopyrightHolderPhone,
+    })
+        .then(() => landStore.updateIsLandInfoEditClicked(""))
+
     return (
-        <div className="cardInfo__modal">
+        <div className="cardInfo__modal"
+             onKeyDown={(e) => e.key == 'Enter' ? handleOnSave() : ""}>
             <ul className="cardInfo__modal-list">
                 <li className="cardInfo__modal-item">
                     <MyInputWithPrefix inputStyle="landActions__item-input"
@@ -44,15 +53,7 @@ const CopyrighterInfoStage: React.FC<CopyrighterInfoStageProps> = ({land}: Copyr
                 </li>
             </ul>
             <div className="cardInfo__modal-btn">
-                <ButtonMain handleOnClick={() => landStore.updateOwner(land.owners[0].id, {
-                    name: landCopyrightHolder,
-                    location: land.owners[0].location,
-                    email: landCopyrightHolderEmail,
-                    phone_number: landCopyrightHolderPhone,
-                })
-                    .then(() => landStore.updateIsLandInfoEditClicked(""))
-                    .then(() => window.location.reload())}
-                            btnText="Сохранить"/>
+                <ButtonMain handleOnClick={handleOnSave} btnText="Сохранить"/>
             </div>
         </div>
     );

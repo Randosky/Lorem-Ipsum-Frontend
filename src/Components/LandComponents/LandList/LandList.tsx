@@ -5,7 +5,6 @@ import MyInputWithPrefix from "../../../UI/MyInput/MyInputWithPrefix";
 import {useNavigate} from "react-router-dom";
 import {LandListCardType} from "../../../Types/Land/LandListCardType";
 import landStore from "../../../Store/LandStore";
-import authStore from "../../../Store/AuthStore";
 
 const LandList: React.FC = () => {
 
@@ -25,9 +24,8 @@ const LandList: React.FC = () => {
     // }, [handleOnCurrentLands, isArchivedLand]);
 
     useEffect(() => {
-        authStore.refreshSession()
-            .then(() => landStore.getAllLands(0, 20, ["name"], "asc")
-                .then((data) => "result" in data ? handleOnCurrentLands(data.result) : ""))
+        landStore.getAllLands(0, 20, ["name"], "asc")
+            .then((data) => "result" in data ? handleOnCurrentLands(data.result) : "")
     }, [handleOnCurrentLands]);
 
 

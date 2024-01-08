@@ -61,10 +61,6 @@ const AddLand: React.FC = () => {
 
     const navigate = useNavigate()
 
-    useEffect(() => {
-        authStore.refreshSession().then()
-    }, []);
-
     return (
         <main className="landActions"
               onClick={() => {
@@ -176,8 +172,7 @@ const AddLand: React.FC = () => {
                                         },
                                     ],
                                 })
-                                    .then((data) => "result" in data
-                                        ? navigate(`/landCard?landCardId=${data.result.id}`) : "")}/>
+                                    .then((data) => data ? navigate(`/landCard?landCardId=${data.result.id}`) : "")}/>
             </div>
         </main>
     );

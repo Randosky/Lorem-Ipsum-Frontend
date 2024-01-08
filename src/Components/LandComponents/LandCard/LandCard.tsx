@@ -6,20 +6,19 @@ import {useSearchParams} from "react-router-dom";
 import ListCardInfo from "../ListCardInfo/ListCardInfo";
 import {ReturnedLandType} from "../../../Types/Land/ReturnedLandType";
 import authStore from "../../../Store/AuthStore";
+import {observer} from "mobx-react-lite";
 
-const LandCard: React.FC = () => {
+const LandCard: React.FC = observer(() => {
 
     const [params] = useSearchParams()
     const landCardId = params.get("landCardId")
 
-    const [land, setLand] = useState<ReturnedLandType | null>(null);
-    const handleOnLand = useCallback((l: ReturnedLandType) => setLand(l), [])
+    const land = landStore.selectedLand
 
     useEffect(() => {
         if (landCardId)
-            landStore.getLandById(landCardId)
-                .then((data) => "result" in data ? handleOnLand(data.result) : "")
-    }, [handleOnLand, landCardId])
+            landStore.getLandById(landCardId).then()
+    }, [landCardId])
 
     return (
         <main className="landCard">
@@ -87,6 +86,6 @@ const LandCard: React.FC = () => {
             </div>
         </main>
     );
-};
+});
 
 export default LandCard;

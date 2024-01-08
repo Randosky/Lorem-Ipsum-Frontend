@@ -19,7 +19,7 @@ interface EditCardInfoProps {
     handleOnClose: () => void,
 }
 
-const CardInfoModal: React.FC<EditCardInfoProps> = observer((props: EditCardInfoProps) => {
+const CardInfoModal: React.FC<EditCardInfoProps> = (props: EditCardInfoProps) => {
     const {editTitle, land, handleOnClose} = props
 
     const getCurrentEditStage = (title: string, land: ReturnedLandType) => {
@@ -62,6 +62,6 @@ const CardInfoModal: React.FC<EditCardInfoProps> = observer((props: EditCardInfo
             </div>
         </div>
     );
-});
+};
 
 export default CardInfoModal;

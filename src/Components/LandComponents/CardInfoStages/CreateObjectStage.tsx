@@ -26,9 +26,11 @@ const CreateObjectStage: React.FC<ObjectsInfoStageProps> = (props: ObjectsInfoSt
     const [showObjectSelect, setShowObjectSelect] = useState(false);
     const handleOnShowObjectSelect = useCallback((e: boolean) => setShowObjectSelect(e), [])
 
+    const handleOnSave = () => landStore.updateIsLandInfoEditClicked("")
 
     return (
-        <div className="cardInfo__modal" onClick={() => handleOnShowObjectSelect(false)}>
+        <div className="cardInfo__modal" onClick={() => handleOnShowObjectSelect(false)}
+             onKeyDown={(e) => e.key == 'Enter' ? handleOnSave() : ""}>
             <ul className="cardInfo__modal-list">
                 <li className="cardInfo__modal-item" onClick={e => e.stopPropagation()}>
                     <MySelectWithPrefix showSelect={showObjectSelect} selectOptions={objectOptions}
@@ -52,8 +54,7 @@ const CreateObjectStage: React.FC<ObjectsInfoStageProps> = (props: ObjectsInfoSt
                 </li>
             </ul>
             <div className="cardInfo__modal-btn">
-                <ButtonMain handleOnClick={() => landStore.updateIsLandInfoEditClicked("")}
-                            btnText="Создать"/>
+                <ButtonMain handleOnClick={handleOnSave} btnText="Создать"/>
             </div>
         </div>
     )

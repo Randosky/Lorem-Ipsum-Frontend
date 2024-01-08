@@ -8,7 +8,10 @@ const backAPIURL = import.meta.env.VITE_BACKEND_API_KEY
 
 class LandService {
 
-    async createLand(land: ILandType) {
+    async createLand(args: ILandType[]) {
+
+        const land: ILandType = args[0]
+
         return await fetch(`${backAPIURL}/api/v1/areas/create_cadastral_land_area`, {
             method: "POST",
             headers: {

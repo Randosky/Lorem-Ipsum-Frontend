@@ -32,12 +32,13 @@ const LegalInfoStage: React.FC<LegalInfoStageProps> = ({land}: LegalInfoStagePro
         setShowRestrictionsSelect(e)
     }, [])
 
+    const handleOnSave = () => landStore.updateIsLandInfoEditClicked("")
 
     return (
         <div className="cardInfo__modal" onClick={() => {
             handleOnShowPermittedUseSelect(false)
             handleOnShowRestrictionsSelect(false)
-        }}>
+        }} onKeyDown={(e) => e.key == 'Enter' ? handleOnSave() : ""}>
             <ul className="cardInfo__modal-list">
                 <li className="cardInfo__modal-item" onClick={e => e.stopPropagation()}>
                     <MyMultiplySelectWithPrefix showSelect={showPermittedUseSelect}
@@ -64,7 +65,7 @@ const LegalInfoStage: React.FC<LegalInfoStageProps> = ({land}: LegalInfoStagePro
                 </li>
             </ul>
             <div className="cardInfo__modal-btn">
-                <ButtonMain handleOnClick={() => landStore.updateIsLandInfoEditClicked("")}
+                <ButtonMain handleOnClick={handleOnSave}
                             btnText="Сохранить"/>
             </div>
         </div>

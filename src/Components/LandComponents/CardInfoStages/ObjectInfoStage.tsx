@@ -28,8 +28,17 @@ const ObjectInfoStage: React.FC<ObjectInfoStageProps> = (props: ObjectInfoStageP
     const [showObjectSelect, setShowObjectSelect] = useState(false);
     const handleOnShowObjectSelect = useCallback((e: boolean) => setShowObjectSelect(e), [])
 
+    const handleOnSave = () => landStore.updateBuilding(land.area_buildings[objInd].id,
+        {
+            name: landObjectName,
+            description: landObjectDescription,
+            commissioning_year: Number(landObjectCommissionedYear),
+        })
+        .then(() => landStore.updateIsObjectEditClicked(-1))
+
     return (
-        <div className="cardInfo__modal" onClick={() => handleOnShowObjectSelect(false)}>
+        <div className="cardInfo__modal" onClick={() => handleOnShowObjectSelect(false)}
+             onKeyDown={(e) => e.key == 'Enter' ? handleOnSave() : ""}>
             <ul className="cardInfo__modal-list">
                 <li className="cardInfo__modal-item" onClick={e => e.stopPropagation()}>
                     <MySelectWithPrefix showSelect={showObjectSelect} selectOptions={objectOptions}
@@ -53,15 +62,7 @@ const ObjectInfoStage: React.FC<ObjectInfoStageProps> = (props: ObjectInfoStageP
                 </li>
             </ul>
             <div className="cardInfo__modal-btn">
-                <ButtonMain handleOnClick={() => landStore.updateBuilding(land.area_buildings[objInd].id,
-                    {
-                        name: landObjectName,
-                        description: landObjectDescription,
-                        commissioning_year: Number(landObjectCommissionedYear),
-                    })
-                    .then(() => landStore.updateIsObjectEditClicked(-1))
-                    .then(() => window.location.reload())}
-                            btnText="Редактировать"/>
+                <ButtonMain handleOnClick={handleOnSave} btnText="Редактировать"/>
             </div>
         </div>
     );

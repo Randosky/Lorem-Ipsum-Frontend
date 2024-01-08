@@ -14,19 +14,32 @@ interface MainInfoStageProps {
 
 const MainInfoStage: React.FC<MainInfoStageProps> = ({land}: MainInfoStageProps) => {
 
-    const [landSquare, setLandSquare] = useState(land.area_square || 0);
+    const [landSquare, setLandSquare] = useState(land.area_square || "");
     const [landAddress, setLandAddress] = useState(land.address || "");
     const [landCategory, setLandCategory] = useState(land.area_category || "");
 
-    const handleOnLandSquare = useCallback((e: number) => setLandSquare(e), [])
+    const handleOnLandSquare = useCallback((e: string) => setLandSquare(e), [])
     const handleOnLandAddress = useCallback((e: string) => setLandAddress(e), [])
     const handleOnLandCategory = useCallback((e: string) => setLandCategory(e), [])
 
     const [showCategorySelect, setShowCategorySelect] = useState(false);
     const handleOnShowCategorySelect = useCallback((e: boolean) => setShowCategorySelect(e), [])
 
+    const handleOnSave = () => landStore.updateMainLandInfo(land.id, {
+        name: land.name,
+        cadastral_number: land.cadastral_number,
+        area_category: landCategory,
+        area_square: Number(landSquare),
+        address: landAddress,
+        search_channel: land.search_channel,
+        working_status: land.working_status,
+        stage: land.stage,
+    })
+        .then(() => landStore.updateIsLandInfoEditClicked(""))
+
     return (
-        <div className="cardInfo__modal" onClick={() => handleOnShowCategorySelect(false)}>
+        <div className="cardInfo__modal" onClick={() => handleOnShowCategorySelect(false)}
+             onKeyDown={(e) => e.key == 'Enter' ? handleOnSave() : ""}>
             <ul className="cardInfo__modal-list">
                 <li className="cardInfo__modal-item" onClick={e => e.stopPropagation()}>
                     <MySelectWithPrefix showSelect={showCategorySelect}
@@ -39,7 +52,7 @@ const MainInfoStage: React.FC<MainInfoStageProps> = ({land}: MainInfoStageProps)
                 <li className="cardInfo__modal-item">
                     <MyInputWithPrefix prefixText="Площадь" type="number"
                                        value={landSquare}
-                                       handleOnChange={(e) => handleOnLandSquare(Number(e.target.value))}/>
+                                       handleOnChange={(e) => handleOnLandSquare(e.target.value)}/>
                 </li>
                 <li className="cardInfo__modal-item">
                     <MyInputWithPrefix inputStyle="landActions__item-input"
@@ -49,18 +62,7 @@ const MainInfoStage: React.FC<MainInfoStageProps> = ({land}: MainInfoStageProps)
                 </li>
             </ul>
             <div className="cardInfo__modal-btn">
-                <ButtonMain handleOnClick={() => landStore.updateMainLandInfo(land.id, {
-                    name: land.name,
-                    cadastral_number: land.cadastral_number,
-                    area_category: landCategory,
-                    area_square: landSquare,
-                    address: landAddress,
-                    search_channel: land.search_channel,
-                    working_status: land.working_status,
-                    stage: land.stage,
-                })
-                    .then(() => landStore.updateIsLandInfoEditClicked(""))
-                    .then(() => window.location.reload())}
+                <ButtonMain handleOnClick={handleOnSave}
                             btnText="Сохранить"/>
             </div>
         </div>
