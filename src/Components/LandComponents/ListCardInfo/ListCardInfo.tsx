@@ -44,7 +44,7 @@ const ListCardInfo: React.FC<ListCardInfoProp> = observer((props: ListCardInfoPr
                         <div className="infoBlock__row" key={ind}>
                             {
                                 itemH2 === "Информация об объектах" ?
-                                    <p className="row__field field__link"
+                                    <p className="row__field field__objects"
                                        onClick={() => {
                                            landStore.updateIsLandInfoEditClicked("")
                                            landStore.updateIsObjectListClicked()

@@ -69,8 +69,26 @@
   }
 }
 
-@media (max-width: 1140px) {
+@media (max-width: 1184px) {
   .landActions__container {
     padding: $mainMediumPadding $containerSmallPadding;
+  }
+
+  .landActions__title{
+    @include smallFontH1;
+    margin-bottom: $mainMediumMargin;
+  }
+
+  .landActions__lists {
+    padding: 0 $mainMediumPadding;
+  }
+
+  .landActions__item-input{
+    @include fontSize5;
+    height: 40px;
+  }
+
+  .landActions__button-button{
+    @include fontSize5;
   }
 }

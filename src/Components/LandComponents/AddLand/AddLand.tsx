@@ -76,21 +76,25 @@ const AddLand: React.FC = () => {
                 <div className="landActions__lists">
                     <ul className="landActions__list">
                         <li className="landActions__item">
-                            <MyInputWithPrefix prefixText="Название" value={landTitle}
+                            <MyInputWithPrefix inputStyle="landActions__item-input"
+                                               prefixText="Название" value={landTitle}
                                                handleOnChange={(e) => handleOnLandTitle(e.target.value)}/>
                         </li>
                         <li className="landActions__item">
-                            <MyInputWithPrefix prefixText="Кадастровый номер" value={landCadastrial}
+                            <MyInputWithPrefix inputStyle="landActions__item-input"
+                                               prefixText="Кадастровый номер" value={landCadastrial}
                                                handleOnChange={(e) => handleOnLandCadastrial(e.target.value)}/>
                         </li>
                         <li className="landActions__item">
-                            <MyInputWithPrefix prefixText="Площадь (м2)" type="number"
+                            <MyInputWithPrefix inputStyle="landActions__item-input"
+                                               prefixText="Площадь (м2)" type="number"
                                                value={landSquare}
                                                handleOnChange={(e) => handleOnLandSquare(e.target.value)}/>
                         </li>
                         <li className="landActions__item"
                             onClick={(e) => e.stopPropagation()}>
                             <MySelectWithPrefix showSelect={showChannelSelect}
+                                                inputStyle="landActions__item-input"
                                                 prefixText="Канал поиска"
                                                 selectOptions={searchChannelOptions}
                                                 handleOnShowSelect={(e) => handleOnShowChannelSelect(e)}
@@ -107,6 +111,7 @@ const AddLand: React.FC = () => {
                         <li className="landActions__item"
                             onClick={(e) => e.stopPropagation()}>
                             <MySelectWithPrefix showSelect={showCategorySelect}
+                                                inputStyle="landActions__item-input"
                                                 prefixText="Категория"
                                                 selectOptions={categoryOptions}
                                                 handleOnShowSelect={(e) => handleOnShowCategorySelect(e)}
@@ -115,6 +120,7 @@ const AddLand: React.FC = () => {
                         <li className="landActions__item"
                             onClick={(e) => e.stopPropagation()}>
                             <MyMultiplySelectWithPrefix showSelect={showObjectSelect} selectOptions={objectOptions}
+                                                        inputStyle="landActions__item-input"
                                                         handleOnShowSelect={(e) => handleOnShowObjectSelect(e)}
                                                         prefixText="Объект"
                                                         handleOnChangeInputValue={(e) => handleOnLandObject(e)}/>

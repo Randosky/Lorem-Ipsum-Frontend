@@ -9,10 +9,19 @@ interface MyMultiplySelectProps {
     selectOptions: string[],
     prefixText: string,
     inputValue?: string[],
+    inputStyle?: string,
 }
 
 const MyMultiplySelectWithPrefix: React.FC<MyMultiplySelectProps> = (props: MyMultiplySelectProps) => {
-    const {showSelect, handleOnShowSelect, handleOnChangeInputValue, selectOptions, prefixText, inputValue} = props
+    const {
+        showSelect,
+        handleOnShowSelect,
+        handleOnChangeInputValue,
+        selectOptions,
+        prefixText,
+        inputValue,
+        inputStyle
+    } = props
 
     const [inputValueLocal, setInputValueLocal] = useState<string[]>(inputValue || []);
     const handleOnInputValueLocal = useCallback((ind: number) => {
@@ -34,7 +43,7 @@ const MyMultiplySelectWithPrefix: React.FC<MyMultiplySelectProps> = (props: MyMu
     return (
         <div>
             <div onClick={() => handleOnShowSelect(!showSelect)} className="ui__multiply-main">
-                <MyInputWithPrefix inputStyle="ui__multiply-input"
+                <MyInputWithPrefix inputStyle={`ui__multiply-input ${inputStyle}`}
                                    prefixText={prefixText} prefixStyle=""
                                    value={inputValueLocal}
                                    handleOnChange={() => {

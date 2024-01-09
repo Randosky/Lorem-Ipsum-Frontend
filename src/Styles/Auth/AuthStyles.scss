@@ -1,18 +1,18 @@
 @import "../Variables";
 
-.auth{
+.auth {
   background-color: $brandColorBlack100;
   width: 100vw;
   height: 100vh;
   position: relative;
 }
 
-.auth__header{
+.auth__header {
   @include flexCenter;
   padding: $mainBigPadding 0 0 0;
 }
 
-.auth__modal{
+.auth__modal {
   @include flexCenterColumn;
   position: absolute;
   top: 50%;
@@ -25,25 +25,25 @@
   padding: $mainMediumPadding $mainBigPadding;
 }
 
-.auth__title{
+.auth__title {
   @include bigFontH1;
   text-align: center;
   margin-bottom: $mainBigMargin;
 }
 
-.auth__login{
+.auth__login {
   width: 100%;
   position: relative;
   margin-bottom: $mainMediumMargin;
 }
 
-.auth__password{
+.auth__password {
   width: 100%;
   position: relative;
   margin-bottom: $mainBigMargin;
 }
 
-.auth__error{
+.auth__error {
   @include fontSize5;
   position: absolute;
   color: orangered;
@@ -51,77 +51,121 @@
   top: -24px;
 }
 
-.auth__password-visibility{
+.auth__password-visibility {
   position: absolute;
-  bottom: 10px;
+  bottom: calc(25px / 2);
   right: 20px;
   cursor: pointer;
+  width: 25px;
+  height: 25px;
+
+  svg{
+    width: 25px;
+    height: 25px;
+  }
 }
 
-.auth__buttons{
+.auth__buttons {
   @include flexCenterColumn
 }
 
-.auth__buttons-signIn{
+.auth__buttons-signIn {
   @include fontSize8;
   border-radius: 20px;
   padding: 10px $mainBigPadding;
   margin-bottom: $mainSmallMargin;
 }
 
-.auth__buttons-register{
+.auth__buttons-register {
   @include fontSize8;
   border-radius: 20px;
   padding: 10px $mainBigPadding;
   margin-bottom: $mainMediumMargin;
 }
 
-.auth__buttons-text{
+.auth__buttons-text {
   @include fontSize6;
   cursor: pointer;
   user-select: none;
 }
 
 @media (max-width: 1600px) {
-  .auth__modal{
+  .auth__modal {
     width: 500px;
     padding: $mainSmallPadding $mainMediumPadding;
   }
 
-  .auth__header{
+  .auth__header {
     padding: $mainMediumPadding 0 0 0;
   }
 
-  .auth__title{
+  .auth__title {
     @include fontH1;
     margin-bottom: $mainMediumMargin;
   }
 
-  .auth__input{
+  .auth__input {
     height: 40px;
   }
 
-  .auth__password-visibility{
-    bottom: 5px;
+  .auth__password-visibility {
+    bottom: calc(15px / 2);
   }
 
-  .auth__login{
+  .auth__login {
     margin-bottom: $mainMediumMargin;
   }
 
-  .auth__password{
+  .auth__password {
     margin-bottom: $mainMediumMargin;
   }
 
-  .auth__buttons-signIn{
+  .auth__buttons-signIn {
     @include fontSize6;
     padding: 7px $mainMediumPadding;
     margin-bottom: $mainSmallestMargin;
   }
 
-  .auth__buttons-register{
+  .auth__buttons-register {
     @include fontSize6;
     padding: 7px $mainMediumPadding;
     margin-bottom: $mainSmallestMargin;
+  }
+}
+
+@media (max-width: 1184px) {
+  .auth__modal{
+    width: 400px;
+  }
+
+  .auth__title {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: $mainSmallMargin;
+  }
+
+  .auth__input{
+    @include fontSize5;
+    height: 35px;
+  }
+
+  .auth__password-visibility {
+    width: 20px;
+    height: 20px;
+    bottom: calc(15px / 2);
+
+    svg{
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .auth__buttons-signIn, .auth__buttons-register{
+    @include fontSize5;
+    padding: 5px 20px;
+  }
+
+  .auth__buttons-text{
+    @include fontSize5;
   }
 }

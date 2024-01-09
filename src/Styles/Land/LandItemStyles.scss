@@ -106,7 +106,7 @@
     @include fontSize8;
     text-align: center;
     word-break: break-word;
-    padding: $mainBigPadding $mainBigPadding;
+    padding: $mainBigPadding;
   }
 }
 
@@ -152,45 +152,6 @@
 
   &:not(:last-child) {
     margin-bottom: $mainBigMargin;
-  }
-}
-
-
-@media (max-width: 1600px) {
-  .header__title {
-    @include fontH1;
-  }
-
-  .header__archive {
-    @include fontSize5;
-  }
-
-  .header__search {
-    @include fontSize6;
-  }
-
-  .header__label {
-    &::before {
-      right: 15px;
-    }
-  }
-
-  .lands__table {
-    th {
-      @include fontH2;
-    }
-
-    td {
-      @include fontSize6;
-    }
-  }
-
-  .item__title {
-    @include fontH1;
-  }
-
-  .item__row {
-    padding: 0 $mainMediumPadding;
   }
 }
 
@@ -249,16 +210,59 @@
   word-break: break-word;
 }
 
-.field__link {
+.field__objects {
   cursor: pointer;
   font-weight: 500 !important;
   padding: $mainSmallPadding;
   margin: -$mainSmallMargin;
+  min-width: 100%;
+  max-width: 100%;
 }
 
 // MEDIA
 
 @media (max-width: 1600px) {
+
+  .landList__container {
+    padding: $mainBigPadding $containerMediumPadding;
+  }
+
+  .header__title {
+    @include fontH1;
+  }
+
+  .header__archive {
+    @include fontSize5;
+  }
+
+  .header__search {
+    @include fontSize6;
+  }
+
+  .header__label {
+    &::before {
+      right: 15px;
+    }
+  }
+
+  .lands__table {
+    th {
+      @include fontH2;
+    }
+
+    td {
+      @include fontSize6;
+    }
+  }
+
+  .item__title {
+    @include fontH1;
+  }
+
+  .item__row {
+    padding: 0 $mainMediumPadding;
+  }
+
   .infoBlock__rows {
     padding: 0 $mainMediumPadding;
   }
@@ -280,10 +284,94 @@
   .infoBlock__edit {
     @include fontSize6;
   }
+
+  .landCard__container {
+    padding: 0 $containerMediumPadding;
+  }
 }
 
-@media (max-width: 1140px) {
+@media (max-width: 1184px) {
+
+  .landList__container {
+    padding: $mainMediumPadding $containerSmallPadding;
+  }
+
+  .landList__header {
+    margin-bottom: $mainMediumMargin;
+  }
+
+  .header__title {
+    @include smallFontH1;
+  }
+
+  .header__search {
+    @include fontSize5;
+    height: 40px;
+  }
+
+  .landList__lands {
+    margin-bottom: $mainMediumMargin;
+  }
+
+  .lands__table {
+    th {
+      font-size: 18px;
+      line-height: 20px;
+      padding: $mainSmallPadding $mainMediumPadding;
+    }
+
+    td {
+      @include fontSize5;
+      padding: $mainMediumPadding;
+    }
+  }
+
+  .pagination__objects {
+    @include fontSize5;
+  }
+
+  .pagination__pages {
+    @include fontSize5;
+  }
+
+  .landCard__container {
+    padding: 0 $containerSmallPadding;
+  }
+
+  .landCard__item {
+    padding: $mainMediumPadding 0 $mainBigPadding 0;
+  }
+
+  .item__header {
+    margin-bottom: $mainMediumMargin;
+  }
+
+  .item__title {
+    @include smallFontH1;
+  }
+
   .item__row {
     padding: 0 $mainSmallPadding;
+  }
+
+  .item__infoBlock {
+    flex: 0 1 47%;
+  }
+
+  .infoBlock__h2 {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .infoBlock__edit {
+    @include fontSize5;
+  }
+
+  .infoBlock__header {
+    margin-bottom: $mainMediumMargin;
+  }
+
+  .row__field {
+    @include fontSize5;
   }
 }

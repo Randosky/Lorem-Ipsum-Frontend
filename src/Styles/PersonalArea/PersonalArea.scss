@@ -126,12 +126,13 @@
 }
 
 .task__task{
+  @include flexCenter;
   cursor: grab;
   width: 300px;
   height: 100px;
   background-color: white;
   border: 1px solid $brandColorBlack100;
-  padding: 25px;
+  padding: 15px;
   margin-bottom: $mainMediumMargin;
 
   p{
@@ -185,8 +186,48 @@
   }
 }
 
-@media (max-width: 1140px) {
+@media (max-width: 1184px) {
+
+  .personalArea__userInfo{
+    padding: $mainMediumPadding 0;
+    margin-bottom: $mainMediumMargin;
+  }
+
   .personalArea__container{
     padding: 0 $containerSmallPadding;
+  }
+
+  .userInfo__title {
+    @include smallFontH1;
+    margin-bottom: $mainMediumMargin;
+  }
+
+  .userInfo__image{
+    margin-right: $mainBigMargin * 2;
+  }
+
+  .userInfo__list-item{
+    @include fontSize5;
+
+    &:first-child{
+      margin-right: $mainBigMargin;
+    }
+  }
+
+  .userInfo__edit-btn{
+    @include fontSize5;
+  }
+
+  .board__title {
+    width: 150px
+  }
+
+  .task__task{
+    width: 200px;
+    height: 70px;
+
+    p {
+      @include fontSize5;
+    }
   }
 }

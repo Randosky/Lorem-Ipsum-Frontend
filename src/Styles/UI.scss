@@ -191,10 +191,9 @@
     background-size: contain;
     width: 15px;
     height: 15px;
-    right: 25px;
-    bottom: 25px;
+    right: 15px;
+    bottom: calc(35px / 2);
     z-index: 1000000;
-    transform: translate(0, 50%);
   }
 }
 
@@ -248,6 +247,7 @@
   border-radius: 10px;
   cursor: pointer;
   user-select: none;
+  padding: 5px;
 
   &:not(:last-child) {
     margin-bottom: $mainSmallestMargin;
@@ -265,7 +265,7 @@
 
 // CardInfoModal
 
-.ui__edit{
+.ui__edit {
   @include flexCenter;
   position: fixed;
   width: 100vw;
@@ -278,7 +278,7 @@
   right: 0;
 }
 
-.ui__edit-front{
+.ui__edit-front {
   @include flexStartColumn;
   width: 800px;
   height: 600px;
@@ -288,25 +288,25 @@
   padding: $mainSmallPadding;
 }
 
-.ui__edit-header{
+.ui__edit-header {
   @include flexSpaceBetween;
   margin-bottom: $mainBigMargin;
   width: 100%;
 }
 
-.ui__edit-title{
+.ui__edit-title {
   @include bigFontH2;
   font-size: 26px;
   line-height: 30px;
 }
 
-.ui__edit-close{
+.ui__edit-close {
   cursor: pointer;
   padding: 15px;
   margin: -15px;
 }
 
-.ui__edit-editInfo{
+.ui__edit-editInfo {
   width: 100%;
   flex-grow: 1;
   overflow-y: auto;
@@ -316,19 +316,35 @@
 
 
 @media (max-width: 1600px) {
-  .header__button-contrast {
-    height: 38px;
-    width: 38px;
 
-    &::before {
-      height: 24px;
-      width: 24px;
+  .ui__header {
+    height: 80px;
+  }
+
+  .header__container {
+    padding: 0 $containerMediumPadding;
+  }
+
+  .header__left {
+    svg {
+      width: 40px;
+      height: 40px;
     }
   }
 
   .header__left-button {
     @include fontSize6;
-    padding: 6px 25px 6px 45px;
+    padding: 5px 25px 5px 45px;
+  }
+
+  .header__button-contrast {
+    height: 36px;
+    width: 36px;
+
+    &::before {
+      height: 22px;
+      width: 22px;
+    }
   }
 
   .ui__userImage {
@@ -336,7 +352,7 @@
     height: 250px;
   }
 
-  .userImage__image{
+  .userImage__image {
     width: 250px;
     height: 250px;
   }
@@ -355,15 +371,118 @@
     @include fontSize5;
   }
 
-  .ui__edit-title{
+  .ui__edit-title {
     @include fontH2;
     font-weight: 600;
   }
 }
 
-@media (max-width: 1140px) {
+@media (max-width: 1184px) {
 
   .infoBlock__lists {
     padding: 0 $mainSmallPadding;
+  }
+
+  .auth__header {
+    svg {
+      width: 250px;
+    }
+  }
+
+  .ui__userImage {
+    width: 225px;
+    height: 225px;
+  }
+
+  .userImage__image {
+    width: 225px;
+    height: 225px;
+  }
+
+  .ui__header {
+    height: 70px;
+  }
+
+  .header__container {
+    padding: 0 $containerSmallPadding;
+  }
+
+  .header__left {
+    svg {
+      width: 35px;
+      height: 35px;
+      margin-right: $mainMediumMargin;
+    }
+  }
+
+  .header__left-add{
+    margin-right: $mainMediumMargin;
+  }
+
+  .header__left-button{
+    @include fontSize5;
+    padding: 5px 25px 5px 40px;
+
+    &::before{
+      width: 15px;
+      height: 15px;
+      left: 15px;
+    }
+  }
+
+  .header__button-contrast{
+    width: 34px;
+    height: 34px;
+
+    &::before{
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .ui__multiply-main {
+    &::before {
+      bottom: calc(25px / 2);
+    }
+  }
+
+  .ui__multiply-popup {
+    width: 250px;
+  }
+
+  .popup__object {
+    @include fontSize4;
+  }
+
+  .ui__edit-front {
+    width: 650px;
+    height: 500px;
+  }
+
+  .ui__edit-header {
+    margin-bottom: $mainMediumMargin;
+  }
+
+  .ui__edit-title {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .ui__edit-close {
+    svg{
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  .ui__edit-editInfo {
+    width: 100%;
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+
+  .ui__label-input {
+    @include fontSize5;
+    height: 40px;
   }
 }

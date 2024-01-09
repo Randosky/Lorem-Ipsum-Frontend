@@ -145,3 +145,31 @@
     @include fontSize5;
   }
 }
+
+@media (max-width: 1184px) {
+  .object__title{
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .object__edit, .object__close{
+    svg{
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  .objects__row:not(:last-child){
+    margin-bottom: 10px;
+  }
+
+  .cardInfo__modal-btn{
+    button{
+      @include fontSize5;
+    }
+  }
+
+  .cardInfo__modal-textarea{
+    @include fontSize5;
+  }
+}

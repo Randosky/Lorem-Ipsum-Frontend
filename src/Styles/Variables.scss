@@ -141,6 +141,13 @@ $borderRadius20: 20px;
   font-weight: 600;
 }
 
+@mixin smallFontH1{
+  font-size: 22px;
+  line-height: 28px;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
 
 // Display
 
