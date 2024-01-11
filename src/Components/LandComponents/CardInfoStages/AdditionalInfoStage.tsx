@@ -1,7 +1,5 @@
 import React, {useCallback, useState} from 'react';
 import {ReturnedLandType} from "../../../Types/Land/ReturnedLandType";
-import MyMultiplySelectWithPrefix from "../../../UI/MySelect/MyMultiplySelectWithPrefix";
-import {permittedUseOptions, restrictionsOptions} from "../../../Helpers/LandHelper";
 import MyInputWithPrefix from "../../../UI/MyInput/MyInputWithPrefix";
 import ButtonMain from "../../../UI/MyButton/ButtonMain";
 import landStore from "../../../Store/LandStore";
