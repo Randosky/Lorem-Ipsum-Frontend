@@ -6,8 +6,16 @@
   justify-content: start;
 }
 
+.cardInfo__modal-error{
+  color: red;
+  @include fontSize6;
+  position: absolute;
+  top: 55px;
+}
+
 .cardInfo__modal-list{
-  width: 85%;
+  width: 90%;
+  margin-bottom: $mainBigMargin;
 }
 
 .cardInfo__modal-item{
@@ -65,7 +73,7 @@
   padding: $mainSmallPadding;
 
   &:not(:last-child){
-    margin-bottom: $mainMediumMargin;
+    margin-bottom: $mainSmallMargin;
   }
 }
 
@@ -144,6 +152,10 @@
   .object__item{
     @include fontSize5;
   }
+
+  .cardInfo__modal-error{
+    top: 50px;
+  }
 }
 
 @media (max-width: 1184px) {
@@ -171,5 +183,13 @@
 
   .cardInfo__modal-textarea{
     @include fontSize5;
+  }
+
+  .cardInfo__modal-list{
+    margin-bottom: $mainMediumMargin;
+  }
+
+  .cardInfo__modal-error{
+    top: 35px;
   }
 }

@@ -2,6 +2,7 @@ export interface ReturnedLandType {
     name: string,
     cadastral_number: string,
     area_category: string,
+    cadastral_cost: number,
     area_square: number,
     address: string,
     search_channel: string,
@@ -26,6 +27,8 @@ export interface ReturnedLandType {
     }[],
     comments: {
         id: string,
+        comment_text: string,
+        land_area_id: string,
         employee_id: string,
         created_at: string,
         employee: {

@@ -18,7 +18,7 @@ const request = (requestFunction: (args: any[]) => any) => {
             return await authStore.refreshSession().then(() => requestFunction(args))
 
         } else if ("error" in data) {
-            alert(data.error.data?.errors[0].msg || data.error.data)
+            alert(typeof data.error.data === "string" ? data.error.data : data.error.data?.errors[0].msg)
             return null
         }
 
@@ -40,6 +40,11 @@ export const updateOwnerRequest = request(landService.updateOwner)
 export const updateBuildingRequest = request(landService.updateBuilding)
 export const updateExtraDataRequest = request(landService.updateExtraData)
 export const createExtraDataRequest = request(landService.createExtraData)
+export const addObjectRequest = request(landService.addObject)
+export const addOwnerRequest = request(landService.addOwner)
+export const getAreaLegalInfoRequest = request(landService.getAreaLegalInfo)
+export const getLegalOptionsRequest = request(landService.getLegalOptions)
+export const updateAreaLegalInfoRequest = request(landService.updateAreaLegalInfo)
 
 // EMPLOYEE
 

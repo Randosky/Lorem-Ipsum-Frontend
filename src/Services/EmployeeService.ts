@@ -6,7 +6,7 @@ class EmployeeService {
 
         const employee_id = args[0]
 
-        return await fetch(`${backAPIURL}/api/v1/usr/get_employee_profile_by_id`, {
+        return await fetch(`${backAPIURL}/api/v1/employee/get_employee_profile_by_id`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -25,7 +25,7 @@ class EmployeeService {
     }
 
     async getEmployeeProfileInfoByAccessToken() {
-        return await fetch(`${backAPIURL}/api/v1/usr/get_profile`, {
+        return await fetch(`${backAPIURL}/api/v1/employee/get_profile`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -45,7 +45,7 @@ class EmployeeService {
 
         const employee_id: string = args[0]
 
-        return await fetch(`${backAPIURL}/api/v1/usr/get_employee_profile_photo`, {
+        return await fetch(`${backAPIURL}/api/v1/employee/get_employee_profile_photo`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -67,7 +67,7 @@ class EmployeeService {
 
         const formData: FormData = args[0]
 
-        return await fetch(`${backAPIURL}/rest/api/v1/usr/set_profile_avatar`, {
+        return await fetch(`${backAPIURL}/rest/api/v1/employee/set_profile_avatar`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,
@@ -85,7 +85,7 @@ class EmployeeService {
         const patronymic: string = args[2]
         const phone_number: string = args[3]
 
-        return await fetch(`${backAPIURL}/api/v1/usr/update_profile_info`, {
+        return await fetch(`${backAPIURL}/api/v1/employee/update_profile_info`, {
             method: "POST",
             headers: {
                 'Authorization': `${localStorage.getItem("userToken")}`,

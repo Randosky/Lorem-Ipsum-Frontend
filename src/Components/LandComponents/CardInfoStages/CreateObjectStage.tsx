@@ -26,7 +26,11 @@ const CreateObjectStage: React.FC<ObjectsInfoStageProps> = (props: ObjectsInfoSt
     const [showObjectSelect, setShowObjectSelect] = useState(false);
     const handleOnShowObjectSelect = useCallback((e: boolean) => setShowObjectSelect(e), [])
 
-    const handleOnSave = () => landStore.updateIsLandInfoEditClicked("")
+    const handleOnSave = () => landStore.addObject(land.id, {
+        name: landObjectName,
+        description: landObjectDescription,
+        commissioning_year: Number(landObjectCommissionedYear),
+    }).then(() => landStore.updateIsLandInfoEditClicked(""))
 
     return (
         <div className="cardInfo__modal" onClick={() => handleOnShowObjectSelect(false)}

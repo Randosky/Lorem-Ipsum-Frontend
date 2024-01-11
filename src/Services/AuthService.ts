@@ -39,7 +39,7 @@ class AuthService {
                 "method": "login_user",
                 "id": 1,
                 "params": {
-                    "login_data": {
+                    "data": {
                         "email": email,
                         "password": password,
                     },

@@ -25,18 +25,18 @@ class EmployeeActionsStore {
         const data = await getEmployeeProfileInfoByIdRequest([employee_id])
         if (data)
             this.updateCurrentEmployeeInfo({
-                last_name: data.result.last_name,
-                first_name: data.result.first_name,
-                patronymic: data.result.patronymic,
-                email: data.result.email,
-                employee_head: data.result.employee_head,
-                department: data.result.department,
-                department_id: data.result.department_id,
-                id: data.result.id,
-                phone_number: data.result.phone_number,
-                position: data.result.position,
-                position_id: data.result.position_id,
-                s3_avatar_file: data.result.s3_avatar_file,
+                last_name: data.result?.last_name,
+                first_name: data.result?.first_name,
+                patronymic: data.result?.patronymic,
+                email: data.result?.email,
+                employee_head: data.result?.employee_head,
+                department: data.result?.department,
+                department_id: data.result?.department_id,
+                id: data.result?.id,
+                phone_number: data.result?.phone_number,
+                position: data.result?.position,
+                position_id: data.result?.position_id,
+                s3_avatar_file: data.result?.s3_avatar_file,
             })
     }
 
@@ -44,18 +44,18 @@ class EmployeeActionsStore {
         const data = await getEmployeeProfileInfoByAccessTokenRequest([])
         if (data) {
             this.updateCurrentEmployeeInfo({
-                last_name: data.result.last_name,
-                first_name: data.result.first_name,
-                patronymic: data.result.patronymic,
-                email: data.result.email,
-                employee_head: data.result.employee_head,
-                department: data.result.department,
-                department_id: data.result.department_id,
-                id: data.result.id,
-                phone_number: data.result.phone_number,
-                position: data.result.position,
-                position_id: data.result.position_id,
-                s3_avatar_file: data.result.s3_avatar_file,
+                last_name: data.result?.last_name || "",
+                first_name: data.result?.first_name || "",
+                patronymic: data.result?.patronymic || "",
+                email: data.result?.email || "",
+                employee_head: data.result?.employee_head,
+                department: data.result?.department,
+                department_id: data.result?.department_id,
+                id: data.result?.id,
+                phone_number: data.result?.phone_number || "",
+                position: data.result?.position,
+                position_id: data.result?.position_id,
+                s3_avatar_file: data.result?.s3_avatar_file,
             })
             return data
         }
@@ -68,7 +68,7 @@ class EmployeeActionsStore {
         if (data && this.currentEmployeeInfo) {
             const newInfo: IEmployeeType = {
                 ...this.currentEmployeeInfo,
-                s3_avatar_file: data.result.profile_photo_link,
+                s3_avatar_file: data.result?.profile_photo_link,
             }
 
             this.updateCurrentEmployeeInfo(newInfo)
@@ -111,7 +111,7 @@ class EmployeeActionsStore {
         const data = await updateEmployeeProfileInfoRequest([last_name, first_name, patronymic, phone_number])
 
         this.getEmployeeProfileInfoByAccessToken()
-            .then((data) => data ? this.getEmployeeProfilePhoto(data.result.id) : null)
+            .then((data) => data ? this.getEmployeeProfilePhoto(data.result?.id) : null)
     }
 }
 

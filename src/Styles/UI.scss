@@ -280,12 +280,15 @@
 
 .ui__edit-front {
   @include flexStartColumn;
-  width: 800px;
-  height: 600px;
+  width: 750px;
+  min-height: fit-content;
+  max-height: 650px;
+  overflow-y: auto;
   border-radius: 20px;
   background-color: $brandColorBlack20;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
   padding: $mainSmallPadding;
+  position: relative;
 }
 
 .ui__edit-header {
@@ -455,8 +458,9 @@
   }
 
   .ui__edit-front {
-    width: 650px;
-    height: 500px;
+    width: 600px;
+    min-height: fit-content;
+    max-height: 550px;
   }
 
   .ui__edit-header {

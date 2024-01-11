@@ -156,6 +156,7 @@ const AddLand: React.FC = () => {
                                         name: landTitle,
                                         address: landAddress,
                                         area_category: landCategory,
+                                        cadastral_cost: 1,
                                         area_square: Number(landSquare),
                                         cadastral_number: landCadastrial,
                                         search_channel: landSearchChannel,

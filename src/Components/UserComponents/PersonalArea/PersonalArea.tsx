@@ -11,7 +11,7 @@ const PersonalArea: React.FC = observer(() => {
 
     useEffect(() => {
         employeeActionsStore.getEmployeeProfileInfoByAccessToken()
-            .then((data) => data ? employeeActionsStore.getEmployeeProfilePhoto(data.result.id) : null)
+            .then((data) => data ? employeeActionsStore.getEmployeeProfilePhoto(data.result?.id) : null)
     }, [])
 
     const [isEditClicked, setIsEditClicked] = useState(false);

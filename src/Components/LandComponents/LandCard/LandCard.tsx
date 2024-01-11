@@ -14,10 +14,13 @@ const LandCard: React.FC = observer(() => {
     const landCardId = params.get("landCardId")
 
     const land = landStore.selectedLand
+    const landLegalInfoPermittedNames = landStore.selectedLandLegalInfo?.permitted_uses.map(u => u.name).join(", ") || ""
+    const landLegalInfoLimitsNames = landStore.selectedLandLegalInfo?.limits.map(l => l.name).join(", ") || ""
 
     useEffect(() => {
         if (landCardId)
-            landStore.getLandById(landCardId).then()
+            landStore.getLandById(landCardId)
+                .then(() => landStore.getAreaLegalInfo(landCardId))
     }, [landCardId])
 
     return (
@@ -37,10 +40,12 @@ const LandCard: React.FC = observer(() => {
                                 <ListCardInfo land={land}
                                               itemBlockStyle="item__mainInfo" itemH2="Основная информация"
                                               itemListTitles={["Кадастровый номер", "Дата внесения в базу",
+                                                  "Кадастровая стоимость",
                                                   "Площадь (м2)", "Адрес", "Категория",
                                                   "Статус", "Этап", "Канал поиска"]}
                                               itemListValues={[land.cadastral_number,
                                                   land.entered_at_base.slice(0, 10).split("-").reverse().join("."),
+                                                  land.cadastral_cost?.toString(),
                                                   land.area_square.toString(), land.address, land.area_category,
                                                   land.working_status, land.stage, land.search_channel]}/>
 
@@ -49,10 +54,10 @@ const LandCard: React.FC = observer(() => {
                                               itemListTitles={["Количество объектов",
                                                   "Количество собственников",
                                                   "Вид разрешенного использования",
-                                                  "Ограничения и обременения", "Кадастровая стоимость"]}
+                                                  "Ограничения и обременения"]}
                                               itemListValues={[land.area_buildings.length.toString(),
                                                   land.owners.length.toString(),
-                                                  "нет данных", "нет данных", "20"
+                                                  landLegalInfoPermittedNames, landLegalInfoLimitsNames
                                               ]}/>
                             </div>
                             <div className="item__row">

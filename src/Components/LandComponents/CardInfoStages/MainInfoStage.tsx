@@ -17,10 +17,12 @@ const MainInfoStage: React.FC<MainInfoStageProps> = ({land}: MainInfoStageProps)
     const [landSquare, setLandSquare] = useState(land.area_square || "");
     const [landAddress, setLandAddress] = useState(land.address || "");
     const [landCategory, setLandCategory] = useState(land.area_category || "");
+    const [landCost, setLandCost] = useState(land.cadastral_cost || "");
 
     const handleOnLandSquare = useCallback((e: string) => setLandSquare(e), [])
     const handleOnLandAddress = useCallback((e: string) => setLandAddress(e), [])
     const handleOnLandCategory = useCallback((e: string) => setLandCategory(e), [])
+    const handleOnLandCost = useCallback((e: string) => setLandCost(e), [])
 
     const [showCategorySelect, setShowCategorySelect] = useState(false);
     const handleOnShowCategorySelect = useCallback((e: boolean) => setShowCategorySelect(e), [])
@@ -29,6 +31,7 @@ const MainInfoStage: React.FC<MainInfoStageProps> = ({land}: MainInfoStageProps)
         name: land.name,
         cadastral_number: land.cadastral_number,
         area_category: landCategory,
+        cadastral_cost: Number(landCost),
         area_square: Number(landSquare),
         address: landAddress,
         search_channel: land.search_channel,
@@ -59,6 +62,13 @@ const MainInfoStage: React.FC<MainInfoStageProps> = ({land}: MainInfoStageProps)
                                        prefixText="Адрес" prefixStyle="landActions__item-prefix"
                                        value={landAddress}
                                        handleOnChange={(e) => handleOnLandAddress(e.target.value)}/>
+                </li>
+                <li className="cardInfo__modal-item">
+                    <MyInputWithPrefix inputStyle="landActions__item-input"
+                                       prefixText="Кадастровая стоимость" prefixStyle="landActions__item-prefix"
+                                       value={landCost}
+                                       type="number"
+                                       handleOnChange={(e) => handleOnLandCost(e.target.value)}/>
                 </li>
             </ul>
             <div className="cardInfo__modal-btn">
