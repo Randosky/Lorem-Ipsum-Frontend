@@ -46,8 +46,6 @@ const LegalInfoStage: React.FC<LegalInfoStageProps> = React.memo(({land}: LegalI
         landStore.getLegalOptions().then()
     }, []);
 
-    const [errorMsg, setErrorMsg] = useState(false);
-
     const handleOnSave = () => {
         if (landPermittedUse.length !== 0 && landRestrictions.length !== 0) {
             type objType = { name: string, id: string }[]
@@ -61,7 +59,7 @@ const LegalInfoStage: React.FC<LegalInfoStageProps> = React.memo(({land}: LegalI
             landStore.updateAreaLegalInfo(land.id, {
                 limits: landRestrictionsObject,
                 permitted_uses: landPermittedUseObject
-            }).then((result) => result ? landStore.updateIsLandInfoEditClicked("") : setErrorMsg(true))
+            }).then((result) => result ? landStore.updateIsLandInfoEditClicked("") : "")
         }
     }
 
