@@ -1,32 +1,32 @@
 @import "../Variables";
 
-.cardInfo__modal{
+.cardInfo__modal {
   @include flexCenterColumn;
   height: 100%;
   justify-content: start;
 }
 
-.cardInfo__modal-error{
+.cardInfo__modal-error {
   color: red;
   @include fontSize6;
   position: absolute;
   top: 55px;
 }
 
-.cardInfo__modal-list{
+.cardInfo__modal-list {
   width: 90%;
   margin-bottom: $mainBigMargin;
 }
 
-.cardInfo__modal-item{
+.cardInfo__modal-item {
   position: relative;
 
-  &:not(:last-child){
+  &:not(:last-child) {
     margin-bottom: $mainMediumMargin;
   }
 }
 
-.cardInfo__modal-prefix{
+.cardInfo__modal-prefix {
   @include fontSize7;
   width: fit-content;
   word-wrap: break-word;
@@ -35,7 +35,7 @@
   margin-bottom: 10px;
 }
 
-.cardInfo__modal-textarea{
+.cardInfo__modal-textarea {
   @include fontSize8;
   width: 100%;
   border-radius: 20px;
@@ -46,86 +46,91 @@
   resize: none;
 }
 
-.cardInfo__modal-btn{
+.cardInfo__modal-btn {
   @include flexCenter;
   flex-grow: 1;
   width: 100%;
   align-items: end;
   justify-content: end;
 
-  button{
+  button {
     @include fontSize7;
+
+    &:not(:last-child) {
+      margin-right: $mainMediumMargin;
+    }
   }
 }
 
 // Objects
 
-.cardInfo__modal-objects{
+.cardInfo__modal-objects {
   width: 100%;
   padding-right: $mainSmallPadding;
 }
 
-.cardInfo__modal-object{
+.cardInfo__modal-object {
   position: relative;
   border-radius: 20px;
   border: 1px solid $brandColorBlack100;
   background: $brandColorBlack20;
   padding: $mainSmallPadding;
 
-  &:not(:last-child){
+  &:not(:last-child) {
     margin-bottom: $mainSmallMargin;
   }
 }
 
-.object__header{
+.object__header {
   @include flexSpaceBetween;
   margin-bottom: $mainSmallMargin;
 }
 
-.object__title{
+.object__title {
   font-size: 20px;
   line-height: 24px;
   font-weight: 600;
 }
 
-.object__actions{
+.object__actions {
   @include flexStart;
 }
 
-.object__edit{
+.object__edit {
   cursor: pointer;
   margin: -$mainSmallMargin;
   margin-right: $mainSmallMargin;
   padding: $mainSmallPadding 0 $mainSmallPadding $mainSmallPadding;
 }
 
-.object__close{
+.object__close {
   cursor: pointer;
   margin: -$mainSmallMargin;
   margin-left: 0;
   padding: $mainSmallPadding $mainSmallPadding $mainSmallPadding 0;
 }
 
-.object__rows{
+.object__rows {
   @include flexStartColumn;
 }
 
-.objects__row{
+.objects__row {
   @include flexStart;
   align-items: start;
 
-  &:not(:last-child){
-    margin-bottom: $mainSmallMargin;
+  &:not(:last-child) {
+    margin-bottom: 5px;
   }
 }
 
-.object__item{
+.object__item {
   @include fontSize6;
+  color: inherit;
   word-break: break-word;
   word-wrap: break-word;
 }
 
-.object__item-title{
+.object__item-title {
   min-width: 200px;
   max-width: 200px;
   margin-right: $mainMediumMargin;
@@ -134,8 +139,8 @@
 // MEDIA
 
 @media (max-width: 1600px) {
-  .cardInfo__modal-btn{
-    button{
+  .cardInfo__modal-btn {
+    button {
       @include fontSize6;
     }
   }
@@ -149,47 +154,43 @@
     @include fontSize5;
   }
 
-  .object__item{
+  .object__item {
     @include fontSize5;
   }
 
-  .cardInfo__modal-error{
+  .cardInfo__modal-error {
     top: 50px;
   }
 }
 
 @media (max-width: 1184px) {
-  .object__title{
+  .object__title {
     font-size: 18px;
     line-height: 20px;
   }
 
-  .object__edit, .object__close{
-    svg{
+  .object__edit, .object__close {
+    svg {
       width: 15px;
       height: 15px;
     }
   }
 
-  .objects__row:not(:last-child){
-    margin-bottom: 10px;
-  }
-
-  .cardInfo__modal-btn{
-    button{
+  .cardInfo__modal-btn {
+    button {
       @include fontSize5;
     }
   }
 
-  .cardInfo__modal-textarea{
+  .cardInfo__modal-textarea {
     @include fontSize5;
   }
 
-  .cardInfo__modal-list{
+  .cardInfo__modal-list {
     margin-bottom: $mainMediumMargin;
   }
 
-  .cardInfo__modal-error{
+  .cardInfo__modal-error {
     top: 35px;
   }
 }

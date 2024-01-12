@@ -18,13 +18,57 @@ const ListCardInfo: React.FC<ListCardInfoProp> = observer((props: ListCardInfoPr
     const {itemBlockStyle, itemH2, itemListValues, itemListTitles, land} = props
 
     useEffect(() => {
-        if (landStore.isLandInfoEditClicked || landStore.isObjectEditClicked !== -1 || landStore.isObjectListClicked)
+        if (landStore.isLandInfoEditClicked || landStore.isObjectEditClicked !== -1 || landStore.isObjectListClicked
+            || landStore.isCopyrighterListClicked || landStore.isCopyrighterEditClicked !== -1)
             document.body.style.overflow = 'hidden'
         else {
             document.body.style.overflowX = 'hidden'
             document.body.style.overflowY = 'auto'
         }
-    }, [landStore.isLandInfoEditClicked, landStore.isObjectEditClicked, landStore.isObjectListClicked]);
+    }, [landStore.isLandInfoEditClicked, landStore.isObjectEditClicked, landStore.isObjectListClicked,
+        landStore.isCopyrighterListClicked, landStore.isCopyrighterEditClicked]);
+
+    const getEditButtonTitle = () => {
+        switch (itemH2) {
+            case "Информация об объектах":
+                return "Создать объект"
+            case "Данные о правообладателях":
+                return "Добавить правообладателя"
+            default:
+                return "Редактировать"
+        }
+    }
+
+    const getRowField = (title: string) => {
+        switch (itemH2) {
+            case "Информация об объектах":
+                return (
+                    <p className="row__field field__objects"
+                       onClick={() => {
+                           landStore.updateIsLandInfoEditClicked("")
+                           landStore.updateIsObjectListClicked()
+                       }}>
+                        {title}
+                    </p>
+                )
+            case "Данные о правообладателях":
+                return (
+                    <p className="row__field field__objects"
+                       onClick={() => {
+                           landStore.updateIsLandInfoEditClicked("")
+                           landStore.updateIsCopyrighterListClicked()
+                       }}>
+                        {title}
+                    </p>
+                )
+            default:
+                return (
+                    <p className="row__field">
+                        {title}
+                    </p>
+                )
+        }
+    }
 
     return (
         <div className={`item__infoBlock ${itemBlockStyle}`}>
@@ -34,7 +78,7 @@ const ListCardInfo: React.FC<ListCardInfoProp> = observer((props: ListCardInfoPr
                 </h2>
                 <p className="infoBlock__edit" onClick={() => landStore.updateIsLandInfoEditClicked(itemH2)}>
                     {
-                        itemH2 === "Информация об объектах" ? "Создать объект" : "Редактировать"
+                        getEditButtonTitle()
                     }
                 </p>
             </div>
@@ -43,18 +87,7 @@ const ListCardInfo: React.FC<ListCardInfoProp> = observer((props: ListCardInfoPr
                     itemListTitles.map((title, ind) =>
                         <div className="infoBlock__row" key={ind}>
                             {
-                                itemH2 === "Информация об объектах" ?
-                                    <p className="row__field field__objects"
-                                       onClick={() => {
-                                           landStore.updateIsLandInfoEditClicked("")
-                                           landStore.updateIsObjectListClicked()
-                                       }}>
-                                        {title}
-                                    </p>
-                                    :
-                                    <p className="row__field">
-                                        {title}
-                                    </p>
+                                getRowField(title)
                             }
                             <p className="row__field">
                                 {itemListValues[ind]}
@@ -73,6 +106,18 @@ const ListCardInfo: React.FC<ListCardInfoProp> = observer((props: ListCardInfoPr
                 landStore.isObjectEditClicked !== -1 && itemH2 === "Информация об объектах"
                     ? <CardInfoModal editTitle={getCurrentEditTitle("Редактирование объекта")}
                                      handleOnClose={() => landStore.updateIsObjectEditClicked(-1)}
+                                     land={land}/> : ""
+            }
+            {
+                landStore.isCopyrighterListClicked && itemH2 === "Данные о правообладателях"
+                    ? <CardInfoModal editTitle={getCurrentEditTitle("Список правообладателей")}
+                                     handleOnClose={() => landStore.updateIsCopyrighterListClicked()}
+                                     land={land}/> : ""
+            }
+            {
+                landStore.isCopyrighterEditClicked !== -1 && itemH2 === "Данные о правообладателях"
+                    ? <CardInfoModal editTitle={getCurrentEditTitle("Редактирование данных о правообладателе")}
+                                     handleOnClose={() => landStore.updateIsCopyrighterEditClicked(-1)}
                                      land={land}/> : ""
             }
             {

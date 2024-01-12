@@ -62,7 +62,11 @@ const ObjectInfoStage: React.FC<ObjectInfoStageProps> = (props: ObjectInfoStageP
                 </li>
             </ul>
             <div className="cardInfo__modal-btn">
-                <ButtonMain handleOnClick={handleOnSave} btnText="Редактировать"/>
+                <ButtonMain handleOnClick={() => {
+                    landStore.updateIsObjectEditClicked(-1)
+                    landStore.updateIsObjectListClicked()
+                }} btnText="Назад"/>
+                <ButtonMain handleOnClick={handleOnSave} btnText="Сохранить"/>
             </div>
         </div>
     );

@@ -1,32 +1,30 @@
 import React, {useCallback, useState} from 'react';
 import {ReturnedLandType} from "../../../Types/Land/ReturnedLandType";
+import landStore from "../../../Store/LandStore";
 import MyInputWithPrefix from "../../../UI/MyInput/MyInputWithPrefix";
 import ButtonMain from "../../../UI/MyButton/ButtonMain";
-import landStore from "../../../Store/LandStore";
 
-interface CopyrighterInfoStageProps {
+interface CreateCopyrighterStageProps {
     land: ReturnedLandType,
 }
 
-const CopyrighterInfoStage: React.FC<CopyrighterInfoStageProps> = ({land}: CopyrighterInfoStageProps) => {
+const CreateCopyrighterStage: React.FC<CreateCopyrighterStageProps> = ({land}: CreateCopyrighterStageProps) => {
 
-    const ownerInd = landStore.isCopyrighterEditClicked
-
-    const [landCopyrightHolder, setLandCopyrightHolder] = useState(land.owners[ownerInd].name || "");
-    const [landCopyrightHolderEmail, setLandCopyrightHolderEmail] = useState(land.owners[ownerInd].email || "");
-    const [landCopyrightHolderPhone, setLandCopyrightHolderPhone] = useState(land.owners[ownerInd].phone_number || "");
+    const [landCopyrightHolder, setLandCopyrightHolder] = useState("");
+    const [landCopyrightHolderEmail, setLandCopyrightHolderEmail] = useState("");
+    const [landCopyrightHolderPhone, setLandCopyrightHolderPhone] = useState("");
 
     const handleOnLandCopyrightHolder = useCallback((e: string) => setLandCopyrightHolder(e), [])
     const handleOnLandCopyrightHolderEmail = useCallback((e: string) => setLandCopyrightHolderEmail(e), [])
     const handleOnLandCopyrightHolderPhone = useCallback((e: string) => setLandCopyrightHolderPhone(e), [])
 
-    const handleOnSave = () => landStore.updateOwner(land.owners[ownerInd].id, {
+    const handleOnSave = () => landStore.addOwner(land.id, {
         name: landCopyrightHolder,
-        location: land.owners[ownerInd].location,
+        location: "Нет данных",
         email: landCopyrightHolderEmail,
         phone_number: landCopyrightHolderPhone,
     })
-        .then(() => landStore.updateIsCopyrighterEditClicked(-1))
+        .then(() => landStore.updateIsLandInfoEditClicked(""))
 
     return (
         <div className="cardInfo__modal"
@@ -56,14 +54,10 @@ const CopyrighterInfoStage: React.FC<CopyrighterInfoStageProps> = ({land}: Copyr
                 </li>
             </ul>
             <div className="cardInfo__modal-btn">
-                <ButtonMain handleOnClick={() => {
-                    landStore.updateIsCopyrighterEditClicked(-1)
-                    landStore.updateIsCopyrighterListClicked()
-                }} btnText="Назад"/>
-                <ButtonMain handleOnClick={handleOnSave} btnText="Сохранить"/>
+                <ButtonMain handleOnClick={handleOnSave} btnText="Добавить"/>
             </div>
         </div>
     );
 };
 
-export default CopyrighterInfoStage;
+export default CreateCopyrighterStage;

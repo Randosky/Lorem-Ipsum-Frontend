@@ -12,6 +12,8 @@ import ObjectsListStage from "../../Components/LandComponents/CardInfoStages/Obj
 import {observer} from "mobx-react-lite";
 import landStore from "../../Store/LandStore";
 import ObjectInfoStage from "../../Components/LandComponents/CardInfoStages/ObjectInfoStage";
+import CopyrighterListStage from "../../Components/LandComponents/CardInfoStages/CopyrighterListStage";
+import CreateCopyrighterStage from "../../Components/LandComponents/CardInfoStages/CreateCopyrighterStage";
 
 interface EditCardInfoProps {
     editTitle: string,
@@ -30,8 +32,6 @@ const CardInfoModal: React.FC<EditCardInfoProps> = (props: EditCardInfoProps) =>
                 return <LegalInfoStage land={land}/>
             case "Редактирование дополнительной информации":
                 return <AdditionalInfoStage land={land}/>
-            case "Редактирование данных о правообладателе":
-                return <CopyrighterInfoStage land={land}/>
             case "Создание задачи":
                 return <TasksInfoStage land={land}/>
             case "Создание объекта":
@@ -40,6 +40,12 @@ const CardInfoModal: React.FC<EditCardInfoProps> = (props: EditCardInfoProps) =>
                 return <ObjectsListStage land={land}/>
             case "Редактирование объекта":
                 return <ObjectInfoStage land={land}/>
+            case "Добавление правообладателя":
+                return <CreateCopyrighterStage land={land}/>
+            case "Список правообладателей":
+                return <CopyrighterListStage land={land}/>
+            case "Редактирование данных о правообладателе":
+                return <CopyrighterInfoStage land={land}/>
         }
     }
 

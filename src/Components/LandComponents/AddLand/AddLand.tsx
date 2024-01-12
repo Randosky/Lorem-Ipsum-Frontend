@@ -127,14 +127,14 @@ const AddLand: React.FC = () => {
                         </li>
                         <li className="landActions__item">
                             <MyInputWithPrefix inputStyle="landActions__item-input"
-                                               prefixText="Правообладатель" prefixStyle="landActions__item-prefix"
+                                               prefixText="ФИО правообладателя" prefixStyle="landActions__item-prefix"
                                                value={landCopyrightHolder}
                                                handleOnChange={(e) => handleOnLandCopyrightHolder(e.target.value)}/>
                         </li>
                         <li className="landActions__item">
                             <MyInputWithPrefix inputStyle="landActions__item-input"
                                                type="email"
-                                               prefixText="Почта" prefixStyle="landActions__item-prefix"
+                                               prefixText="Почта правообладателя" prefixStyle="landActions__item-prefix"
                                                value={landCopyrightHolderEmail}
                                                handleOnChange={(e) => handleOnLandCopyrightHolderEmail(e.target.value)}/>
                         </li>
@@ -142,7 +142,7 @@ const AddLand: React.FC = () => {
                             <MyInputWithPrefix inputStyle="landActions__item-input"
                                                type="tel"
                                                placeholder="+79000000000"
-                                               prefixText="Телефон" prefixStyle="landActions__item-prefix"
+                                               prefixText="Телефон правообладателя" prefixStyle="landActions__item-prefix"
                                                value={landCopyrightHolderPhone.slice(0, 15)}
                                                handleOnChange={(e) => handleOnLandCopyrightHolderPhone(e.target.value)}/>
                         </li>

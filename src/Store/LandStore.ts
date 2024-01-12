@@ -30,6 +30,8 @@ class LandStore {
 
     isObjectEditClicked: number = -1;
     isObjectListClicked: boolean = false;
+    isCopyrighterEditClicked: number = -1;
+    isCopyrighterListClicked: boolean = false;
     isLandInfoEditClicked: string = "";
     selectedLand: ReturnedLandType | null = null;
     selectedLandLegalInfo: LegalInfoType | null = null;
@@ -93,6 +95,14 @@ class LandStore {
 
     updateIsObjectListClicked() {
         this.isObjectListClicked = !this.isObjectListClicked;
+    }
+
+    updateIsCopyrighterEditClicked(ind: number) {
+        this.isCopyrighterEditClicked = ind
+    }
+
+    updateIsCopyrighterListClicked() {
+        this.isCopyrighterListClicked = !this.isCopyrighterListClicked;
     }
 
     updateIsLandInfoEditClicked(currentInfoEdit: string) {

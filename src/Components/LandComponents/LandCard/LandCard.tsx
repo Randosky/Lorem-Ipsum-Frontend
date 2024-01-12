@@ -66,20 +66,18 @@ const LandCard: React.FC = observer(() => {
                                               itemListTitles={["Открыть список объектов"]}
                                               itemListValues={[""]}/>
                                 <ListCardInfo land={land}
+                                              itemBlockStyle="item__copyrightInfo" itemH2="Данные о правообладателях"
+                                              itemListTitles={["Открыть список правообладателей"]}
+                                              itemListValues={[""]}/>
+                            </div>
+                            <div className="item__row">
+                                <ListCardInfo land={land}
                                               itemBlockStyle="item__additionalInfo" itemH2="Дополнительная информация"
                                               itemListTitles={["Наличие инженерных сетей",
                                                   "Наличие транспорта", "Экономика"]}
                                               itemListValues={[`${land.extra_data?.engineering_networks || "нет данных"}`,
                                                   `${land.extra_data?.transport || "нет данных"}`,
                                                   `${land.extra_data?.result || "нет данных"}`,]}/>
-                            </div>
-                            <div className="item__row">
-                                <ListCardInfo land={land}
-                                              itemBlockStyle="item__copyrightInfo" itemH2="Данные о правообладателе"
-                                              itemListTitles={["Правообладатель",
-                                                  "Почта", "Телефон"]}
-                                              itemListValues={[land.owners[0].name,
-                                                  land.owners[0].email, land.owners[0].phone_number]}/>
                                 <ListCardInfo land={land}
                                               itemBlockStyle="item__tasks" itemH2="Задачи"
                                               itemListTitles={["Завершено"]}
