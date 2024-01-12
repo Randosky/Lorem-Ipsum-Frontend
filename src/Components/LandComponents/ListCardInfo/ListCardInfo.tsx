@@ -17,17 +17,6 @@ interface ListCardInfoProp {
 const ListCardInfo: React.FC<ListCardInfoProp> = observer((props: ListCardInfoProp) => {
     const {itemBlockStyle, itemH2, itemListValues, itemListTitles, land} = props
 
-    useEffect(() => {
-        if (landStore.isLandInfoEditClicked || landStore.isObjectEditClicked !== -1 || landStore.isObjectListClicked
-            || landStore.isCopyrighterListClicked || landStore.isCopyrighterEditClicked !== -1)
-            document.body.style.overflow = 'hidden'
-        else {
-            document.body.style.overflowX = 'hidden'
-            document.body.style.overflowY = 'auto'
-        }
-    }, [landStore.isLandInfoEditClicked, landStore.isObjectEditClicked, landStore.isObjectListClicked,
-        landStore.isCopyrighterListClicked, landStore.isCopyrighterEditClicked]);
-
     const getEditButtonTitle = () => {
         switch (itemH2) {
             case "Информация об объектах":

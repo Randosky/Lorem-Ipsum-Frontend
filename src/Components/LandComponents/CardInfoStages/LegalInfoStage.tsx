@@ -79,6 +79,7 @@ const LegalInfoStage: React.FC<LegalInfoStageProps> = React.memo(({land}: LegalI
             <ul className="cardInfo__modal-list">
                 <li className="cardInfo__modal-item" onClick={e => e.stopPropagation()}>
                     <MyMultiplySelectWithPrefix showSelect={showPermittedUseSelect}
+                                                popupStyle="cardInfo__modal-popup1"
                                                 prefixText="Вид разрешенного использования"
                                                 inputValue={landPermittedUse}
                                                 selectOptions={permittedUseOptions}
@@ -88,6 +89,7 @@ const LegalInfoStage: React.FC<LegalInfoStageProps> = React.memo(({land}: LegalI
                 <li className="cardInfo__modal-item" onClick={e => e.stopPropagation()}>
                     <MyMultiplySelectWithPrefix showSelect={showRestrictionsSelect}
                                                 prefixText="Ограничения и обременения"
+                                                popupStyle="cardInfo__modal-popup2"
                                                 inputValue={landRestrictions}
                                                 selectOptions={restrictionsOptions}
                                                 handleOnShowSelect={(e) => handleOnShowRestrictionsSelect(e)}

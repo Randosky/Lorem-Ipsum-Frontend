@@ -2,6 +2,7 @@ import authStore from "../Store/AuthStore";
 import landService from "../Services/LandService";
 import authService from "../Services/AuthService";
 import employeeService from "../Services/EmployeeService";
+import schedulerService from "../Services/SchedulerService";
 
 const request = (requestFunction: (args: any[]) => any) => {
     return async (args: any[]) => {
@@ -15,8 +16,16 @@ const request = (requestFunction: (args: any[]) => any) => {
             data.error.data.toLowerCase().includes("token")
         )) {
             // console.log("рефреш")
-            return await authStore.refreshSession().then(() => requestFunction(args))
-
+            return await authStore.refreshSession().then((data) => {
+                if ("error" in data && typeof data.error.data === "string" && (
+                    data.error.data.toLowerCase().includes("user") ||
+                    data.error.data.toLowerCase().includes("agent") ||
+                    data.error.data.toLowerCase().includes("incorrect")
+                ))
+                    alert("Похоже ваш user-agent некорректный. Пожалуйста нажмите на кнопку выхода и повторно авторизуйтесь")
+                else
+                    requestFunction(args)
+            })
         } else if ("error" in data) {
             alert(typeof data.error.data === "string" ? data.error.data : data.error.data?.errors[0].msg)
             return null
@@ -53,3 +62,15 @@ export const getEmployeeProfileInfoByAccessTokenRequest = request(employeeServic
 export const getEmployeeProfilePhotoRequest = request(employeeService.getEmployeeProfilePhoto)
 export const setEmployeeProfilePhotoRequest = request(employeeService.setEmployeeProfilePhoto)
 export const updateEmployeeProfileInfoRequest = request(employeeService.updateEmployeeProfileInfo)
+
+// SCHEDULER
+
+export const createLandTaskRequest = request(schedulerService.createLandTask)
+export const updateLandTaskRequest = request(schedulerService.updateLandTask)
+export const getEmployeeTasksRequest = request(schedulerService.getEmployeeTasks)
+export const getAreaTasksRequest = request(schedulerService.getAreaTasks)
+export const getAreaTaskByIdRequest = request(schedulerService.getAreaTaskById)
+export const changeTaskStatusRequest = request(schedulerService.changeTaskStatus)
+export const deleteLandTaskRequest = request(schedulerService.deleteLandTask)
+export const addTaskCommentRequest = request(schedulerService.addTaskComment)
+export const deleteTaskCommentRequest = request(schedulerService.deleteTaskComment)

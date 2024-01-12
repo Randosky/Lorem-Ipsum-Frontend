@@ -26,6 +26,24 @@
   }
 }
 
+.cardInfo__modal-popup1{
+  top: 0;
+  max-height: 250px;
+
+  .popup__objects{
+    max-height: 150px;
+  }
+}
+
+.cardInfo__modal-popup2{
+  top: 0;
+  max-height: 200px;
+
+  .popup__objects{
+    max-height: calc(150px - (250px - 200px));
+  }
+}
+
 .cardInfo__modal-prefix {
   @include fontSize7;
   width: fit-content;

@@ -10,6 +10,7 @@ interface MyMultiplySelectProps {
     prefixText: string,
     inputValue?: string[],
     inputStyle?: string,
+    popupStyle?: string,
 }
 
 const MyMultiplySelectWithPrefix: React.FC<MyMultiplySelectProps> = (props: MyMultiplySelectProps) => {
@@ -20,7 +21,8 @@ const MyMultiplySelectWithPrefix: React.FC<MyMultiplySelectProps> = (props: MyMu
         selectOptions,
         prefixText,
         inputValue,
-        inputStyle
+        inputStyle,
+        popupStyle,
     } = props
 
     const [inputValueLocal, setInputValueLocal] = useState<string[]>(inputValue || []);
@@ -52,7 +54,7 @@ const MyMultiplySelectWithPrefix: React.FC<MyMultiplySelectProps> = (props: MyMu
             {
                 showSelect
                     ?
-                    <div className="ui__multiply-popup">
+                    <div className={`ui__multiply-popup ${popupStyle}`}>
                         <div className="popup__header">
                             <h2 className="popup__title">
                                 {prefixText}

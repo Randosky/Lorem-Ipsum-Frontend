@@ -53,7 +53,7 @@ class AuthStore {
     }
 
     async refreshSession() {
-        return await authService.refreshSession().then(data => "result" in data)
+        return await authService.refreshSession().then(data => data)
     }
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import "../../Styles/UI.scss"
 import CloseIcon from "../../Assets/Svg/CloseIcon";
 import MainInfoStage from "../../Components/LandComponents/CardInfoStages/MainInfoStage";
@@ -14,6 +14,8 @@ import landStore from "../../Store/LandStore";
 import ObjectInfoStage from "../../Components/LandComponents/CardInfoStages/ObjectInfoStage";
 import CopyrighterListStage from "../../Components/LandComponents/CardInfoStages/CopyrighterListStage";
 import CreateCopyrighterStage from "../../Components/LandComponents/CardInfoStages/CreateCopyrighterStage";
+import CreateTaskStage from "../../Components/LandComponents/CardInfoStages/CreateTaskStage";
+import schedulerStore from "../../Store/SchedulerStore";
 
 interface EditCardInfoProps {
     editTitle: string,
@@ -33,6 +35,8 @@ const CardInfoModal: React.FC<EditCardInfoProps> = (props: EditCardInfoProps) =>
             case "Редактирование дополнительной информации":
                 return <AdditionalInfoStage land={land}/>
             case "Создание задачи":
+                return <CreateTaskStage land={land}/>
+            case "Редактирование задачи":
                 return <TasksInfoStage land={land}/>
             case "Создание объекта":
                 return <CreateObjectStage land={land}/>

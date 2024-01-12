@@ -51,6 +51,8 @@ export const getCurrentEditTitle = (title: string | undefined) => {
             return "Редактирование дополнительной информации"
         case "Задачи":
             return "Создание задачи"
+        case "Редактирование задачи":
+            return "Редактирование задачи"
         case "Информация об объектах":
             return "Создание объекта"
         case "Список объектов":

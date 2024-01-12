@@ -1,12 +1,12 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Header from "../../../UI/Header/Header";
 import "../../../Styles/Land/LandActionStyles.scss"
 import landStore from "../../../Store/LandStore";
 import {useSearchParams} from "react-router-dom";
 import ListCardInfo from "../ListCardInfo/ListCardInfo";
-import {ReturnedLandType} from "../../../Types/Land/ReturnedLandType";
-import authStore from "../../../Store/AuthStore";
 import {observer} from "mobx-react-lite";
+import schedulerStore from "../../../Store/SchedulerStore";
+import ListCardTasksInfo from "../ListCardInfo/ListCardTasksInfo";
 
 const LandCard: React.FC = observer(() => {
 
@@ -20,8 +20,21 @@ const LandCard: React.FC = observer(() => {
     useEffect(() => {
         if (landCardId)
             landStore.getLandById(landCardId)
-                .then(() => landStore.getAreaLegalInfo(landCardId))
+                .then(() => landStore.getAreaLegalInfo(landCardId)
+                    .then(() => schedulerStore.getAreaTasks(landCardId)))
     }, [landCardId])
+
+    useEffect(() => {
+        if (landStore.isLandInfoEditClicked || landStore.isObjectEditClicked !== -1 || landStore.isObjectListClicked
+            || landStore.isCopyrighterListClicked || landStore.isCopyrighterEditClicked !== -1
+            || schedulerStore.isTaskEditClicked)
+            document.body.style.overflow = 'hidden'
+        else {
+            document.body.style.overflowX = 'hidden'
+            document.body.style.overflowY = 'auto'
+        }
+    }, [landStore.isLandInfoEditClicked, landStore.isObjectEditClicked, landStore.isObjectListClicked,
+        landStore.isCopyrighterListClicked, landStore.isCopyrighterEditClicked, schedulerStore.isTaskEditClicked]);
 
     return (
         <main className="landCard">
@@ -35,6 +48,12 @@ const LandCard: React.FC = observer(() => {
                                 <h1 className="item__title">
                                     Земельный участок {`"${land.name}"`}
                                 </h1>
+                                <p className="item__status">
+                                    {land.working_status}
+                                </p>
+                                <p className="item__stage">
+                                    {land.stage}
+                                </p>
                             </div>
                             <div className="item__row">
                                 <ListCardInfo land={land}
@@ -48,7 +67,9 @@ const LandCard: React.FC = observer(() => {
                                                   land.cadastral_cost?.toString(),
                                                   land.area_square.toString(), land.address, land.area_category,
                                                   land.working_status, land.stage, land.search_channel]}/>
-
+                                <ListCardTasksInfo land={land}/>
+                            </div>
+                            <div className="item__row">
                                 <ListCardInfo land={land}
                                               itemBlockStyle="item__legalInfo" itemH2="Юридические сведения"
                                               itemListTitles={["Количество объектов",
@@ -59,6 +80,13 @@ const LandCard: React.FC = observer(() => {
                                                   land.owners.length.toString(),
                                                   landLegalInfoPermittedNames, landLegalInfoLimitsNames
                                               ]}/>
+                                <ListCardInfo land={land}
+                                              itemBlockStyle="item__additionalInfo" itemH2="Дополнительная информация"
+                                              itemListTitles={["Наличие инженерных сетей",
+                                                  "Наличие транспорта", "Экономика"]}
+                                              itemListValues={[`${land.extra_data?.engineering_networks || "нет данных"}`,
+                                                  `${land.extra_data?.transport || "нет данных"}`,
+                                                  `${land.extra_data?.result || "нет данных"}`,]}/>
                             </div>
                             <div className="item__row">
                                 <ListCardInfo land={land}
@@ -69,19 +97,6 @@ const LandCard: React.FC = observer(() => {
                                               itemBlockStyle="item__copyrightInfo" itemH2="Данные о правообладателях"
                                               itemListTitles={["Открыть список правообладателей"]}
                                               itemListValues={[""]}/>
-                            </div>
-                            <div className="item__row">
-                                <ListCardInfo land={land}
-                                              itemBlockStyle="item__additionalInfo" itemH2="Дополнительная информация"
-                                              itemListTitles={["Наличие инженерных сетей",
-                                                  "Наличие транспорта", "Экономика"]}
-                                              itemListValues={[`${land.extra_data?.engineering_networks || "нет данных"}`,
-                                                  `${land.extra_data?.transport || "нет данных"}`,
-                                                  `${land.extra_data?.result || "нет данных"}`,]}/>
-                                <ListCardInfo land={land}
-                                              itemBlockStyle="item__tasks" itemH2="Задачи"
-                                              itemListTitles={["Завершено"]}
-                                              itemListValues={["нет данных"]}/>
                             </div>
                         </div>
                         : ""

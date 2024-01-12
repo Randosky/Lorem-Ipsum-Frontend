@@ -30,6 +30,7 @@
   align-self: end;
   cursor: pointer;
   user-select: none;
+  text-decoration: underline;
 }
 
 .header__label {
@@ -142,7 +143,7 @@
 .item__header {
   @include flexStart;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
   margin-bottom: $mainBigMargin;
   width: 100%;
 }
@@ -150,6 +151,23 @@
 .item__title {
   @include bigFontH1;
   margin-right: $mainBigMargin;
+}
+
+.item__status{
+  cursor: initial;
+  @include fontSize7;
+  padding: 5px 25px;
+  margin-right: $mainMediumMargin;
+  background-color: transparent;
+  border: 1px solid $brandColorBlack100;
+}
+
+.item__stage{
+  cursor: initial;
+  @include fontSize7;
+  padding: 5px 25px;
+  background-color: transparent;
+  border: 1px solid $brandColorBlack100;
 }
 
 .item__row {
@@ -165,18 +183,22 @@
 // ListCardInfo
 
 .item__infoBlock {
-  width: 100%;
+  @include flexStartColumn;
+  justify-content: start;
   position: relative;
   padding: $mainMediumPadding;
   background-color: white;
   box-shadow: 0px 4px 4.5px 0px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
+  width: 100%;
+  max-height: 700px;
 }
 
 .infoBlock__header {
   @include flexSpaceBetween;
   align-items: start;
   margin-bottom: $mainBigMargin;
+  width: 100%;
 }
 
 .infoBlock__h2 {
@@ -195,8 +217,11 @@
 
 .infoBlock__rows {
   @include flexStartColumn;
-  align-items: start;
+  justify-content: start;
   padding: 0 $mainBigMargin;
+  overflow-y: auto;
+  width: 100%;
+  flex-grow: 1;
 }
 
 .infoBlock__row {
@@ -224,6 +249,53 @@
   padding: $mainSmallPadding;
   margin: -$mainSmallMargin;
   margin-bottom: 10px;
+}
+
+.infoBlock__tasks{
+  @include flexStartColumn;
+  justify-content: start;
+  width: 100%;
+  flex-grow: 1;
+  padding: 0 $mainBigMargin;
+  overflow-y: auto;
+}
+
+.tasks__task{
+  width: 100%;
+
+  &:not(:last-child){
+    margin-bottom: $mainMediumMargin;
+  }
+}
+
+.task__header{
+  @include flexStart;
+}
+
+.task__title{
+  @include fontSize6;
+  font-weight: 500;
+  margin-right: $mainMediumMargin;
+}
+
+.task__status{
+
+}
+
+.task__description{
+
+}
+
+.task__row{
+
+}
+
+.task__row-item{
+
+}
+
+.task__row-title{
+
 }
 
 // MEDIA
@@ -269,7 +341,15 @@
   .item__row {
   }
 
+  .item__infoBlock {
+    max-height: 550px;
+  }
+
   .infoBlock__rows {
+    padding: 0 $mainMediumPadding;
+  }
+
+  .infoBlock__tasks{
     padding: 0 $mainMediumPadding;
   }
 
@@ -299,8 +379,14 @@
     margin-bottom: $mainMediumMargin;
   }
 
-  .field__objects {
-    margin-bottom: -10px;
+  .item__status{
+    @include fontSize6;
+    padding: 5px 25px;
+  }
+
+  .item__stage{
+    @include fontSize6;
+    padding: 5px 25px;
   }
 }
 
@@ -371,6 +457,14 @@
     flex: 0 1 47%;
   }
 
+  .infoBlock__rows {
+    padding: 0 $mainSmallPadding;
+  }
+
+  .infoBlock__tasks{
+    padding: 0 $mainSmallPadding;
+  }
+
   .infoBlock__h2 {
     font-size: 18px;
     line-height: 20px;
@@ -382,5 +476,15 @@
 
   .row__field {
     @include fontSize5;
+  }
+
+  .item__status{
+    @include fontSize5;
+    padding: 5px 15px;
+  }
+
+  .item__stage{
+    @include fontSize5;
+    padding: 5px 15px;
   }
 }
