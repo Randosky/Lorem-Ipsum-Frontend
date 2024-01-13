@@ -7,12 +7,14 @@ import {AreaTask} from "../../../Types/Tasks/AreaTask";
 import {ReturnedLandType} from "../../../Types/Land/ReturnedLandType";
 import {useNavigate} from "react-router-dom";
 import EditIcon from "../../../Assets/Svg/EditIcon";
+import CloseIcon from "../../../Assets/Svg/CloseIcon";
+import {observer} from "mobx-react-lite";
 
 interface ListCardTasksInfoProps {
     land: ReturnedLandType,
 }
 
-const ListCardTasksInfo: React.FC<ListCardTasksInfoProps> = ({land}: ListCardTasksInfoProps) => {
+const ListCardTasksInfo: React.FC<ListCardTasksInfoProps> = observer(({land}: ListCardTasksInfoProps) => {
 
     const navigate = useNavigate()
 
@@ -60,6 +62,13 @@ const ListCardTasksInfo: React.FC<ListCardTasksInfoProps> = ({land}: ListCardTas
                                            style={{backgroundColor: getStatusColor(task.status)}}>
                                             {task.status}
                                         </p>
+                                        <div className="task__delete"
+                                             onClick={e => {
+                                                 e.stopPropagation()
+                                                 schedulerStore.deleteLandTask(task.id).then()
+                                             }}>
+                                            <CloseIcon/>
+                                        </div>
                                         <div className="task__edit"
                                              onClick={e => {
                                                  e.stopPropagation()
@@ -113,6 +122,6 @@ const ListCardTasksInfo: React.FC<ListCardTasksInfoProps> = ({land}: ListCardTas
             }
         </div>
     );
-};
+});
 
 export default ListCardTasksInfo;

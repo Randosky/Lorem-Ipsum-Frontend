@@ -1,8 +1,9 @@
 import {makeAutoObservable} from "mobx";
 import {AreaOwnersType} from "../Types/Land/AreaOwnersType";
 import {
+    addTaskCommentRequest,
     changeTaskStatusRequest,
-    createLandTaskRequest, getAreaTaskByIdRequest, getAreaTasksRequest,
+    createLandTaskRequest, deleteLandTaskRequest, deleteTaskCommentRequest, getAreaTaskByIdRequest, getAreaTasksRequest,
     getEmployeeTasksRequest,
     updateLandTaskRequest,
     updateOwnerRequest
@@ -93,6 +94,11 @@ class SchedulerStore {
         this.currentAreaTasks = landTask
     }
 
+    deleteSelectedAreaTask(taskId: string) {
+        if (this.currentAreaTasks)
+            this.currentAreaTasks = this.currentAreaTasks.filter(t => t.id !== taskId)
+    }
+
     async createLandTask(landTask: TaskType) {
         const data = await createLandTaskRequest([landTask])
 
@@ -173,6 +179,37 @@ class SchedulerStore {
                 deadline: data.result.deadline,
                 status: data.result.status,
             })
+            return data
+        }
+
+        return null
+    }
+
+    async deleteLandTask(landTaskId: string) {
+        const data = await deleteLandTaskRequest([landTaskId])
+
+        if (data) {
+            this.deleteSelectedAreaTask(landTaskId)
+            return data
+        }
+
+        return null
+    }
+
+    async addTaskComment(landTaskId: string, text: string) {
+        const data = await addTaskCommentRequest([landTaskId, text])
+
+        if (data) {
+            return data
+        }
+
+        return null
+    }
+
+    async deleteTaskComment(landTaskCommentId: string) {
+        const data = await deleteTaskCommentRequest([landTaskCommentId])
+
+        if (data) {
             return data
         }
 

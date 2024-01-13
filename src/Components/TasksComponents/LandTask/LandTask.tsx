@@ -1,13 +1,16 @@
 import React, {useEffect} from 'react';
 import Header from "../../../UI/Header/Header";
 import "../../../Styles/Task/LandTaskStyles.scss"
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import schedulerStore from "../../../Store/SchedulerStore";
 import {CreatedTask} from "../../../Types/Tasks/CreatedTask";
 import ListCardInfo from "../../LandComponents/ListCardInfo/ListCardInfo";
 import ListCardTasksInfo from "../../LandComponents/ListCardInfo/ListCardTasksInfo";
 import TaskInfo from "../TaskInfo/TaskInfo";
+import ButtonContrast from "../../../UI/MyButton/ButtonContrast";
+import CardInfoModal from "../../../UI/CardInfoModal/CardInfoModal";
+import {getCurrentEditTitle} from "../../../Helpers/LandHelper";
 
 const LandTask: React.FC = observer(() => {
 
@@ -15,6 +18,7 @@ const LandTask: React.FC = observer(() => {
     const taskId = params.get("taskId")
 
     const currentTask = schedulerStore.selectedAreaTask
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (taskId)
@@ -30,13 +34,29 @@ const LandTask: React.FC = observer(() => {
                     currentTask
                         ?
                         <div className="landTask__item">
-                            <div className="item__header">
-                                <h1 className="item__title">
-                                    Задача {`"${currentTask.name}"`}
-                                </h1>
-                                <p className="item__status">
-                                    {currentTask.status}
-                                </p>
+                            <div className="item__head">
+                                <div className="item__header-block">
+                                    <h1 className="item__title">
+                                        Задача {`"${currentTask.name}"`}
+                                    </h1>
+                                    <p className="item__status">
+                                        {currentTask.status}
+                                    </p>
+                                </div>
+                                <div className="item__header-block">
+                                    <ButtonContrast btnText="Удалить"
+                                                    btnStyle="item__header-btn"
+                                                    handleOnClick={() => {
+                                                        schedulerStore.deleteLandTask(currentTask?.id)
+                                                            .then(() => navigate(`/landCard?landCardId=${currentTask?.land_area_id}`))
+                                                    }}/>
+                                    <ButtonContrast btnText="Редактировать"
+                                                    btnStyle="item__header-btn"
+                                                    handleOnClick={() => {
+                                                        navigate(`/landCard?landCardId=${currentTask?.land_area_id}`)
+                                                        schedulerStore.updateIsTaskEditClicked(currentTask?.id)
+                                                    }}/>
+                                </div>
                             </div>
                             <div className="item__row">
                                 <TaskInfo task={currentTask}
