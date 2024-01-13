@@ -11,6 +11,8 @@ import TaskInfo from "../TaskInfo/TaskInfo";
 import ButtonContrast from "../../../UI/MyButton/ButtonContrast";
 import CardInfoModal from "../../../UI/CardInfoModal/CardInfoModal";
 import {getCurrentEditTitle} from "../../../Helpers/LandHelper";
+import ListCardCommentsInfo from "../../LandComponents/ListCardInfo/ListCardCommentsInfo";
+import TaskCommentsInfo from "../TaskInfo/TaskCommentsInfo";
 
 const LandTask: React.FC = observer(() => {
 
@@ -63,9 +65,9 @@ const LandTask: React.FC = observer(() => {
                                           itemBlockStyle="item__taskInfo"
                                           itemH2="Основная информация"
                                           itemListTitles={["Описание", "Дата начала", "Дедлайн", "Статус", "Земельный участок"]}
-                                          itemListValues={[currentTask.description, `${currentTask.started_at.slice(11, -3)} 
+                                          itemListValues={[currentTask.description, `${currentTask.started_at.slice(11, 16)} 
                                   ${currentTask.started_at.slice(0, 10).split("-").reverse().join(".")}`,
-                                              `${currentTask.deadline.slice(11, -3)} 
+                                              `${currentTask.deadline.slice(11, 16)} 
                                   ${currentTask.deadline.slice(0, 10).split("-").reverse().join(".")}`,
                                               currentTask.status, currentTask.land_area.name]}/>
                                 <TaskInfo task={currentTask}
@@ -74,6 +76,9 @@ const LandTask: React.FC = observer(() => {
                                           itemListTitles={["Автор", "Ответственный"]}
                                           itemListValues={[`${currentTask.author.last_name} ${currentTask.author.first_name}`,
                                               `${currentTask.executor.last_name} ${currentTask.executor.first_name}`]}/>
+                            </div>
+                            <div className="item__comments">
+                                <TaskCommentsInfo task={currentTask}/>
                             </div>
                         </div>
                         : ""

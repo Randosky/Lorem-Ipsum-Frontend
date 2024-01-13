@@ -98,7 +98,7 @@ const ListCardTasksInfo: React.FC<ListCardTasksInfoProps> = observer(({land}: Li
                                         Дедлайн
                                     </p>
                                     <p className="task__row-item">
-                                        {task.deadline.slice(11, -3)}
+                                        {task.deadline.slice(11, 16)}
                                         &nbsp;&nbsp;&nbsp;
                                         {task.deadline.slice(0, 10).split("-").reverse().join(".")}
                                     </p>

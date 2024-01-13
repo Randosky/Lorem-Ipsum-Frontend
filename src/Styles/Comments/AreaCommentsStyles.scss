@@ -89,6 +89,10 @@
   }
 }
 
+.comment__delete-nomargin{
+  margin-right: -$mainSmallestMargin;
+}
+
 .comment__edit-current {
   background-color: $brandColorGreen100;
 

@@ -15,6 +15,8 @@ import {EmployeeTask} from "../Types/Tasks/EmployeeTask";
 import {AreaTask} from "../Types/Tasks/AreaTask";
 import {IBoardType} from "../Types/Board/BoardType";
 import {DraggableLocation, DropResult} from "@hello-pangea/dnd";
+import {TaskComment} from "../Types/Comments/TaskComment";
+import landStore from "./LandStore";
 
 class SchedulerStore {
 
@@ -97,6 +99,25 @@ class SchedulerStore {
     deleteSelectedAreaTask(taskId: string) {
         if (this.currentAreaTasks)
             this.currentAreaTasks = this.currentAreaTasks.filter(t => t.id !== taskId)
+    }
+
+    addTaskCommentLocal(comment: TaskComment) {
+        if (this.selectedAreaTask) {
+            this.selectedAreaTask.task_comments.push({
+                id: comment.id,
+                text: comment.text,
+                task_id: comment.task_id,
+                created_at: comment.created_at,
+                employee: comment.employee,
+                employee_id: comment.employee_id,
+            })
+        }
+    }
+
+    deleteTaskCommentLocal(commentId: string) {
+        if (this.selectedAreaTask) {
+            this.selectedAreaTask.task_comments = this.selectedAreaTask.task_comments.filter(c => c.id !== commentId)
+        }
     }
 
     async createLandTask(landTask: TaskType) {
@@ -200,6 +221,7 @@ class SchedulerStore {
         const data = await addTaskCommentRequest([landTaskId, text])
 
         if (data) {
+            this.addTaskCommentLocal(data.result)
             return data
         }
 
@@ -210,6 +232,7 @@ class SchedulerStore {
         const data = await deleteTaskCommentRequest([landTaskCommentId])
 
         if (data) {
+            this.deleteTaskCommentLocal(landTaskCommentId)
             return data
         }
 
