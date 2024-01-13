@@ -12,16 +12,68 @@ import {CreatedTask} from "../Types/Tasks/CreatedTask";
 import {UpdatedTask} from "../Types/Tasks/UpdatedTask";
 import {EmployeeTask} from "../Types/Tasks/EmployeeTask";
 import {AreaTask} from "../Types/Tasks/AreaTask";
+import {IBoardType} from "../Types/Board/BoardType";
+import {DraggableLocation, DropResult} from "@hello-pangea/dnd";
 
 class SchedulerStore {
 
     isTaskEditClicked: string = ""
     selectedAreaTask: CreatedTask | null = null
-    currentEmployeeTasks: EmployeeTask[] | null = null
     currentAreaTasks: AreaTask[] | null = null
+    kanban: IBoardType[] | null = null;
 
     constructor() {
         makeAutoObservable(this)
+    }
+
+    updateKanban(allTasks: EmployeeTask[] | null) {
+        if (allTasks)
+            this.kanban = [
+                {
+                    id: "Создана",
+                    title: "Создана",
+                    titleColor: "#EF3B24",
+                    tasks: allTasks.filter(t => t.status === "Создана"),
+                },
+                {
+                    id: "В работе",
+                    title: "В работе",
+                    titleColor: "#FFF176",
+                    tasks: allTasks.filter(t => t.status === "В работе"),
+                },
+                {
+                    id: "Выполнена",
+                    title: "Выполнена",
+                    titleColor: "#9ACA3C",
+                    tasks: allTasks.filter(t => t.status === "Выполнена"),
+                },
+            ]
+    }
+
+    updateBoard(source: DraggableLocation, destination: DraggableLocation, result: DropResult) {
+        if (this.kanban) {
+            const sourceBoardIndex: number = this.kanban.findIndex(b => b.id === source.droppableId)
+            const destinationBoardIndex: number = this.kanban.findIndex(b => b.id === destination.droppableId)
+
+            if (source.droppableId !== destination.droppableId) {
+                const sourceTasks = this.kanban[sourceBoardIndex].tasks
+                const destinationTasks = this.kanban[destinationBoardIndex].tasks
+
+                const [removed] = sourceTasks.splice(source.index, 1);
+                destinationTasks.splice(destination.index, 0, removed);
+
+                this.kanban[sourceBoardIndex].tasks = sourceTasks;
+                this.kanban[destinationBoardIndex].tasks = destinationTasks;
+                this.changeTaskStatus(result.draggableId, destination.droppableId).then()
+            } else {
+                const copiedTasks = this.kanban[sourceBoardIndex].tasks
+
+                const [removed] = copiedTasks.splice(source.index, 1);
+                copiedTasks.splice(destination.index, 0, removed)
+
+                this.kanban[sourceBoardIndex].tasks = copiedTasks
+            }
+        }
     }
 
     updateIsTaskEditClicked(taskId: string) {
@@ -35,10 +87,6 @@ class SchedulerStore {
     editSelectedAreaTask(editedInfo: UpdatedTask) {
         if (this.selectedAreaTask)
             this.selectedAreaTask = {...this.selectedAreaTask, ...editedInfo}
-    }
-
-    updateCurrentEmployeeTasks(landTask: EmployeeTask[]) {
-        this.currentEmployeeTasks = landTask
     }
 
     updateCurrentAreaTasks(landTask: AreaTask[]) {
@@ -81,7 +129,7 @@ class SchedulerStore {
         const data = await getEmployeeTasksRequest([])
 
         if (data) {
-            this.updateCurrentEmployeeTasks(data.result)
+            this.updateKanban(data.result)
             return data
         }
 

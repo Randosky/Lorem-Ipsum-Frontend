@@ -9,6 +9,8 @@ import Kanban from "./Kanban/Kanban";
 
 const PersonalArea: React.FC = observer(() => {
 
+    const employeeInfo = employeeActionsStore.currentEmployeeInfo
+
     useEffect(() => {
         employeeActionsStore.getEmployeeProfileInfoByAccessToken()
             .then((data) => data ? employeeActionsStore.getEmployeeProfilePhoto(data.result?.id) : null)
@@ -25,20 +27,19 @@ const PersonalArea: React.FC = observer(() => {
             <Header/>
             <div className="personalArea__container">
                 {
-                    employeeActionsStore.currentEmployeeInfo
+                    employeeInfo
                         ?
                         isEditClicked
                             ?
                             <EditingPage handleOnEdit={handleOnEdit}
-                                         employeeInfo={employeeActionsStore.currentEmployeeInfo}/>
+                                         employeeInfo={employeeInfo}/>
                             :
                             <div>
                                 <UserInfo handleOnEdit={handleOnEdit}
-                                          employeeInfo={employeeActionsStore.currentEmployeeInfo}/>
+                                          employeeInfo={employeeInfo}/>
                                 <Kanban/>
                             </div>
                         : ""
-                    // <RefreshSession/>
                 }
             </div>
         </main>

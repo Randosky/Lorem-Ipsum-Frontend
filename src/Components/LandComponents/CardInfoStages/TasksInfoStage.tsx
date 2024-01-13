@@ -15,59 +15,7 @@ interface TasksInfoStageProps {
 
 const TasksInfoStage: React.FC<TasksInfoStageProps> = ({land}: TasksInfoStageProps) => {
 
-    const tasks: AreaTask[] = schedulerStore.currentAreaTasks || [
-        {
-            land_area_id: "22",
-            started_at: "2024-01-21T21:32:00",
-            deadline: "2024-01-23T21:32:00",
-            description: "Описание",
-            status: "Создана",
-            name: "Название задачи",
-            executor_id: "33",
-            id: "44",
-            author_id: "33",
-            executor: {
-                email: "123@mail.ru",
-                id: "33",
-                first_name: "Кирилл",
-                last_name: "Овинкин",
-            }
-        },
-        {
-            land_area_id: "22",
-            started_at: "2024-01-21T21:32:00",
-            deadline: "2024-01-23T21:32:00",
-            description: "Описание",
-            status: "Создана",
-            name: "Название задачи",
-            executor_id: "33",
-            id: "44",
-            author_id: "33",
-            executor: {
-                email: "123@mail.ru",
-                id: "33",
-                first_name: "Кирилл",
-                last_name: "Овинкин",
-            }
-        },
-        {
-            land_area_id: "22",
-            started_at: "2024-01-21T21:32:00",
-            deadline: "2024-01-23T21:32:00",
-            description: "Описание",
-            status: "Создана",
-            name: "Название задачи",
-            executor_id: "33",
-            id: "44",
-            author_id: "33",
-            executor: {
-                email: "123@mail.ru",
-                id: "33",
-                first_name: "Кирилл",
-                last_name: "Овинкин",
-            }
-        },
-    ]
+    const tasks: AreaTask[] = schedulerStore.currentAreaTasks || []
 
     const clickedTaskInd = tasks.findIndex(t => t.id === schedulerStore.isTaskEditClicked)
     const clickedTask = tasks[clickedTaskInd]

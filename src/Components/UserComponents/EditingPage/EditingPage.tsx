@@ -112,7 +112,7 @@ const EditingPage: React.FC<EditingPageProps> = observer((props: EditingPageProp
                 <ButtonMain btnStyle="editing__save" btnText="Отменить"
                             handleOnClick={handleOnEdit}/>
                 <ButtonMain btnStyle="editing__save" btnText="Сохранить"
-                            handleOnClick={() => employeeActionsStore.updateEmployeeProfileInfo(employeeFIO, employeePhone)
+                            handleOnClick={() => employeeActionsStore.updateEmployeeProfileInfo(employeeFIO, employeePhone.trim())
                                 .then(handleOnEdit)}/>
             </div>
         </div>

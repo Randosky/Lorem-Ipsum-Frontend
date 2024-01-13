@@ -1,8 +1,9 @@
-import {IBoardTaskType} from "./BoardTaskType";
+import {EmployeeTask} from "../Tasks/EmployeeTask";
+
 
 export interface IBoardType {
     id: string,
     title: string,
     titleColor: string,
-    tasks: IBoardTaskType[]
+    tasks: EmployeeTask[]
 }

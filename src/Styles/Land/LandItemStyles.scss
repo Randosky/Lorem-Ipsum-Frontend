@@ -262,40 +262,85 @@
 
 .tasks__task{
   width: 100%;
+  border: 1px solid $brandColorBlack100;
+  margin: 0 -15px;
+  padding: 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 
   &:not(:last-child){
     margin-bottom: $mainMediumMargin;
   }
+
+  &:hover, &:active{
+    background-color: $brandColorBlack40;
+  }
+}
+
+.tasks__task:has(.task__edit:hover, .task__edit:active){
+  &:hover, &:active{
+    background-color: transparent;
+  }
 }
 
 .task__header{
+  @include flexSpaceBetween;
+  margin-bottom: $mainSmallMargin;
+}
+
+.task__header-block{
   @include flexStart;
 }
 
+.task__edit{
+  padding: $mainSmallestPadding;
+  margin: -$mainSmallestMargin;
+  width: 38px;
+  height: 38px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 50%;
+
+  &:hover, &:active{
+    background-color: $brandColorBlack40;
+  }
+}
+
 .task__title{
-  @include fontSize6;
+  @include fontSize8;
   font-weight: 500;
   margin-right: $mainMediumMargin;
 }
 
 .task__status{
-
+  @include fontSize7;
+  padding: 5px 15px;
+  border-radius: 20px;
+  color: #000;
+  margin-right: $mainMediumMargin;
 }
 
 .task__description{
-
+  @include fontSize7;
+  margin-bottom: 15px;
+  word-break: break-word;
+  word-wrap: break-word;
 }
 
 .task__row{
-
+  @include fontSize7;
+  @include flexStart;
 }
 
 .task__row-item{
-
+  word-break: break-word;
+  word-wrap: break-word;
 }
 
 .task__row-title{
-
+  min-width: 150px;
+  max-width: 150px;
+  margin-right: $mainMediumMargin;
 }
 
 // MEDIA
@@ -387,6 +432,24 @@
   .item__stage{
     @include fontSize6;
     padding: 5px 25px;
+  }
+
+  .task__title{
+    @include fontSize6;
+    font-weight: 500;
+    margin-right: $mainMediumMargin;
+  }
+
+  .task__status{
+    @include fontSize5;
+  }
+
+  .task__description{
+    @include fontSize5;
+  }
+
+  .task__row{
+    @include fontSize5;
   }
 }
 
@@ -486,5 +549,23 @@
   .item__stage{
     @include fontSize5;
     padding: 5px 15px;
+  }
+
+  .task__title{
+    @include fontSize5;
+    font-weight: 500;
+    margin-right: $mainMediumMargin;
+  }
+
+  .task__status{
+    @include fontSize5;
+  }
+
+  .task__description{
+    @include fontSize5;
+  }
+
+  .task__row{
+    @include fontSize5;
   }
 }

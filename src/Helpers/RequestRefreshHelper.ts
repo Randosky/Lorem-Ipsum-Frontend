@@ -22,6 +22,7 @@ const request = (requestFunction: (args: any[]) => any) => {
                     data.error.data.toLowerCase().includes("agent") ||
                     data.error.data.toLowerCase().includes("incorrect")
                 ))
+                    // return null
                     alert("Похоже ваш user-agent некорректный. Пожалуйста нажмите на кнопку выхода и повторно авторизуйтесь")
                 else
                     requestFunction(args)

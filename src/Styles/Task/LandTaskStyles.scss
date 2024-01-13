@@ -1,0 +1,77 @@
+@import "../Variables";
+
+
+.landTask {
+  @include pageStyles;
+}
+
+.landTask__container {
+  @include container;
+}
+
+.landTask__item {
+  padding: $mainBigPadding 0;
+}
+
+.item__header {
+  @include flexStart;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: $mainBigMargin;
+  width: 100%;
+}
+
+.item__title {
+  @include bigFontH1;
+  margin-right: $mainBigMargin;
+}
+
+.item__status{
+  cursor: initial;
+  @include fontSize7;
+  padding: 5px 25px;
+  background-color: transparent;
+  border: 1px solid $brandColorBlack100;
+}
+
+// MEDIA 1600px
+
+@media (max-width: 1600px) {
+  .landTask__container {
+    padding: 0 $containerMediumPadding;
+  }
+
+  .item__title {
+    @include fontH1;
+  }
+
+  .item__status{
+    @include fontSize6;
+    padding: 5px 25px;
+  }
+}
+
+// MEDIA 1184px
+
+@media (max-width: 1184px) {
+  .landTask__container {
+    padding: 0 $containerSmallPadding;
+  }
+
+  .landTask__item {
+    padding: $mainMediumPadding 0 $mainBigPadding 0;
+  }
+
+  .item__header {
+    margin-bottom: $mainMediumMargin;
+  }
+
+  .item__title {
+    @include smallFontH1;
+  }
+
+  .item__status{
+    @include fontSize5;
+    padding: 5px 15px;
+  }
+}

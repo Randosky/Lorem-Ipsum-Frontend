@@ -5,6 +5,8 @@ import CardInfoModal from "../../../UI/CardInfoModal/CardInfoModal";
 import {getCurrentEditTitle} from "../../../Helpers/LandHelper";
 import {AreaTask} from "../../../Types/Tasks/AreaTask";
 import {ReturnedLandType} from "../../../Types/Land/ReturnedLandType";
+import {useNavigate} from "react-router-dom";
+import EditIcon from "../../../Assets/Svg/EditIcon";
 
 interface ListCardTasksInfoProps {
     land: ReturnedLandType,
@@ -12,161 +14,22 @@ interface ListCardTasksInfoProps {
 
 const ListCardTasksInfo: React.FC<ListCardTasksInfoProps> = ({land}: ListCardTasksInfoProps) => {
 
-    const tasks: AreaTask[] = schedulerStore.currentAreaTasks || [
-        {
-            land_area_id: "22",
-            started_at: "2024-01-21T21:32:00",
-            deadline: "2024-01-23T21:32:00",
-            description: "Описание",
-            status: "Создана",
-            name: "Название задачи",
-            executor_id: "33",
-            id: "44",
-            author_id: "33",
-            executor: {
-                email: "123@mail.ru",
-                id: "33",
-                first_name: "Кирилл",
-                last_name: "Овинкин",
-            }
-        },
-        {
-            land_area_id: "22",
-            started_at: "2024-01-21T21:32:00",
-            deadline: "2024-01-23T21:32:00",
-            description: "Описание",
-            status: "Создана",
-            name: "Название задачи",
-            executor_id: "33",
-            id: "44",
-            author_id: "33",
-            executor: {
-                email: "123@mail.ru",
-                id: "33",
-                first_name: "Кирилл",
-                last_name: "Овинкин",
-            }
-        },
-        {
-            land_area_id: "22",
-            started_at: "2024-01-21T21:32:00",
-            deadline: "2024-01-23T21:32:00",
-            description: "Описание",
-            status: "Создана",
-            name: "Название задачи",
-            executor_id: "33",
-            id: "44",
-            author_id: "33",
-            executor: {
-                email: "123@mail.ru",
-                id: "33",
-                first_name: "Кирилл",
-                last_name: "Овинкин",
-            }
-        },
-        {
-            land_area_id: "22",
-            started_at: "2024-01-21T21:32:00",
-            deadline: "2024-01-23T21:32:00",
-            description: "Описание",
-            status: "Создана",
-            name: "Название задачи",
-            executor_id: "33",
-            id: "44",
-            author_id: "33",
-            executor: {
-                email: "123@mail.ru",
-                id: "33",
-                first_name: "Кирилл",
-                last_name: "Овинкин",
-            }
-        },
-        {
-            land_area_id: "22",
-            started_at: "2024-01-21T21:32:00",
-            deadline: "2024-01-23T21:32:00",
-            description: "Описание",
-            status: "Создана",
-            name: "Название задачи",
-            executor_id: "33",
-            id: "44",
-            author_id: "33",
-            executor: {
-                email: "123@mail.ru",
-                id: "33",
-                first_name: "Кирилл",
-                last_name: "Овинкин",
-            }
-        },
-        {
-            land_area_id: "22",
-            started_at: "2024-01-21T21:32:00",
-            deadline: "2024-01-23T21:32:00",
-            description: "Описание",
-            status: "Создана",
-            name: "Название задачи",
-            executor_id: "33",
-            id: "44",
-            author_id: "33",
-            executor: {
-                email: "123@mail.ru",
-                id: "33",
-                first_name: "Кирилл",
-                last_name: "Овинкин",
-            }
-        },
-        {
-            land_area_id: "22",
-            started_at: "2024-01-21T21:32:00",
-            deadline: "2024-01-23T21:32:00",
-            description: "Описание",
-            status: "Создана",
-            name: "Название задачи",
-            executor_id: "33",
-            id: "44",
-            author_id: "33",
-            executor: {
-                email: "123@mail.ru",
-                id: "33",
-                first_name: "Кирилл",
-                last_name: "Овинкин",
-            }
-        },
-        {
-            land_area_id: "22",
-            started_at: "2024-01-21T21:32:00",
-            deadline: "2024-01-23T21:32:00",
-            description: "Описание",
-            status: "Создана",
-            name: "Название задачи",
-            executor_id: "33",
-            id: "44",
-            author_id: "33",
-            executor: {
-                email: "123@mail.ru",
-                id: "33",
-                first_name: "Кирилл",
-                last_name: "Овинкин",
-            }
-        },
-        {
-            land_area_id: "22",
-            started_at: "2024-01-21T21:32:00",
-            deadline: "2024-01-23T21:32:00",
-            description: "Описание",
-            status: "Создана",
-            name: "Название задачи",
-            executor_id: "33",
-            id: "44",
-            author_id: "33",
-            executor: {
-                email: "123@mail.ru",
-                id: "33",
-                first_name: "Кирилл",
-                last_name: "Овинкин",
-            }
-        },
-    ]
+    const navigate = useNavigate()
+
+    const tasks = schedulerStore.currentAreaTasks
+
+    const getStatusColor = (color: string) => {
+        switch (color.toLowerCase()) {
+            case "создана":
+                return "#EF3B24"
+            case "в работе":
+                return "#FFF176"
+            case "выполнена":
+                return "#9ACA3C"
+            default:
+                return "#B9BABA"
+        }
+    }
 
     return (
         <div className={`item__infoBlock item__tasks`}>
@@ -183,13 +46,35 @@ const ListCardTasksInfo: React.FC<ListCardTasksInfoProps> = ({land}: ListCardTas
                         ?
                         tasks.map((task, ind) =>
                             <div className="tasks__task" key={ind}
-                                 onClick={() => schedulerStore.updateIsTaskEditClicked(task.id)}>
+                                 onClick={() => navigate(`/landCard/task?taskId=${task.id}`)}>
                                 <div className="task__header">
-                                    <h3 className="task__title">{task.name}</h3>
-                                    <p className="task__status">{task.status}</p>
+                                    <h3 className="task__title">
+                                        {
+                                            task.name.length > 50
+                                                ? task.name.slice(0, 50) + "..."
+                                                : task.name
+                                        }
+                                    </h3>
+                                    <div className="task__header-block">
+                                        <p className="task__status"
+                                           style={{backgroundColor: getStatusColor(task.status)}}>
+                                            {task.status}
+                                        </p>
+                                        <div className="task__edit"
+                                             onClick={e => {
+                                                 e.stopPropagation()
+                                                 schedulerStore.updateIsTaskEditClicked(task.id)
+                                             }}>
+                                            <EditIcon/>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p className="task__description">
-                                    {task.description}
+                                    {
+                                        task.description.length > 150
+                                            ? task.description.slice(0, 150) + "..."
+                                            : task.description
+                                    }
                                 </p>
                                 <div className="task__row">
                                     <p className="task__row-item task__row-title">
@@ -197,6 +82,16 @@ const ListCardTasksInfo: React.FC<ListCardTasksInfoProps> = ({land}: ListCardTas
                                     </p>
                                     <p className="task__row-item">
                                         {task.executor.last_name + " " + task.executor.first_name}
+                                    </p>
+                                </div>
+                                <div className="task__row">
+                                    <p className="task__row-item task__row-title">
+                                        Дедлайн
+                                    </p>
+                                    <p className="task__row-item">
+                                        {task.deadline.slice(11, -3)}
+                                        &nbsp;&nbsp;&nbsp;
+                                        {task.deadline.slice(0, 10).split("-").reverse().join(".")}
                                     </p>
                                 </div>
                             </div>

@@ -5,6 +5,7 @@ import Auth from "../Components/AuthComponents/Auth/Auth";
 import LandList from "../Components/LandComponents/LandList/LandList";
 import LandCard from "../Components/LandComponents/LandCard/LandCard";
 import AddLand from "../Components/LandComponents/AddLand/AddLand";
+import LandTask from "../Components/TasksComponents/LandTask/LandTask";
 
 type RouteType = {
     path: string,
@@ -39,6 +40,10 @@ const AppRouter: React.FC = () => {
         {
             path: "/landCard",
             element: <LandCard/>
+        },
+        {
+            path: "/landCard/task",
+            element: <LandTask/>
         }
     ]
 

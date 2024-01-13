@@ -18,10 +18,11 @@ const LandCard: React.FC = observer(() => {
     const landLegalInfoLimitsNames = landStore.selectedLandLegalInfo?.limits.map(l => l.name).join(", ") || ""
 
     useEffect(() => {
-        if (landCardId)
-            landStore.getLandById(landCardId)
-                .then(() => landStore.getAreaLegalInfo(landCardId)
-                    .then(() => schedulerStore.getAreaTasks(landCardId)))
+        if (landCardId) {
+            landStore.getLandById(landCardId).then()
+            landStore.getAreaLegalInfo(landCardId).then()
+            schedulerStore.getAreaTasks(landCardId).then()
+        }
     }, [landCardId])
 
     useEffect(() => {

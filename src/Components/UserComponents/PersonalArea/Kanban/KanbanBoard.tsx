@@ -2,6 +2,7 @@ import React from 'react';
 import {IBoardType} from "../../../../Types/Board/BoardType";
 import {Droppable} from "@hello-pangea/dnd";
 import KanbanItem from "./KanbanItem";
+import {EmployeeTask} from "../../../../Types/Tasks/EmployeeTask";
 
 type KanbanBoard = {
     board: IBoardType,
@@ -16,13 +17,13 @@ const KanbanBoard: React.FC<KanbanBoard> = ({board, index}: KanbanBoard) => {
                     <div className="board__board"
                          ref={droppableProvided.innerRef}
                          {...droppableProvided.droppableProps}>
-                        {
-                            board.tasks.map((task, ind) =>
-                                <div className="board__task" key={ind}>
-                                    <KanbanItem task={task} ind={ind}/>
-                                </div>
-                            )
-                        }
+                        <div className="board__scrollable">
+                            {
+                                board.tasks.map((task, ind) =>
+                                    <KanbanItem task={task} ind={ind} key={ind}/>
+                                )
+                            }
+                        </div>
                         {droppableProvided.placeholder}
                     </div>
             }
