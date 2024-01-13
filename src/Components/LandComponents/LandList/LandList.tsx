@@ -24,7 +24,7 @@ const LandList: React.FC = () => {
     // }, [handleOnCurrentLands, isArchivedLand]);
 
     useEffect(() => {
-        landStore.getAllLands(0, 20, ["name"], "asc")
+        landStore.getAllLands(0, 30, ["name"], "asc")
             .then((data) => data ? handleOnCurrentLands(data.result) : window.location.reload())
     }, [handleOnCurrentLands]);
 
@@ -90,14 +90,21 @@ const LandList: React.FC = () => {
                             Нет земельных участков
                         </p>
                 }
-                <div className="landList__pagination">
-                    <p className="pagination__objects">
-                        Объектов в списке: 20
-                    </p>
-                    <p className="pagination__pages">
-                        Страница: 1
-                    </p>
-                </div>
+                {
+                    currentLands && currentLands.length !== 0
+                        ?
+                        <div className="landList__pagination">
+                            <div className="pagination__pages">
+                                <p className="pages__page">
+                                    1
+                                </p>
+                            </div>
+                            <p className="pagination__objects">
+                                Объектов в списке:&nbsp;&nbsp;&nbsp;{currentLands?.length}
+                            </p>
+                        </div>
+                        : ""
+                }
             </div>
         </main>
     );
