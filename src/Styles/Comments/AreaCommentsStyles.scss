@@ -1,16 +1,18 @@
 @import "../Variables";
 
 .item__comments {
+  @include flexCenter;
   width: 100%;
-  height: 100px;
+}
+
+.comments {
+  @include flexStartColumn;
+  width: 50%;
+  min-height: 400px;
   padding: $mainMediumPadding;
   background-color: white;
   box-shadow: 0px 4px 4.5px 0px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-}
-
-.comments {
-  width: 100%;
 }
 
 .comments__title {
@@ -20,6 +22,129 @@
 
 .comments__block {
   width: 100%;
+  flex-grow: 1;
+  max-height: 450px;
+  border-radius: 20px;
+  background-color: $brandColorBlack20;
+  padding: $mainBigMargin;
+  margin-bottom: $mainSmallMargin;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.comments__comment {
+  width: fit-content;
+  padding: 15px;
+  border-radius: 20px;
+  background-color: white;
+  border: 1px solid $brandColorBlack100;
+
+  &:not(:last-child) {
+    margin-bottom: $mainMediumMargin;
+  }
+}
+
+.comment__head {
+  @include flexStart;
+  align-items: start;
+  justify-content: end;
+  width: 100%;
+  margin-bottom: $mainSmallMargin;
+}
+
+.comment__text {
+  @include fontSize8;
+  flex-grow: 1;
+  word-break: break-word;
+  word-wrap: break-word;
+  margin-bottom: $mainMediumMargin;
+}
+
+.comment__edit {
+  cursor: pointer;
+  padding: $mainSmallestPadding;
+  margin: -$mainSmallestMargin;
+  width: 38px;
+  height: 38px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 50%;
+
+  &:hover, &:active {
+    background-color: $brandColorBlack40;
+  }
+}
+
+.comment__delete {
+  cursor: pointer;
+  padding: $mainSmallestPadding;
+  margin: -$mainSmallestMargin;
+  margin-right: $mainSmallestMargin;
+  width: 38px;
+  height: 38px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 50%;
+
+  &:hover, &:active {
+    background-color: $brandColorBlack40;
+  }
+}
+
+.comment__edit-current {
+  background-color: $brandColorGreen100;
+
+  &:hover, &:active {
+    background-color: $brandColorGreen100;
+  }
+}
+
+.comment__bottom {
+  @include flexStart;
+  justify-content: end;
+}
+
+.comment__employee {
+  @include fontSize7;
+  font-weight: 500;
+  color: #2a5885;
+  margin-right: $mainSmallMargin;
+}
+
+.comment__time {
+  @include fontSize7;
+}
+
+.comments__actions {
+  @include flexStart;
+  height: 90px;
+  padding: 0 15px;
+  width: 100%;
+  background-color: $brandColorBlack20;
+  border-radius: 20px;
+}
+
+.actions__input {
+  @include fontSize8;
+  height: 60px;
+  padding: 0 15px;
+  flex-grow: 1;
+  background-color: white;
+  border-radius: 20px;
+  margin-right: $mainMediumMargin;
+}
+
+.actions__button {
+  @include flexCenter;
+  padding: 0 15px;
+  height: calc(100% - 30px);
+  border-radius: 20px;
+  background-color: white;
+
+  svg {
+    path {
+      stroke: $brandColorBlack100;
+      stroke-width: 2;
+    }
+  }
 }
 
 // MEDIA 1600px
@@ -30,13 +155,61 @@
     @include fontH2;
     margin-bottom: $mainMediumMargin;
   }
+
+  .comments__block {
+    padding: $mainMediumMargin;
+  }
+
+  .comment__text {
+    @include fontSize6;
+  }
+
+  .comment__employee {
+    @include fontSize5;
+    font-weight: 500;
+  }
+
+  .comment__time {
+    @include fontSize5;
+  }
+
+  .comments__actions {
+    height: 80px;
+  }
+
+  .actions__input {
+    @include fontSize6;
+    height: 50px;
+  }
 }
 
 // MEDIA 1184px
 
 @media (max-width: 1184px) {
+
+  .comments {
+    width: 60%;
+  }
+
   .comments__title {
     font-size: 18px;
     line-height: 20px;
+  }
+
+  .comments__block {
+    padding: $mainSmallMargin;
+  }
+
+  .comment__text {
+    @include fontSize5;
+  }
+
+  .comments__actions {
+    height: 70px;
+  }
+
+  .actions__input {
+    @include fontSize5;
+    height: 40px;
   }
 }

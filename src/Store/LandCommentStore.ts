@@ -13,7 +13,7 @@ class LandCommentStore {
         makeAutoObservable(this)
     }
 
-    updateAreaComment(comment: LandComment) {
+    uploadAreaCommentLocal(comment: LandComment) {
         if (landStore.selectedLand) {
             landStore.selectedLand.comments.push({
                 id: comment.id,
@@ -21,17 +21,12 @@ class LandCommentStore {
                 comment_text: comment.comment_text,
                 created_at: comment.created_at,
                 employee_id: comment.employee_id,
-                employee: {
-                    id: "2",
-                    email: "d2@mail.ru",
-                    first_name: "2",
-                    last_name: "da",
-                }
+                employee: comment.employee,
             })
         }
     }
 
-    editUploadedAreaComment(comment: LandComment) {
+    editAreaCommentLocal(comment: LandComment) {
         if (landStore.selectedLand) {
             const editedCommentInd = landStore.selectedLand.comments.findIndex(c => c.id === comment.id)
             landStore.selectedLand.comments[editedCommentInd] = {
@@ -40,13 +35,14 @@ class LandCommentStore {
                 comment_text: comment.comment_text,
                 created_at: comment.created_at,
                 employee_id: comment.employee_id,
-                employee: {
-                    id: "2",
-                    email: "d2@mail.ru",
-                    first_name: "2",
-                    last_name: "da",
-                }
+                employee: comment.employee,
             }
+        }
+    }
+
+    deleteAreaCommentLocal(commentId: string) {
+        if (landStore.selectedLand) {
+            landStore.selectedLand.comments = landStore.selectedLand.comments.filter(c => c.id !== commentId)
         }
     }
 
@@ -54,7 +50,7 @@ class LandCommentStore {
         const data = await uploadAreaCommentRequest([commentText, landId])
 
         if (data) {
-            this.updateAreaComment(data.result)
+            this.uploadAreaCommentLocal(data.result)
             return data
         }
 
@@ -65,7 +61,7 @@ class LandCommentStore {
         const data = await editAreaCommentRequest([commentId, commentText])
 
         if (data) {
-            this.editUploadedAreaComment(data.result)
+            this.editAreaCommentLocal(data.result)
             return data
         }
 
@@ -76,6 +72,7 @@ class LandCommentStore {
         const data = await deleteAreaCommentRequest([commentId])
 
         if (data) {
+            this.deleteAreaCommentLocal(commentId)
             return data
         }
 
