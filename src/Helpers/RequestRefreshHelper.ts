@@ -3,6 +3,7 @@ import landService from "../Services/LandService";
 import authService from "../Services/AuthService";
 import employeeService from "../Services/EmployeeService";
 import schedulerService from "../Services/SchedulerService";
+import landCommentService from "../Services/LandCommentService";
 
 const request = (requestFunction: (args: any[]) => any) => {
     return async (args: any[]) => {
@@ -75,3 +76,9 @@ export const changeTaskStatusRequest = request(schedulerService.changeTaskStatus
 export const deleteLandTaskRequest = request(schedulerService.deleteLandTask)
 export const addTaskCommentRequest = request(schedulerService.addTaskComment)
 export const deleteTaskCommentRequest = request(schedulerService.deleteTaskComment)
+
+// AREA_COMMENTS
+
+export const uploadAreaCommentRequest = request(landCommentService.uploadAreaComment)
+export const editAreaCommentRequest = request(landCommentService.editAreaComment)
+export const deleteAreaCommentRequest = request(landCommentService.deleteAreaComment)

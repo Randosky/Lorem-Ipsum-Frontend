@@ -1,0 +1,42 @@
+@import "../Variables";
+
+.item__comments {
+  width: 100%;
+  height: 100px;
+  padding: $mainMediumPadding;
+  background-color: white;
+  box-shadow: 0px 4px 4.5px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+.comments {
+  width: 100%;
+}
+
+.comments__title {
+  @include bigFontH2;
+  margin-bottom: $mainBigMargin;
+}
+
+.comments__block {
+  width: 100%;
+}
+
+// MEDIA 1600px
+
+@media (max-width: 1600px) {
+
+  .comments__title {
+    @include fontH2;
+    margin-bottom: $mainMediumMargin;
+  }
+}
+
+// MEDIA 1184px
+
+@media (max-width: 1184px) {
+  .comments__title {
+    font-size: 18px;
+    line-height: 20px;
+  }
+}

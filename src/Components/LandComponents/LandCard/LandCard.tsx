@@ -7,6 +7,7 @@ import ListCardInfo from "../ListCardInfo/ListCardInfo";
 import {observer} from "mobx-react-lite";
 import schedulerStore from "../../../Store/SchedulerStore";
 import ListCardTasksInfo from "../ListCardInfo/ListCardTasksInfo";
+import ListCardCommentsInfo from "../ListCardInfo/ListCardCommentsInfo";
 
 const LandCard: React.FC = observer(() => {
 
@@ -98,6 +99,9 @@ const LandCard: React.FC = observer(() => {
                                               itemBlockStyle="item__copyrightInfo" itemH2="Данные о правообладателях"
                                               itemListTitles={["Открыть список правообладателей"]}
                                               itemListValues={[""]}/>
+                            </div>
+                            <div className="item__comments">
+                                <ListCardCommentsInfo land={land}/>
                             </div>
                         </div>
                         : ""
