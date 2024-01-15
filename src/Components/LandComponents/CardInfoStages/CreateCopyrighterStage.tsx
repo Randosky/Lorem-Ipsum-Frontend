@@ -47,7 +47,7 @@ const CreateCopyrighterStage: React.FC<CreateCopyrighterStageProps> = ({land}: C
                 <li className="cardInfo__modal-item">
                     <MyInputWithPrefix inputStyle="landActions__item-input"
                                        prefixText="Телефон" prefixStyle="landActions__item-prefix"
-                                       value={landCopyrightHolderPhone}
+                                       value={landCopyrightHolderPhone.slice(0, 15)}
                                        type="tel"
                                        placeholder="+7"
                                        handleOnChange={(e) => handleOnLandCopyrightHolderPhone(e.target.value)}/>

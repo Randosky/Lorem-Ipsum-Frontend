@@ -41,7 +41,10 @@ const CreateObjectStage: React.FC<ObjectsInfoStageProps> = (props: ObjectsInfoSt
                                         handleOnShowSelect={(e) => handleOnShowObjectSelect(e)}
                                         inputValue={landObjectName}
                                         prefixText="Название"
-                                        handleOnChangeInputValue={(e) => handleOnLandObjectName(e)}/>
+                                        handleOnChangeInputValue={(e) => {
+                                            handleOnLandObjectName(e)
+                                            handleOnShowObjectSelect(false)
+                                        }}/>
                 </li>
                 <li className="cardInfo__modal-item">
                     <p className="cardInfo__modal-prefix">Описание</p>

@@ -50,7 +50,10 @@ const MainInfoStage: React.FC<MainInfoStageProps> = ({land}: MainInfoStageProps)
                                         inputValue={landCategory}
                                         selectOptions={categoryOptions}
                                         handleOnShowSelect={(e) => handleOnShowCategorySelect(e)}
-                                        handleOnChangeInputValue={(e) => handleOnLandCategory(e)}/>
+                                        handleOnChangeInputValue={(e) => {
+                                            handleOnLandCategory(e)
+                                            handleOnShowCategorySelect(false)
+                                        }}/>
                 </li>
                 <li className="cardInfo__modal-item">
                     <MyInputWithPrefix prefixText="Площадь" type="number"

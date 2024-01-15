@@ -102,7 +102,10 @@ const AddLand: React.FC = () => {
                                                 prefixText="Канал поиска"
                                                 selectOptions={searchChannelOptions}
                                                 handleOnShowSelect={(e) => handleOnShowChannelSelect(e)}
-                                                handleOnChangeInputValue={(e) => handleOnLandSearchChannel(e)}/>
+                                                handleOnChangeInputValue={(e) => {
+                                                    handleOnLandSearchChannel(e)
+                                                    handleOnShowChannelSelect(false)
+                                                }}/>
                         </li>
                         <li className="landActions__item">
                             <MyInputWithPrefix inputStyle="landActions__item-input"
@@ -119,7 +122,10 @@ const AddLand: React.FC = () => {
                                                 prefixText="Категория"
                                                 selectOptions={categoryOptions}
                                                 handleOnShowSelect={(e) => handleOnShowCategorySelect(e)}
-                                                handleOnChangeInputValue={(e) => handleOnLandCategory(e)}/>
+                                                handleOnChangeInputValue={(e) => {
+                                                    handleOnLandCategory(e)
+                                                    handleOnShowCategorySelect(false)
+                                                }}/>
                         </li>
                         <li className="landActions__item"
                             onClick={(e) => e.stopPropagation()}>
