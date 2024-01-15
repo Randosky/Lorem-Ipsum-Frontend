@@ -24,7 +24,11 @@ const TasksInfoStage: React.FC<TasksInfoStageProps> = ({land}: TasksInfoStagePro
     const [taskDescription, setTaskDescription] = useState(clickedTask.description || "")
     const [taskDeadline, setTaskDeadline] = useState(clickedTask.deadline || "")
 
-    const handleOnTaskName = useCallback((e: string) => setTaskName(e), [])
+    const handleOnTaskName = useCallback((e: string) => {
+        if (e.length < 30) {
+            setTaskName(e)
+        }
+    }, [])
     const handleOnTaskDescription = useCallback((e: string) => setTaskDescription(e), [])
     const handleOnTaskDeadline = useCallback((e: string) => setTaskDeadline(e), [])
 

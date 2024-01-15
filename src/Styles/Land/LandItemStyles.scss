@@ -174,8 +174,26 @@
   @include flexStart;
   align-items: center;
   justify-content: start;
-  margin-bottom: $mainBigMargin;
+  margin-bottom: $mainMediumMargin;
   width: 100%;
+}
+
+.item__header-archived{
+  margin-bottom: $mainBigMargin;
+}
+
+.item__header-btns{
+  @include flexStart;
+  width: 100%;
+  //justify-content: space-around;
+  margin-bottom: $mainBigMargin;
+}
+
+.item__header-block{
+  @include flexStart;
+  padding-right: $mainMediumMargin;
+  border-right: 1px solid $brandColorBlack60;
+  margin-right: $mainMediumMargin;
 }
 
 .item__title {
@@ -557,7 +575,12 @@
     padding: $mainMediumPadding 0 $mainBigPadding 0;
   }
 
-  .item__header {
+  .item__header-btns{
+    @include flexStart;
+    margin-bottom: $mainMediumMargin;
+  }
+
+  .item__header-archived{
     margin-bottom: $mainMediumMargin;
   }
 

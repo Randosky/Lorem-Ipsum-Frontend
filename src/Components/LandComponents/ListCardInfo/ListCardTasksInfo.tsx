@@ -52,9 +52,7 @@ const ListCardTasksInfo: React.FC<ListCardTasksInfoProps> = observer(({land}: Li
                                 <div className="task__header">
                                     <h3 className="task__title">
                                         {
-                                            task.name.length > 50
-                                                ? task.name.slice(0, 50) + "..."
-                                                : task.name
+                                            task.name
                                         }
                                     </h3>
                                     <div className="task__header-block">

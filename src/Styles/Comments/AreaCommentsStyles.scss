@@ -7,7 +7,7 @@
 
 .comments {
   @include flexStartColumn;
-  width: 50%;
+  width: 100%;
   min-height: 400px;
   padding: $mainMediumPadding;
   background-color: white;
@@ -21,6 +21,8 @@
 }
 
 .comments__block {
+  @include flexStartColumn;
+  justify-content: start;
   width: 100%;
   flex-grow: 1;
   max-height: 450px;
@@ -33,8 +35,10 @@
 }
 
 .comments__comment {
-  width: fit-content;
-  padding: 15px;
+  position: relative;
+  min-width: 30%;
+  max-width: 60%;
+  padding: 10px 15px;
   border-radius: 20px;
   background-color: white;
   border: 1px solid $brandColorBlack100;
@@ -42,25 +46,26 @@
   &:not(:last-child) {
     margin-bottom: $mainMediumMargin;
   }
+
+  &:hover, &:active{
+    .comment__edit, .comment__delete{
+      opacity: 1;
+    }
+  }
 }
 
-.comment__head {
-  @include flexStart;
-  align-items: start;
-  justify-content: end;
-  width: 100%;
-  margin-bottom: $mainSmallMargin;
-}
+.comments__comment-mySelf{
+  align-self: end;
 
-.comment__text {
-  @include fontSize8;
-  flex-grow: 1;
-  word-break: break-word;
-  word-wrap: break-word;
-  margin-bottom: $mainMediumMargin;
+  //&:not(:last-child) {
+  //  margin-bottom: $mainBigMargin;
+  //}
 }
 
 .comment__edit {
+  position: absolute;
+  top: 35px;
+  right: -28px;
   cursor: pointer;
   padding: $mainSmallestPadding;
   margin: -$mainSmallestMargin;
@@ -68,6 +73,7 @@
   height: 38px;
   transition: all 0.2s ease-in-out;
   border-radius: 50%;
+  opacity: 0;
 
   &:hover, &:active {
     background-color: $brandColorBlack40;
@@ -75,22 +81,25 @@
 }
 
 .comment__delete {
+  position: absolute;
+  top: 0;
+  right: -28px;
   cursor: pointer;
   padding: $mainSmallestPadding;
   margin: -$mainSmallestMargin;
-  margin-right: $mainSmallestMargin;
   width: 38px;
   height: 38px;
   transition: all 0.2s ease-in-out;
   border-radius: 50%;
+  opacity: 0;
 
   &:hover, &:active {
     background-color: $brandColorBlack40;
   }
 }
 
-.comment__delete-nomargin{
-  margin-right: -$mainSmallestMargin;
+.comment__edit-nomargin{
+  right: 0;
 }
 
 .comment__edit-current {
@@ -103,18 +112,26 @@
 
 .comment__bottom {
   @include flexStart;
-  justify-content: end;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.comment__text {
+  @include fontSize8;
+  flex-grow: 1;
+  word-break: break-word;
+  word-wrap: break-word;
 }
 
 .comment__employee {
   @include fontSize7;
   font-weight: 500;
   color: #2a5885;
-  margin-right: $mainSmallMargin;
 }
 
 .comment__time {
   @include fontSize7;
+  text-align: end;
 }
 
 .comments__actions {
@@ -160,10 +177,6 @@
     margin-bottom: $mainMediumMargin;
   }
 
-  .comments__block {
-    padding: $mainMediumMargin;
-  }
-
   .comment__text {
     @include fontSize6;
   }
@@ -191,17 +204,9 @@
 
 @media (max-width: 1184px) {
 
-  .comments {
-    width: 60%;
-  }
-
   .comments__title {
     font-size: 18px;
     line-height: 20px;
-  }
-
-  .comments__block {
-    padding: $mainSmallMargin;
   }
 
   .comment__text {

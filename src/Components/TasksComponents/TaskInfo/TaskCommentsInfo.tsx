@@ -5,6 +5,9 @@ import {observer} from "mobx-react-lite";
 import schedulerStore from "../../../Store/SchedulerStore";
 import CloseIcon from "../../../Assets/Svg/CloseIcon";
 import {CreatedTask} from "../../../Types/Tasks/CreatedTask";
+import landCommentStore from "../../../Store/LandCommentStore";
+import EditIcon from "../../../Assets/Svg/EditIcon";
+import employeeActionsStore from "../../../Store/EmployeeActionsStore";
 
 interface TaskCommentsInfoProps {
     task: CreatedTask
@@ -19,7 +22,10 @@ const TaskCommentsInfo: React.FC<TaskCommentsInfoProps> = observer(({task}: Task
     useEffect(() => {
         const comments = document.getElementById("comments")
         comments ? comments.scrollTo(0, 9999999999999) : ""
+        employeeActionsStore.getEmployeeProfileInfoByAccessToken().then()
     }, []);
+
+    const currentEmployee = employeeActionsStore.currentEmployeeInfo
 
     const handleOnSave = () => {
         if (commentText !== "") {
@@ -42,27 +48,43 @@ const TaskCommentsInfo: React.FC<TaskCommentsInfoProps> = observer(({task}: Task
                     task.task_comments
                         ?
                         task.task_comments.map((c, ind) =>
-                            <div key={ind} className="comments__comment">
-                                <div className="comment__head">
-                                    <div className="comment__delete comment__delete-nomargin"
+                            currentEmployee?.id === c.employee_id
+                                ?
+                                <div key={ind} className="comments__comment comments__comment-mySelf">
+                                    <div className={`comment__delete`}
                                          onClick={() => schedulerStore.deleteTaskComment(c.id).then()}>
                                         <CloseIcon/>
                                     </div>
-                                </div>
-                                <p className="comment__text">
-                                    {c.text}
-                                </p>
-                                <div className="comment__bottom">
-                                    <p className="comment__employee">
-                                        {`${c.employee.last_name} ${c.employee.first_name}`}
+                                    <div className="comment__bottom">
+                                        <p className="comment__employee">
+                                            {`${c.employee.last_name} ${c.employee.first_name}`}
+                                        </p>
+                                        <p className="comment__time">
+                                            {c.created_at.slice(11, 16)}
+                                            &nbsp;
+                                            {c.created_at.slice(0, 10).split("-").reverse().join(".")}
+                                        </p>
+                                    </div>
+                                    <p className="comment__text">
+                                        {c.text}
                                     </p>
-                                    <p className="comment__time">
-                                        {c.created_at.slice(11, 16)}
-                                        &nbsp;
-                                        {c.created_at.slice(0, 10).split("-").reverse().join(".")}
+                                </div>
+                                :
+                                <div key={ind} className="comments__comment">
+                                    <div className="comment__bottom">
+                                        <p className="comment__employee">
+                                            {`${c.employee.last_name} ${c.employee.first_name}`}
+                                        </p>
+                                        <p className="comment__time">
+                                            {c.created_at.slice(11, 16)}
+                                            &nbsp;
+                                            {c.created_at.slice(0, 10).split("-").reverse().join(".")}
+                                        </p>
+                                    </div>
+                                    <p className="comment__text">
+                                        {c.text}
                                     </p>
                                 </div>
-                            </div>
                         )
                         : ""
                 }

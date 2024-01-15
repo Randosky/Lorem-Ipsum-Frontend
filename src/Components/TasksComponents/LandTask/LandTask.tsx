@@ -27,6 +27,25 @@ const LandTask: React.FC = observer(() => {
             schedulerStore.getAreaTaskById(taskId).then()
     }, [taskId]);
 
+    const getCurrentTaskStatus = (task: CreatedTask) => {
+        switch (task.status) {
+            case "Создана":
+                return (
+                    <ButtonContrast btnText="Создана"
+                                    btnStyle="item__header-btn item__header-btnRed"
+                                    handleOnClick={() =>
+                                        schedulerStore.changeTaskStatus(task.id, "В работе")}/>
+                )
+            case "В работе":
+                return (
+                    <ButtonContrast btnText="В работе"
+                                    btnStyle="item__header-btn item__header-btnYellow"
+                                    handleOnClick={() =>
+                                        schedulerStore.changeTaskStatus(task.id, "Выполнена")}/>
+                )
+            default: return ""
+        }
+    }
 
     return (
         <main className="landTask">
@@ -37,15 +56,13 @@ const LandTask: React.FC = observer(() => {
                         ?
                         <div className="landTask__item">
                             <div className="item__head">
+                                <h1 className="item__title">
+                                    Задача {`"${currentTask.name}"`}
+                                </h1>
                                 <div className="item__header-block">
-                                    <h1 className="item__title">
-                                        Задача {`"${currentTask.name}"`}
-                                    </h1>
-                                    <p className="item__status">
-                                        {currentTask.status}
-                                    </p>
-                                </div>
-                                <div className="item__header-block">
+                                    {
+                                        getCurrentTaskStatus(currentTask)
+                                    }
                                     <ButtonContrast btnText="Удалить"
                                                     btnStyle="item__header-btn"
                                                     handleOnClick={() => {

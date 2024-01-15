@@ -29,7 +29,11 @@ const AddLand: React.FC = () => {
     const [showCategorySelect, setShowCategorySelect] = useState(false);
     const [showChannelSelect, setShowChannelSelect] = useState(false);
 
-    const handleOnLandTitle = useCallback((e: string) => setLandTitle(e), [])
+    const handleOnLandTitle = useCallback((e: string) => {
+        if (e.length < 55) {
+            setLandTitle(e)
+        }
+    }, [])
     const handleOnLandCadastrial = useCallback((e: string) => {
         if (!/[a-zA-Zа-яА-Я]/.test(e))
             setLandCadastrial(e)

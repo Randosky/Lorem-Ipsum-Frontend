@@ -8,6 +8,8 @@ import {observer} from "mobx-react-lite";
 import schedulerStore from "../../../Store/SchedulerStore";
 import ListCardTasksInfo from "../ListCardInfo/ListCardTasksInfo";
 import ListCardCommentsInfo from "../ListCardInfo/ListCardCommentsInfo";
+import ButtonContrast from "../../../UI/MyButton/ButtonContrast";
+import {ReturnedLandType} from "../../../Types/Land/ReturnedLandType";
 
 const LandCard: React.FC = observer(() => {
 
@@ -38,6 +40,84 @@ const LandCard: React.FC = observer(() => {
     }, [landStore.isLandInfoEditClicked, landStore.isObjectEditClicked, landStore.isObjectListClicked,
         landStore.isCopyrighterListClicked, landStore.isCopyrighterEditClicked, schedulerStore.isTaskEditClicked]);
 
+    const handleOnChangeStatus = (landInfo: ReturnedLandType, statusAndStage: string[]) =>
+        landStore.updateMainLandInfo(landInfo.id, {
+            name: landInfo.name,
+            cadastral_number: landInfo.cadastral_number,
+            area_category: landInfo.area_category,
+            cadastral_cost: landInfo.cadastral_cost,
+            area_square: landInfo.area_square,
+            address: landInfo.address,
+            search_channel: landInfo.search_channel,
+            working_status: statusAndStage[0],
+            stage: statusAndStage[1],
+        })
+            .then(() => landStore.updateIsLandInfoEditClicked(""))
+
+    const getCurrentLandStatus = (land: ReturnedLandType) => {
+        switch (land.working_status) {
+            case "Новый":
+                return (
+                    <div className="item__header-block">
+                        <ButtonContrast btnText="В работу" btnStyle="item__header-btn"
+                                        handleOnClick={() =>
+                                            handleOnChangeStatus(land, ["В работе", land?.stage])}/>
+                        <ButtonContrast btnText="Ждёт решения" btnStyle="item__header-btn"
+                                        handleOnClick={() =>
+                                            handleOnChangeStatus(land, ["Ждёт решения", land?.stage])}/>
+                    </div>
+                )
+            case "В работе":
+                return (
+                    <div className="item__header-block">
+                        <ButtonContrast btnText="Новый" btnStyle="item__header-btn"
+                                        handleOnClick={() =>
+                                            handleOnChangeStatus(land, ["Новый", land?.stage])}/>
+                        <ButtonContrast btnText="Ждёт решения" btnStyle="item__header-btn"
+                                        handleOnClick={() =>
+                                            handleOnChangeStatus(land, ["Ждёт решения", land?.stage])}/>
+                    </div>
+                )
+            case "Ждёт решения":
+                return (
+                    <div className="item__header-block">
+                        <ButtonContrast btnText="Новый" btnStyle="item__header-btn"
+                                        handleOnClick={() =>
+                                            handleOnChangeStatus(land, ["Новый", land?.stage])}/>
+                        <ButtonContrast btnText="В работу" btnStyle="item__header-btn"
+                                        handleOnClick={() =>
+                                            handleOnChangeStatus(land, ["В работе", land?.stage])}/>
+                    </div>
+                )
+            case "В архиве":
+                return ""
+        }
+    }
+    const getCurrentLandStage = (land: ReturnedLandType) => {
+        switch (land.stage) {
+            case "Поиск":
+                return (
+                    <ButtonContrast btnText="К аналитике" btnStyle="item__header-btn"
+                                    handleOnClick={() =>
+                                        handleOnChangeStatus(land, ["Ждёт решения", "Аналитика"])}/>
+                )
+            case "Аналитика":
+                return (
+                    <ButtonContrast btnText="К сделке" btnStyle="item__header-btn"
+                                    handleOnClick={() =>
+                                        handleOnChangeStatus(land, ["Ждёт решения", "Сделка"])}/>
+                )
+            case "Сделка":
+                return (
+                    <ButtonContrast btnText="В архив" btnStyle="item__header-btn"
+                                    handleOnClick={() =>
+                                        handleOnChangeStatus(land, ["В архиве", "В архиве"])}/>
+                )
+            case "В архиве":
+                return ""
+        }
+    }
+
     return (
         <main className="landCard">
             <Header/>
@@ -46,17 +126,31 @@ const LandCard: React.FC = observer(() => {
                     land
                         ?
                         <div className="landCard__item">
-                            <div className="item__header">
+                            <div className={`item__header ${land.stage === "В архиве" ? "item__header-archived" : ""}`}>
                                 <h1 className="item__title">
-                                    Земельный участок {`"${land.name}"`}
+                                    {`Земельный участок "${land.name}"`}
                                 </h1>
-                                <p className="item__status">
-                                    {land.working_status}
-                                </p>
+                                {
+                                    land.stage === "В архиве" ? "" :
+                                        <p className="item__status">
+                                            {land.working_status}
+                                        </p>
+                                }
                                 <p className="item__stage">
                                     {land.stage}
                                 </p>
                             </div>
+                            {
+                                land.stage === "В архиве" ? "" :
+                                    <div className="item__header-btns">
+                                        {
+                                            getCurrentLandStatus(land)
+                                        }
+                                        {
+                                            getCurrentLandStage(land)
+                                        }
+                                    </div>
+                            }
                             <div className="item__row">
                                 <ListCardInfo land={land}
                                               itemBlockStyle="item__mainInfo" itemH2="Основная информация"

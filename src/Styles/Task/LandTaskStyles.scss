@@ -28,22 +28,22 @@
   padding: 5px 25px;
   border-radius: 20px;
 
-  &:first-child{
+  &:not(:last-child){
     margin-right: $mainMediumMargin;
   }
+}
+
+.item__header-btnRed{
+  background-color: rgb(239, 59, 36);
+}
+
+.item__header-btnYellow{
+  background-color: rgb(255, 241, 118);
 }
 
 .item__title {
   @include bigFontH1;
   margin-right: $mainBigMargin;
-}
-
-.item__status{
-  cursor: initial;
-  @include fontSize7;
-  padding: 5px 25px;
-  background-color: transparent;
-  border: 1px solid $brandColorBlack100;
 }
 
 // MEDIA 1600px
@@ -55,11 +55,6 @@
 
   .item__title {
     @include fontH1;
-  }
-
-  .item__status{
-    @include fontSize6;
-    padding: 5px 25px;
   }
 
   .item__header-btn{
@@ -84,11 +79,6 @@
 
   .item__title {
     @include smallFontH1;
-  }
-
-  .item__status{
-    @include fontSize5;
-    padding: 5px 15px;
   }
 
   .item__header-btn{
